@@ -1,23 +1,16 @@
--- This file is automatically loaded by init.lua
-
--- local util = require("util")
-
 local function map(mode, lhs, rhs, opts)
-  local keys = require("lazy.core.handler").handlers.keys
-  ---@cast keys LazyKeysHandler
-  -- do not create the keymap if a lazy keys handler exists
-  if not keys.active[keys.parse({ lhs, mode = mode }).id] then
-    opts = opts or {}
-    opts.silent = opts.silent ~= false
-    vim.keymap.set(mode, lhs, rhs, opts)
-  end
+	local options = { noremap = true, silent = true }
+	if opts then
+		options = vim.tbl_extend("force", options, opts)
+	end
+	vim.keymap.set(mode, lhs, rhs, options)
 end
 
--- move to window using the <ctrl> hjkl keys
-map("n", "<C-h>", "<C-w>h", { desc = "Go to left window" })
-map("n", "<C-j>", "<C-w>j", { desc = "Go to lower window" })
-map("n", "<C-k>", "<C-w>k", { desc = "Go to upper window" })
-map("n", "<C-l>", "<C-w>l", { desc = "Go to right window" })
+-- Reload configuration without restart nvim
+map("n", "<leader>r", ":so %<CR>")
+-- Terminal mappings
+map("n", "<C-t>", ":split | term<CR>") -- open
+map("t", "<Esc>", "<C-\\><C-n>") -- exit
 
 -- move Lines
 map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
@@ -27,19 +20,107 @@ map("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
 map("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
 map("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
 
---键盘映射
-map({ "n", "v", "o" }, "H", "^",{ desc = "Use 'H' as '^'" })
-map({ "n", "v", "o" }, "L", "$",{ desc = "Use 'L' as '$'" })
+map({ "n", "v", "o" }, "H", "^", { desc = "Use 'H' as '^'" })
+map({ "n", "v", "o" }, "L", "$", { desc = "Use 'L' as '$'" })
+map("i", "jj", "<Esc>")
 
---调整esc为jj 并且设置间隔时间避免
-vim.api.nvim_set_keymap("i", "jj", "<Esc>", {noremap = true})
-vim.cmd("autocmd InsertEnter * set timeoutlen=150")
-vim.cmd("autocmd InsertLeave * set timeoutlen=1000")
+-- windows
+map("n", "<leader>ww", "<C-W>p", { desc = "Other window" })
+map("n", "<leader>wd", "<C-W>c", { desc = "Delete window" })
+map("n", "<leader>w-", "<C-W>s", { desc = "Split window below" })
+map("n", "<leader>w|", "<C-W>v", { desc = "Split window right" })
+map("n", "<leader>-", "<C-W>s", { desc = "Split window below" })
+map("n", "<leader>|", "<C-W>v", { desc = "Split window right" })
 
---括号匹配输入
-vim.api.nvim_set_keymap("i", "(", "()<Left>", {noremap = true})
-vim.api.nvim_set_keymap("i", "[", "[]<Left>", {noremap = true})
-vim.api.nvim_set_keymap("i", "<", "<><Left>", {noremap = true})
-vim.api.nvim_set_keymap("i", "{", "{}<Esc>i", {noremap = true})
-vim.api.nvim_set_keymap("i", "'", "''<Left>", {noremap = true})
-vim.api.nvim_set_keymap("i", "\"", "\"\"<Left>", {noremap = true})
+-- Resize window using <ctrl> arrow keys
+map("n", "<C-Up>", "<cmd>resize +5<cr>", { desc = "Increase window height" })
+map("n", "<C-Down>", "<cmd>resize -5<cr>", { desc = "Decrease window height" })
+map("n", "<C-Left>", "<cmd>vertical resize -5<cr>", { desc = "Decrease window width" })
+map("n", "<C-Right>", "<cmd>vertical resize +5<cr>", { desc = "Increase window width" })
+
+-- buffers
+map("n", "<S-j>", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
+map("n", "<S-k>", "<cmd>bnext<cr>", { desc = "Next buffer" })
+map("n", "<S-x>", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
+
+-- tabs
+map("n", "tm", "<cmd>tabclose<cr>", { desc = "Close tab" })
+map("n", "tn", "<cmd>tabnew<cr>", { desc = "New tab" })
+map("n", "tl", "<cmd>tabnext<CR>", { desc = "Next tab" })
+map("n", "th", "<cmd>tabprevious<CR>", { desc = "Previous tab" })
+
+-- save file
+
+map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save file" })
+-- lazy
+map("n", "<leader>l", "<cmd>:Lazy<cr>", { desc = "Lazy" })
+
+-- keymaps for plugins
+local M = {}
+M.hop = {
+	map("n", "<space>c", ":HopChar1<cr>", { desc = "Hop one char" }),
+	map("n", "<space>l", ":HopLine<cr>", { desc = "Hop line" }),
+}
+M.leap = {
+	map({ "x", "o", "n" }, ",", "<Plug>(leap-forward-to)"),
+	map({ "x", "o", "n" }, "<space>b", "<Plug>(leap-backward-to)"),
+}
+M.flit = { f = "f", F = "F", t = "t", T = "T" }
+M.telescope = {
+	{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "TL file" },
+	{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "TL grep" },
+	{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "TL buffer" },
+	{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "TL tags" },
+}
+M.nvim_tree = {
+	{ "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Explorer" },
+}
+M.spectre = { {
+	"<leader>sr",
+	function()
+		require("spectre").open()
+	end,
+}, desc = "Spectre" }
+M.persistence = {
+	{
+		"<leader>Ss",
+		function()
+			require("persistence").save()
+		end,
+		desc = "Save Session",
+	},
+	{
+		"<leader>Sl",
+		function()
+			require("persistence").load()
+		end,
+		desc = "Load Session",
+	},
+}
+M.tmux = {
+	map("n", "<S-Up>", "<cmd>lua require('tmux').resize_top()<cr>", { desc = "Increase window height" }),
+	map("n", "<S-Down>", "<cmd>lua require('tmux').resize_bottom()<cr>", { desc = "Decrease window height" }),
+	map("n", "<S-Left>", "<cmd>lua require('tmux').resize_left()<cr>", { desc = "Decrease window width" }),
+	map("n", "<S-Right>", "<cmd>lua require('tmux').resize_right()<cr>", { desc = "Increase window width" }),
+	map("n", "<C-h>", "<cmd>lua require('tmux').move_left()<cr>", { desc = "Move to the left tmux and nvim window" }),
+	map(
+		"n",
+		"<C-j>",
+		"<cmd>lua require('tmux').move_bottom()<cr>",
+		{ desc = "Move to the bottom tmux and nvim window" }
+	),
+	map("n", "<C-k>", "<cmd>lua require('tmux').move_top()<cr>", { desc = "Move to the top tmux and nvim window" }),
+	map("n", "<C-l>", "<cmd>lua require('tmux').move_right()<cr>", { desc = "Move to the right tmux and nvim window" }),
+}
+return M
+
+-- new file
+-- map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
+
+-- tabs
+-- map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
+-- map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+-- map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
+-- map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+-- map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
+-- map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
