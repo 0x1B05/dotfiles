@@ -32,7 +32,7 @@ map("n", "<leader>w|", "<C-W>v", { desc = "Split window right" })
 map("n", "<leader>-", "<C-W>s", { desc = "Split window below" })
 map("n", "<leader>|", "<C-W>v", { desc = "Split window right" })
 
--- Resize window using <ctrl> arrow keys
+-- Resize window in neovim using <ctrl> arrow keys
 map("n", "<C-Up>", "<cmd>resize +5<cr>", { desc = "Increase window height" })
 map("n", "<C-Down>", "<cmd>resize -5<cr>", { desc = "Decrease window height" })
 map("n", "<C-Left>", "<cmd>vertical resize -5<cr>", { desc = "Decrease window width" })

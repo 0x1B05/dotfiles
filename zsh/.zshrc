@@ -2,8 +2,8 @@ cd ~
 #
 # Start ssh-agent
 if [ -z "$SSH_AUTH_SOCK" ]; then
-    eval $(ssh-agent -s)
-    ssh-add ~/.ssh/id_rsa
+    eval $(ssh-agent -s) >/dev/null 2>&1
+    ssh-add ~/.ssh/id_rsa >/dev/null 2>&1
 fi
 
 # History in cache directory:
@@ -36,24 +36,32 @@ autoload -U colors && colors
 
 # alias
 alias vim="nvim"
-alias python="python3"
+alias py="python3"
 alias la="ls -a"
 alias glog="git log --all --oneline --pretty=format:'%C(auto)%h%C(blue) %<|(19)%as%C(auto)%d %s' --graph"
 alias ll="ls -lh"
 alias mv="mv -i"           # -i prompts before overwrite
 alias mkdir="mkdir -p"     # -p make parent dirs as needed
 alias df="df -h"           # -h prints human readable format
-alias c="lfcd"
+alias c="clear"
+alias t="tmux"
+alias ta="tmux a"
 
 # Use vim style line editing in zsh
-bindkey -v
-bindkey -a 'gg' beginning-of-buffer-or-history
-bindkey -a 'G' end-of-buffer-or-history
-bindkey -a 'u' undo
+# bindkey -v
 bindkey -a '^R' redo
 bindkey -a '^V' edit-command-line
 bindkey '^H' backward-delete-char
 bindkey '^R' history-incremental-search-backward
+
+# function zle-keymap-select {
+# 	if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
+# 		echo -ne '\e[1 q'
+# 	elif [[ ${KEYMAP} == main ]] || [[ ${KEYMAP} == viins ]] || [[ ${KEYMAP} = '' ]] || [[ $1 = 'beam' ]]; then
+# 		echo -ne '\e[5 q'
+#   fi
+# }
+# zle -N zle-keymap-select
 
 # my scripts
 mcd(){
@@ -70,6 +78,7 @@ lfcd () {
         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
     fi
 }
+bindkey -s '^o' 'lfcd\n'
 
 # autopairs
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
