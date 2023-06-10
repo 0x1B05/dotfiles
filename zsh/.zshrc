@@ -35,24 +35,15 @@ export PATH="$path"
 autoload -U colors && colors
 
 # alias
-alias vim="nvim"
-alias py="python3"
-alias la="ls -a"
-alias glog="git log --all --oneline --pretty=format:'%C(auto)%h%C(blue) %<|(19)%as%C(auto)%d %s' --graph"
-alias ll="ls -lh"
-alias mv="mv -i"           # -i prompts before overwrite
-alias mkdir="mkdir -p"     # -p make parent dirs as needed
-alias df="df -h"           # -h prints human readable format
-alias c="clear"
-alias t="tmux"
-alias ta="tmux a"
+source ~/.config/zsh/aliases.zsh
 
 # Use vim style line editing in zsh
-# bindkey -v
-bindkey -a '^R' redo
-bindkey -a '^V' edit-command-line
-bindkey '^H' backward-delete-char
-bindkey '^R' history-incremental-search-backward
+
+source ~/.config/zsh/zsh-vi-mode.plugin.zsh
+
+autoload edit-command-line; zle -N edit-command-line
+bindkey '^e' edit-command-line
+
 
 # function zle-keymap-select {
 # 	if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
@@ -100,8 +91,6 @@ fi
 setopt HIST_IGNORE_ALL_DUPS
 
 # Input/output
-# Set editor default keymap to emacs (`-e`) or vi (`-v`)
-bindkey -e
 
 # Prompt for spelling correction of commands.
 #setopt CORRECT
@@ -190,8 +179,7 @@ fi
 if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
   source ${ZIM_HOME}/zimfw.zsh init -q
 fi
-# Initialize modules.
-# 启用 zsh-autosuggestions 插件
+
 source ${ZIM_HOME}/modules/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ${ZIM_HOME}/init.zsh
 source ${ZIM_HOME}/modules/zsh-autopair/autopair.zsh
@@ -218,8 +206,6 @@ zmodload -F zsh/terminfo +p:terminfo
 # Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
 for key ('^[[A' '^P' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up
 for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
-for key ('k') bindkey -M vicmd ${key} history-substring-search-up
-for key ('j') bindkey -M vicmd ${key} history-substring-search-down
 unset key
 # }}} End configuration added by Zim install
 

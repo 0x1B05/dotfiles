@@ -5,10 +5,6 @@
 #
 
 # Start configuration added by Zim install {{{
-# -------
-# Modules
-# -------
-
 # Sets sane Zsh built-in environment options.
 zmodule environment
 # Provides handy git aliases and functions.
@@ -20,15 +16,11 @@ zmodule termtitle
 # Utility aliases and functions. Adds colour to ls, grep and less.
 zmodule utility
 zmodule romkatv/powerlevel10k
-#
-#Prompt
-#
 # Exposes to prompts how long the last command took to execute, used by asciiship.
 zmodule duration-info
 # Exposes git repository status information to prompts, used by asciiship.
 zmodule git-info
 # A heavily reduced, ASCII-only version of the Spaceship and Starship prompts.
-
 # Additional completion definitions for Zsh.
 zmodule zsh-users/zsh-completions
 # Enables and configures smart and extensive tab completion.
@@ -44,10 +36,8 @@ zmodule zsh-users/zsh-syntax-highlighting
 zmodule zsh-users/zsh-history-substring-search
 # }}} End configuration added by Zim install
 
-
 # zmodule DarrinTisdale/zsh-aliases-exa # 添加多个 alias, 使用 exa 代替 ls，要求有安装 exa
 zmodule wookayin/fzf-fasd
 zmodule zdharma-continuum/fast-syntax-highlighting
 zmodule hlissner/zsh-autopair
 zmodule Aloxaf/fzf-tab
-
