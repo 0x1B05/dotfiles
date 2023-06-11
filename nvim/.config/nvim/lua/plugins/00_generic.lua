@@ -16,7 +16,7 @@ return {
 			},
 			root_dirs = { "~" },
 			filters = {
-				custom = { ".git", ".aux", ".log" },
+				custom = { ".git", ".aux"  },
 				dotfiles = false,
 			},
 			sync_root_with_cwd = true,

@@ -10,7 +10,7 @@ end
 map("n", "<leader>r", ":so %<CR>")
 -- Terminal mappings
 map("n", "<C-t>", ":split | term<CR>") -- open
-map("t", "<Esc>", "<C-\\><C-n>") -- exit
+map("n", "<C-g>", ":tabe<cr>:-tabmove<cr>:term lazygit<cr>")
 
 -- move Lines
 map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
@@ -50,8 +50,8 @@ map("n", "tl", "<cmd>tabnext<CR>", { desc = "Next tab" })
 map("n", "th", "<cmd>tabprevious<CR>", { desc = "Previous tab" })
 
 -- save file
-
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save file" })
+map({ "i", "v", "n", "s" }, "<C-q>", "<cmd>wqa<cr><esc>", { desc = "Save file and exit" })
 -- lazy
 map("n", "<leader>l", "<cmd>:Lazy<cr>", { desc = "Lazy" })
 

@@ -34,25 +34,11 @@ path=$(join_by ":" "${paths[@]}")
 export PATH="$path"
 autoload -U colors && colors
 
-# alias
 source ~/.config/zsh/aliases.zsh
-
-# Use vim style line editing in zsh
-
 source ~/.config/zsh/zsh-vi-mode.plugin.zsh
 
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
-
-
-# function zle-keymap-select {
-# 	if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
-# 		echo -ne '\e[1 q'
-# 	elif [[ ${KEYMAP} == main ]] || [[ ${KEYMAP} == viins ]] || [[ ${KEYMAP} = '' ]] || [[ $1 = 'beam' ]]; then
-# 		echo -ne '\e[5 q'
-#   fi
-# }
-# zle -N zle-keymap-select
 
 # my scripts
 mcd(){
@@ -90,7 +76,6 @@ fi
 # Remove older command from the history if a duplicate is to be added.
 setopt HIST_IGNORE_ALL_DUPS
 
-# Input/output
 
 # Prompt for spelling correction of commands.
 #setopt CORRECT
@@ -111,29 +96,6 @@ WORDCHARS=${WORDCHARS//[\/]}
 # --------------------
 # Module configuration
 # --------------------
-
-#
-# git
-#
-
-# Set a custom prefix for the generated aliases. The default prefix is 'G'.
-#zstyle ':zim:git' aliases-prefix 'g'
-
-#
-# input
-#
-
-# Append `../` to your input for each `.` you type after an initial `..`
-#zstyle ':zim:input' double-dot-expand yes
-
-#
-# termtitle
-#
-
-# Set a custom terminal title format using prompt expansion escape sequences.
-# See http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Simple-Prompt-Escapes
-# If none is provided, the default '%n@%m: %~' is used.
-#zstyle ':zim:termtitle' format '%1~'
 
 #
 # zsh-autosuggestions
@@ -185,28 +147,12 @@ source ${ZIM_HOME}/init.zsh
 source ${ZIM_HOME}/modules/zsh-autopair/autopair.zsh
 
 # autoload -Uz is-at-least
-# if is-at-least 5.1; then
-#     zle -N autopair
-#     bindkey "\e\"" autopair
-#     bindkey "\e'" autopair
-#     bindkey "\e(" autopair
-#     bindkey "\e[" autopair
-#     bindkey "\e{" autopair
-# fi
-
-# ------------------------------
-# Post-init module configuration
-# ------------------------------
-
-#
-# zsh-history-substring-search
-#
-
-zmodload -F zsh/terminfo +p:terminfo
-# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
-for key ('^[[A' '^P' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up
-for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
-unset key
+zle -N autopair
+bindkey "\e\"" autopair
+bindkey "\e'" autopair
+bindkey "\e(" autopair
+bindkey "\e[" autopair
+bindkey "\e{" autopair
 # }}} End configuration added by Zim install
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
