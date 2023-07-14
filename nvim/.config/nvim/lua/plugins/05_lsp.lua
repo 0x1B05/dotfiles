@@ -1,7 +1,7 @@
 local util = require("config.util")
 
 return {
-	-- lspconfig
+    -- lspconfig
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
@@ -16,7 +16,6 @@ return {
 			-- { "<C-k>", vim.lsp.buf.signature_help, mode = "", desc = "Signature Help" },
 			{ "<C-a>", vim.lsp.buf.code_action, mode = { "n", "v" }, desc = "Code Action" },
 			{ "<C-f>", util.format, desc = "Format" },
-			{ "<leader>cl", "<cmd>LspInfo<cr>", desc = "Lsp Info" },
 		},
 		opts = {
 			diagnostics = {
@@ -66,10 +65,10 @@ return {
 
 			-- check to setup manually in case no support from mason
 			for server, _ in pairs(opts.servers) do
-                -- stylua: ignore
-                if not vim.tbl_contains(mslp_servers, server) then
-                    s_setup(server)
-                end
+	               -- stylua: ignore
+	               if not vim.tbl_contains(mslp_servers, server) then
+	                   s_setup(server)
+	               end
 			end
 
 			-- check to setup with mason-lspconfig
@@ -87,39 +86,6 @@ return {
 				cond = function()
 					return util.has("nvim-cmp")
 				end,
-			},
-		},
-	},
-
-	-- easy lspconfig: implicitly load mason and auto install lsp servers
-	{
-		"williamboman/mason-lspconfig.nvim",
-		lazy = true,
-		opts = {
-			ensure_installed = require("config.options").plugins.lsp_servers,
-			automatic_installation = false,
-		},
-		dependencies = {
-			"williamboman/mason.nvim",
-			-- 'neovim/nvim-lspconfig',
-		},
-	},
-
-	-- manage LSP servers, DAP servers, linters, and formatters
-	{
-		"williamboman/mason.nvim",
-		cmd = "Mason",
-		build = ":MasonUpdate",
-		opts = { -- required for :Mason
-			log_level = vim.log.levels.INFO,
-			max_concurrent_installers = 4,
-			ui = {
-				-- disable check on :Mason window
-				check_outdated_packages_on_open = false,
-
-				border = "rounded",
-				width = 0.8,
-				height = 0.8,
 			},
 		},
 	},
