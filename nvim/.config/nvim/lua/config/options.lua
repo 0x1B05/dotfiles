@@ -77,7 +77,6 @@ M.plugins = {
 	-- stylua: ignore
 	lsp_servers = {
 		'clangd',
-		'gopls',
 		'pyright',
 		'lua_ls',
 		'rust_analyzer',
@@ -85,18 +84,22 @@ M.plugins = {
 
 	-- null-ls sources: formatter and linter
 	nls_sources = function(nls)
+        -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
+        local formatting = nls.builtins.formatting
+        -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
+        local diagnostics = nls.builtins.diagnostics
 		return {
 			-- formatters
-			nls.builtins.formatting.clang_format,
-			nls.builtins.formatting.gofmt,
-			nls.builtins.formatting.rustfmt,
-			nls.builtins.formatting.yapf,
-			nls.builtins.formatting.stylua,
-			nls.builtins.formatting.shfmt,
+			formatting.clang_format,
+			formatting.gofmt,
+			formatting.rustfmt,
+			formatting.yapf,
+			formatting.stylua,
+			formatting.shfmt,
 
 			-- linters
-			nls.builtins.diagnostics.clang_check,
-			nls.builtins.diagnostics.flake8,
+			diagnostics.clang_check,
+			diagnostics.flake8,
 		}
 	end,
 

@@ -3,12 +3,12 @@ return {
 	{
 		"L3MON4D3/LuaSnip",
 		build = "make install_jsregexp",
-		-- dependencies = {
-		-- 	"rafamadriz/friendly-snippets",
-		-- 	config = function()
-		-- 		require("luasnip.loaders.from_vscode").lazy_load()
-		-- 	end,
-		-- },
+		dependencies = {
+			"rafamadriz/friendly-snippets",
+			config = function()
+				require("luasnip.loaders.from_vscode").lazy_load()
+			end,
+		},
 		opts = {
 			history = true,
 			delete_check_events = "TextChanged",
@@ -20,32 +20,32 @@ return {
 			})
 			require("luasnip.loaders.from_lua").load({ paths = "~/.config/fvim/LuaSnip" })
 		end,
-		keys = {
-			-- {
-			-- 	"fj",
-			-- 	function()
-			-- 		return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next"
-			-- 			or "<c-\\><c-n>:call searchpair('[([{<|]', '', '[)\\]}>|]', 'W')<cr>a"
-			-- 	end,
-			-- 	expr = true,
-			-- 	silent = true,
-			-- 	mode = "i",
-			-- },
-			-- {
-			-- 	"fj",
-			-- 	function()
-			-- 		require("luasnip").jump(1)
-			-- 	end,
-			-- 	mode = "s",
-			-- },
-			-- {
-			-- 	"fk",
-			-- 	function()
-			-- 		require("luasnip").jump(-1)
-			-- 	end,
-			-- 	mode = { "i", "s" },
-			-- },
-		},
+		-- keys = {
+		-- 	{
+		-- 		"fj",
+		-- 		function()
+		-- 			return require("luasnip").jumpable(1) and "<Plug>luasnip-jump-next"
+		-- 				or "<c-\\><c-n>:call searchpair('[([{<|]', '', '[)\\]}>|]', 'W')<cr>a"
+		-- 		end,
+		-- 		expr = true,
+		-- 		silent = true,
+		-- 		mode = "i",
+		-- 	},
+		-- 	{
+		-- 		"fj",
+		-- 		function()
+		-- 			require("luasnip").jump(1)
+		-- 		end,
+		-- 		mode = "s",
+		-- 	},
+		-- 	{
+		-- 		"fk",
+		-- 		function()
+		-- 			require("luasnip").jump(-1)
+		-- 		end,
+		-- 		mode = { "i", "s" },
+		-- 	},
+		-- },
 	},
 
 	-- surround
@@ -102,19 +102,25 @@ return {
 			require("mini.comment").setup(opts)
 		end,
 	},
-	-- null-ls as formatter and linter
+
+	-- auto pairs
 	{
-		"jose-elias-alvarez/null-ls.nvim",
-		event = { "BufReadPre", "BufNewFile" },
-		opts = function()
-			local nls = require("null-ls")
-			return {
-				sources = require("config.options").plugins.nls_sources(nls),
-			}
-		end,
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		opts = {
+			disable_filetype = { "TelescopePrompt", "spectre_panel" },
+			fast_wrap = {
+				map = "<M-e>",
+				chars = { "{", "[", "(", '"', "'", "`", "<"},
+				pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
+				offset = 0, -- Offset from pattern match
+				end_key = "$",
+				keys = "qwertyuiopzxcvbnmasdfghjkl",
+				check_comma = true,
+				highlight = "PmenuSel",
+				highlight_grey = "LineNr",
+			},
+		}, -- this is equalent to setup({}) function
 	},
 
 	--{
