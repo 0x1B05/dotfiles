@@ -65,6 +65,11 @@ return {
 					-- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 					["<CR>"] = cmp.mapping.confirm({ select = false }),
 					["<Tab>"] = cmp.mapping(function(fallback)
+                        local luasnip = require("luasnip")
+                        local check_backspace = function()
+                            local col = vim.fn.col "." - 1
+                            return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
+                        end
 						if cmp.visible() then
 							cmp.select_next_item()
 						elseif luasnip.expandable() then
@@ -81,6 +86,7 @@ return {
 						"s",
 					}),
 					["<S-Tab>"] = cmp.mapping(function(fallback)
+                        local luasnip = require("luasnip")
 						if cmp.visible() then
 							cmp.select_prev_item()
 						elseif luasnip.jumpable(-1) then

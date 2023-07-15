@@ -1,9 +1,9 @@
-local util = require("util")
+local handlers = require("plugins.lspconfig.handlers")
 
 -- https://clangd.llvm.org/extensions.html#switch-between-sourceheader
 local function switch_source_header(bufnr)
-	bufnr = util.validate_bufnr(bufnr)
-	local clangd_client = util.get_active_client_by_name(bufnr, "clangd")
+	bufnr = handlers.validate_bufnr(bufnr)
+	local clangd_client = handlers.get_active_client_by_name(bufnr, "clangd")
 	local params = { uri = vim.uri_from_bufnr(bufnr) }
 	if clangd_client then
 		clangd_client.request("textDocument/switchSourceHeader", params, function(err, result)
@@ -28,8 +28,6 @@ local root_files = {
 	"compile_commands.json",
 	"compile_flags.txt",
 	"configure.ac", -- AutoTools
-	".git ",
-	"CMakeLists.txt",
 }
 
 local default_capabilities = {
@@ -46,7 +44,7 @@ return {
 		cmd = { "clangd" },
 		filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
 		root_dir = function(fname)
-			return util.root_pattern(table.unpack(root_files))(fname) or util.find_git_ancestor(fname)
+			return handlers.root_pattern(table.unpack(root_files))(fname) or handlers.find_git_ancestor(fname)
 		end,
 		single_file_support = true,
 		capabilities = default_capabilities,

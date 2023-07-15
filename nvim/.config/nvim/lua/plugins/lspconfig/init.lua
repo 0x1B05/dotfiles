@@ -7,6 +7,23 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
+		keys = {
+			{ "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", desc = "show the declaration" },
+			{ "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", desc = "go to definition" },
+			-- {"K", "<cmd>lua vim.lsp.buf.hover()<CR>", },
+			{ "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", desc = "go to implementation" },
+			{ "gr", "<cmd>lua vim.lsp.buf.references()<CR>", desc = "go to references" },
+			{ "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", desc = "diagnostic float" },
+			{ "<leader>lf", util.format, desc = "Format" },
+			{ "<leader>li", "<cmd>LspInfo<cr>", desc = "LspInfo" },
+			{ "<leader>lI", "<cmd>LspInstallInfo<cr>", desc = "LspInstallInfo" },
+			{ "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "code action" },
+			{ "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", desc = "go to next diagnostic" },
+			{ "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", desc = "go to prev diagnostic" },
+			{ "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "rename buffer" },
+			{ "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", desc = "signature help" },
+			{ "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", desc = "set loclist" },
+		},
 		dependencies = {
 			-- load for lsp server setup
 			"williamboman/mason.nvim",
@@ -19,12 +36,27 @@ return {
 				end,
 			},
 		},
+		opts = {
+			diagnostics = {
+				underline = true,
+				update_in_insert = false,
+				virtual_text = {
+					spacing = 4,
+					source = "if_many",
+					prefix = "●",
+					-- this will set set the prefix to a function that returns the diagnostics icon based on the severity
+					-- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
+					-- prefix = "icons",
+				},
+				severity_sort = true,
+			},
+		},
 
 		config = function()
 			handlers.setup()
 			local lspconfig = require("lspconfig")
 			for _, server in pairs(servers) do
-				opts = {
+				local opts = {
 					on_attach = handlers.on_attach,
 					capabilities = handlers.capabilities,
 				}
