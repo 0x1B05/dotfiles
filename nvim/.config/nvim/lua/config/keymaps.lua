@@ -53,6 +53,7 @@ map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save file" })
 -- map({ "i", "v", "n", "s" }, "<C-q>", "<cmd>wqa<cr><esc>", { desc = "Save file and exit" })
 
 -- keymaps for plugins
+local util = require("config.util")
 local M = {}
 M.hop = {
 	map("n", "<space>c", ":HopChar1<cr>", { desc = "Hop one char" }),
@@ -78,6 +79,23 @@ M.spectre = { {
 		require("spectre").open()
 	end,
 }, desc = "Spectre" }
+M.lsp = {
+	{ "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", desc = "show the declaration" },
+	{ "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", desc = "go to definition" },
+	-- {"K", "<cmd>lua vim.lsp.buf.hover()<CR>", },
+	{ "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", desc = "go to implementation" },
+	{ "gr", "<cmd>lua vim.lsp.buf.references()<CR>", desc = "go to references" },
+	{ "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", desc = "diagnostic float" },
+	{ "<leader>lf", util.format, desc = "Format" },
+	{ "<leader>li", "<cmd>LspInfo<cr>", desc = "LspInfo" },
+	{ "<leader>lI", "<cmd>LspInstallInfo<cr>", desc = "LspInstallInfo" },
+	{ "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "code action" },
+	{ "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", desc = "go to next diagnostic" },
+	{ "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", desc = "go to prev diagnostic" },
+	{ "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "rename buffer" },
+	{ "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", desc = "signature help" },
+	{ "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", desc = "set loclist" },
+}
 M.persistence = {
 	{
 		"<leader>Ss",
