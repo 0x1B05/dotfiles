@@ -1,29 +1,12 @@
 local util = require("config.util")
-local servers = require("config.options").plugins.lsp_servers
-local handlers = require("plugins.lspconfig.handlers")
+local keymaps = require("config.keymaps")
 
 return {
 	-- lspconfig
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
-		keys = {
-			{ "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", desc = "show the declaration" },
-			{ "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", desc = "go to definition" },
-			-- {"K", "<cmd>lua vim.lsp.buf.hover()<CR>", },
-			{ "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", desc = "go to implementation" },
-			{ "gr", "<cmd>lua vim.lsp.buf.references()<CR>", desc = "go to references" },
-			{ "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", desc = "diagnostic float" },
-			{ "<leader>lf", util.format, desc = "Format" },
-			{ "<leader>li", "<cmd>LspInfo<cr>", desc = "LspInfo" },
-			{ "<leader>lI", "<cmd>LspInstallInfo<cr>", desc = "LspInstallInfo" },
-			{ "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "code action" },
-			{ "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", desc = "go to next diagnostic" },
-			{ "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", desc = "go to prev diagnostic" },
-			{ "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "rename buffer" },
-			{ "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", desc = "signature help" },
-			{ "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", desc = "set loclist" },
-		},
+		keys = keymaps.lsp,
 		dependencies = {
 			-- load for lsp server setup
 			"williamboman/mason.nvim",
@@ -37,6 +20,7 @@ return {
 			},
 		},
 		opts = {
+			-- options for vim.diagnostic.config()
 			diagnostics = {
 				underline = true,
 				update_in_insert = false,
@@ -50,25 +34,97 @@ return {
 				},
 				severity_sort = true,
 			},
+			-- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
+			-- Be aware that you also will need to properly configure your LSP server to
+			-- provide the inlay hints.
+			inlay_hints = {
+				enabled = false,
+			},
+			-- add any global capabilities here
+			capabilities = {},
+			-- Automatically format on save
+			autoformat = true,
+			-- Enable this to show formatters used in a notification
+			-- Useful for debugging formatter issues
+			format_notify = false,
+			-- options for vim.lsp.buf.format
+			-- `bufnr` and `filter` is handled by the LazyVim formatter,
+			-- but can be also overridden when specified
+			format = {
+				formatting_options = nil,
+				timeout_ms = nil,
+			},
+			-- LSP Server Settings
+			servers = {
+				pyright = require("plugins.lspconfig.langs.pyright"),
+				clangd = require("plugins.lspconfig.langs.clangd"),
+				cmake = require("plugins.lspconfig.langs.cmake-language-server"),
+
+				lua_ls = require("plugins.lspconfig.langs.lua_ls"),
+			},
+			-- you can do any additional lsp server setup here
+			-- return true if you don't want this server to be setup with lspconfig
+			setup = {
+				-- example to setup with typescript.nvim
+				-- tsserver = function(_, opts)
+				--   require("typescript").setup({ server = opts })
+				--   return true
+				-- end,
+				-- Specify * to use this function as a fallback for any server
+				-- ["*"] = function(server, opts) end,
+			},
 		},
 
-		config = function()
-			handlers.setup()
-			local lspconfig = require("lspconfig")
-			for _, server in pairs(servers) do
-				local opts = {
-					on_attach = handlers.on_attach,
-					capabilities = handlers.capabilities,
-				}
+		config = function(_, opts)
+			local servers = opts.servers
+			local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+			local capabilities = vim.tbl_deep_extend(
+				"force",
+				{},
+				vim.lsp.protocol.make_client_capabilities(),
+				has_cmp and cmp_nvim_lsp.default_capabilities() or {},
+				opts.capabilities or {}
+			)
 
-				server = vim.split(server, "@")[1]
+			local function setup(server)
+				local server_opts = vim.tbl_deep_extend("force", {
+					capabilities = vim.deepcopy(capabilities),
+				}, servers[server] or {})
 
-				local require_ok, conf_opts = pcall(require, "plugins.lspconfig.langs." .. server)
-				if require_ok then
-					opts = vim.tbl_deep_extend("force", conf_opts, opts)
+				if opts.setup[server] then
+					if opts.setup[server](server, server_opts) then
+						return
+					end
+				elseif opts.setup["*"] then
+					if opts.setup["*"](server, server_opts) then
+						return
+					end
 				end
+				require("lspconfig")[server].setup(server_opts)
+			end
 
-				lspconfig[server].setup(opts)
+			-- get all the servers that are available thourgh mason-lspconfig
+			local have_mason, mlsp = pcall(require, "mason-lspconfig")
+			local all_mslp_servers = {}
+			if have_mason then
+				all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
+			end
+
+			local ensure_installed = require("config.options").plugins.lsp_servers
+			for server, server_opts in pairs(servers) do
+				if server_opts then
+					server_opts = server_opts == true and {} or server_opts
+					-- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
+					if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
+						setup(server)
+					else
+						ensure_installed[#ensure_installed + 1] = server
+					end
+				end
+			end
+
+			if have_mason then
+				mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
 			end
 		end,
 	},
