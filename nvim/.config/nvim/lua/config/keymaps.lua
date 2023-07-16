@@ -57,15 +57,6 @@ map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save file" })
 -- keymaps for plugins
 local util = require("config.util")
 local M = {}
-M.hop = {
-	map("n", "<space>c", ":HopChar1<cr>", { desc = "Hop one char" }),
-	map("n", "<space>l", ":HopLine<cr>", { desc = "Hop line" }),
-}
-M.leap = {
-	map({ "x", "o", "n" }, ",", "<Plug>(leap-forward-to)"),
-	map({ "x", "o", "n" }, "<space>b", "<Plug>(leap-backward-to)"),
-}
-M.flit = { f = "f", F = "F", t = "t", T = "T" }
 M.telescope = {
 	{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "TL file" },
 	{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "TL grep" },
@@ -130,12 +121,9 @@ M.tmux = {
 	map("n", "<C-l>", "<cmd>lua require('tmux').move_right()<cr>", { desc = "Move to the right tmux and nvim window" }),
 }
 M.toggleterm = {
-	{ "t", "<C-h>", "<C-\\><C-N><C-w>h", { desc = "Open terminal left" } },
-	{ "t", "<C-j>", "<C-\\><C-N><C-w>j", { desc = "Open terminal below" } },
-	{ "t", "<C-k>", "<C-\\><C-N><C-w>k", { desc = "Open terminal below" } },
-	{ "t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "Open terminal right" } },
+	{ "t", "<C-h>", "<C-\\><C-N><C-w>h", { desc = "Move to the left window in terminal mode." } },
+	{ "t", "<C-j>", "<C-\\><C-N><C-w>j", { desc = "Move to the below window in terminal mode." } },
+	{ "t", "<C-k>", "<C-\\><C-N><C-w>k", { desc = "Move to the above window in terminal mode." } },
+	{ "t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "Move to the right window in terminal mode." } },
 }
 return M
-
--- new file
--- map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
