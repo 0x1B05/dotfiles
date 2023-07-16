@@ -45,7 +45,7 @@ return {
 			}
 			return {
 				completion = {
-					completeopt = "menu,menuone,noinsert,noselect",
+					completeopt = "menu,menuone,noinsert",
 				},
 				snippet = {
 					expand = function(args)
@@ -65,11 +65,11 @@ return {
 					-- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 					["<CR>"] = cmp.mapping.confirm({ select = false }),
 					["<Tab>"] = cmp.mapping(function(fallback)
-                        local luasnip = require("luasnip")
-                        local check_backspace = function()
-                            local col = vim.fn.col "." - 1
-                            return col == 0 or vim.fn.getline("."):sub(col, col):match "%s"
-                        end
+						local luasnip = require("luasnip")
+						local check_backspace = function()
+							local col = vim.fn.col(".") - 1
+							return col == 0 or vim.fn.getline("."):sub(col, col):match("%s")
+						end
 						if cmp.visible() then
 							cmp.select_next_item()
 						elseif luasnip.expandable() then
@@ -86,7 +86,7 @@ return {
 						"s",
 					}),
 					["<S-Tab>"] = cmp.mapping(function(fallback)
-                        local luasnip = require("luasnip")
+						local luasnip = require("luasnip")
 						if cmp.visible() then
 							cmp.select_prev_item()
 						elseif luasnip.jumpable(-1) then
@@ -118,6 +118,19 @@ return {
 						return vim_item
 					end,
 				},
+				confirm_opts = {
+					behavior = cmp.ConfirmBehavior.Replace,
+					select = false,
+				},
+				window = {
+					documentation = {
+						border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+					},
+				},
+				experimental = {
+					ghost_text = true,
+					native_menu = false,
+				},
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
@@ -136,6 +149,10 @@ return {
 					sources = {
 						{ name = "buffer" },
 					},
+					-- 禁用默认的第一项选择
+					completion = {
+						completeopt = "menu,menuone,noinsert,noselect",
+					},
 				}),
 				-- 命令模式下输入 `:` 启用补全
 				cmp.setup.cmdline(":", {
@@ -145,6 +162,10 @@ return {
 					}, {
 						{ name = "cmdline" },
 					}),
+					-- 禁用默认的第一项选择
+					completion = {
+						completeopt = "menu,menuone,noinsert,noselect",
+					},
 				}),
 			}
 		end,

@@ -43,10 +43,12 @@ map("n", "<S-k>", "<cmd>bnext<cr>", { desc = "Next buffer" })
 map("n", "<S-x>", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
 
 -- tabs
-map("n", "tm", "<cmd>tabclose<cr>", { desc = "Close tab" })
-map("n", "tn", "<cmd>tabnew<cr>", { desc = "New tab" })
-map("n", "tl", "<cmd>tabnext<CR>", { desc = "Next tab" })
-map("n", "th", "<cmd>tabprevious<CR>", { desc = "Previous tab" })
+map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
+map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
+map("n", "<leader><tab>h", "<cmd>tabfirst<cr>", { desc = "First Tab" })
+map("n", "<leader><tab>k", "<cmd>tabnext<cr>", { desc = "Next Tab" })
+map("n", "<leader><tab>j", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
+map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 
 -- save file
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save file" })
@@ -127,15 +129,13 @@ M.tmux = {
 	map("n", "<C-k>", "<cmd>lua require('tmux').move_top()<cr>", { desc = "Move to the top tmux and nvim window" }),
 	map("n", "<C-l>", "<cmd>lua require('tmux').move_right()<cr>", { desc = "Move to the right tmux and nvim window" }),
 }
+M.toggleterm = {
+	{ "t", "<C-h>", "<C-\\><C-N><C-w>h", { desc = "Open terminal left" } },
+	{ "t", "<C-j>", "<C-\\><C-N><C-w>j", { desc = "Open terminal below" } },
+	{ "t", "<C-k>", "<C-\\><C-N><C-w>k", { desc = "Open terminal below" } },
+	{ "t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "Open terminal right" } },
+}
 return M
 
 -- new file
 -- map("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New File" })
-
--- tabs
--- map("n", "<leader><tab>l", "<cmd>tablast<cr>", { desc = "Last Tab" })
--- map("n", "<leader><tab>f", "<cmd>tabfirst<cr>", { desc = "First Tab" })
--- map("n", "<leader><tab><tab>", "<cmd>tabnew<cr>", { desc = "New Tab" })
--- map("n", "<leader><tab>]", "<cmd>tabnext<cr>", { desc = "Next Tab" })
--- map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
--- map("n", "<leader><tab>[", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })

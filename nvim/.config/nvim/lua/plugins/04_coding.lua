@@ -1,3 +1,4 @@
+local keymaps = require("config.keymaps")
 return {
 	-- snippets
 	{
@@ -97,6 +98,8 @@ return {
 			{ "gbO", mode = "n", esc = "Add comment on the line above" },
 			{ "gbo", mode = "n", esc = "Add comment on the line below" },
 			{ "gbA", mode = "n", esc = "Add comment at the end of line" },
+			{ "gc", mode = "v", esc = "Line-comment toggle keymap in visual mode" },
+			{ "gb", mode = "v", esc = "Line-comment toggle keymap in visual mode" },
 		},
 		config = function()
 			require("Comment").setup({
@@ -185,6 +188,7 @@ return {
 		"akinsho/toggleterm.nvim",
 		event = "VeryLazy",
 		version = "*",
+		keys = keymaps.toggleterm,
 		opts = {
 			size = 20,
 			open_mapping = [[<c-\>]],
