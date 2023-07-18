@@ -112,9 +112,8 @@ function M.load_lazy()
 			frequency = 3600 * 24 * 7, -- check for updates every week
 		},
 		change_detection = {
-			-- automatically check for config file changes and reload the ui
-			enabled = true,
-			notify = true, -- get a notification when changes are found
+			enabled = false,
+			notify = false,
 		},
 		performance = {
 			cache = {

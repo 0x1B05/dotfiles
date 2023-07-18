@@ -52,7 +52,6 @@ map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 
 -- save file
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save file" })
--- map({ "i", "v", "n", "s" }, "<C-q>", "<cmd>wqa<cr><esc>", { desc = "Save file and exit" })
 
 -- keymaps for plugins
 local util = require("config.util")

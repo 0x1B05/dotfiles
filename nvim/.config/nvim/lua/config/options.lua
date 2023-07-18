@@ -42,9 +42,9 @@ M.opt_o = {
 	-----------------------------------------------------------
 	-- Code Fold
 	-----------------------------------------------------------
-    foldmethod = "expr",
-    foldexpr = "nvim_treesitter#foldexpr()",
-    foldlevel = 99,
+	foldmethod = "expr",
+	foldexpr = "nvim_treesitter#foldexpr()",
+	foldlevel = 99,
 
 	-----------------------------------------------------------
 	-- Neovim UI
@@ -84,13 +84,17 @@ M.plugins = {
 
 	-- null-ls sources: formatter and linter
 	nls_sources = function(nls)
-        -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
-        local formatting = nls.builtins.formatting
-        -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
-        local diagnostics = nls.builtins.diagnostics
+		-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
+		local formatting = nls.builtins.formatting
+		-- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
+		local diagnostics = nls.builtins.diagnostics
 		return {
 			-- formatters
-			formatting.clang_format,
+			formatting.clang_format.with({
+				extra_args = {
+					"-style={BasedOnStyle: Google, IndentWidth: 4, DerivePointerAlignment: true, PointerAlignment: Right }",
+				},
+			}),
 			formatting.gofmt,
 			formatting.rustfmt,
 			formatting.yapf,
@@ -112,6 +116,5 @@ function M.load_options()
 	for k, v in pairs(M.opt_o) do vim.o[k] = v end
 	for k, v in pairs(M.opt_g) do vim.g[k] = v end
 end
-
 
 return M

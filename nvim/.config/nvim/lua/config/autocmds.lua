@@ -68,6 +68,26 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 		vim.opt.formatoptions = vim.opt.formatoptions - { "c", "r", "o" }
 	end,
 })
+-- reload config on save
+vim.api.nvim_create_autocmd("BufWritePost", {
+	pattern = "**/lua/config/*.lua",
+	callback = function()
+		local filepath = vim.fn.expand("%")
+		dofile(filepath)
+		vim.notify("Configuration reloaded \n" .. filepath, nil)
+	end,
+	group = augroup("reload_on_save"),
+	desc = "Reload config on save",
+})
+-- autoformat code on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = { "*.cpp", "*.h", "*.c", "*.lua", "*.py" },
+	callback = function()
+		require("config.util").format()
+	end,
+	group = augroup("auto_format_on_save"),
+	desc = "Autoformat code on save",
+})
 -- auto-save
 -- local function save()
 --   local buf = vim.api.nvim_get_current_buf()
