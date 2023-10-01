@@ -95,9 +95,6 @@ M.plugins = {
 					"-style={BasedOnStyle: Google, IndentWidth: 4, DerivePointerAlignment: true, PointerAlignment: Right }",
 				},
 			}),
-			formatting.gofmt,
-			formatting.rustfmt,
-			formatting.yapf,
 			formatting.stylua,
 			formatting.shfmt,
 
