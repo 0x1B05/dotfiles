@@ -10,11 +10,13 @@ export SAVEHIST=10000
 export HISTFILE=~/.zsh_history
 
 # env-variables
-export NEMU_HOME=/home/liuheihei/cs_learning/nju_os/ics/ics2022/nemu
-export AM_HOME=/home/liuheihei/cs_learning/nju_os/ics/ics2022/abstract-machine
+export NPC_HOME=/home/liuheihei/ysyx-workbench/npc
+export NEMU_HOME=/home/liuheihei/ysyx-workbench/nemu
+export AM_HOME=/home/liuheihei/ysyx-workbench/abstract-machine
+export NVBOARD_HOME=/home/liuheihei/ysyx-workbench/nvboard
+
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 export GOBIN=/usr/local/go/bin
-export NPC_HOME=/home/liuheihei/ysyx-workbench/npc
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
@@ -36,6 +38,7 @@ autoload -U colors && colors
 
 source ~/.config/zsh/aliases.zsh
 source ~/.config/zsh/zsh-vi-mode.plugin.zsh
+# source ~/.config/zsh/icons.zsh
 
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
