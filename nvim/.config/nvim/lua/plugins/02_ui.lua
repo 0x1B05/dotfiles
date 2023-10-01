@@ -466,7 +466,7 @@ return {
 				},
 			},
 			rainbow = {
-				enable = true,
+				enable = false,
 				query = { latex = "rainbow-parens" },
 			},
 		},
