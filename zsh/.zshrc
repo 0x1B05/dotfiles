@@ -14,6 +14,16 @@ export NPC_HOME=/home/liuheihei/ysyx-workbench/npc
 export NEMU_HOME=/home/liuheihei/ysyx-workbench/nemu
 export AM_HOME=/home/liuheihei/ysyx-workbench/abstract-machine
 export NVBOARD_HOME=/home/liuheihei/ysyx-workbench/nvboard
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export JRE_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
+export HADOOP_HOME=/usr/local/hadoop
+export HADOOP_INSTALL=$HADOOP_HOME
+export HADOOP_MAPRED_HOME=$HADOOP_HOME
+export HADOOP_COMMON_HOME=$HADOOP_HOME
+export HADOOP_HDFS_HOME=$HADOOP_HOME
+export HADOOP_YARN_HOME=$HADOOP_HOME
+export YARN_HOME=$HADOOP_HOME
+export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 export GOBIN=/usr/local/go/bin
@@ -26,6 +36,8 @@ paths=(
     /usr/bin
     /usr/sbin
     /usr/local/go/bin
+    /usr/local/hadoop/bin
+    /usr/local/hadoop/sbin
 )
 join_by() {
     local separator="$1"
