@@ -15,8 +15,10 @@ return {
 			},
 			-- root_dirs = { "~" },
 			filters = {
-				custom = { ".git", ".aux" },
+				git_ignored = true,
 				dotfiles = false,
+				custom = { ".git", ".aux" },
+				exclude = { ".json" },
 			},
 			sync_root_with_cwd = true,
 			respect_buf_cwd = true,
