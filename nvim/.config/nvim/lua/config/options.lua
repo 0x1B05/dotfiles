@@ -97,6 +97,8 @@ M.plugins = {
 			}),
 			formatting.stylua,
 			formatting.shfmt,
+			formatting.latexindent,
+			formatting.markdownlint,
 
 			-- linters
 			diagnostics.clang_check,
