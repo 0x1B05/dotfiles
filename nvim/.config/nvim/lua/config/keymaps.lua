@@ -53,6 +53,14 @@ map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 -- save file
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save file" })
 
+-- refresh snippets
+map(
+	"n",
+	"<leader>U",
+	"<Cmd>lua require('luasnip.loaders.from_lua').lazy_load({paths = '~/.config/nvim/LuaSnip/'})<CR><Cmd>echo 'Snippets refreshed!'",
+	{ desc = "Snippets refreshed!" }
+)
+
 -- keymaps for plugins
 local util = require("config.util")
 local M = {}

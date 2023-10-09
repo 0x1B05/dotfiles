@@ -4,17 +4,14 @@ return {
 	{
 		"L3MON4D3/LuaSnip",
 		build = "make install_jsregexp",
-		dependencies = {
-			"rafamadriz/friendly-snippets",
-			config = function()
-				require("luasnip.loaders.from_vscode").lazy_load()
-			end,
-		},
 		config = function()
 			require("luasnip").config.set_config({
 				enable_autosnippets = true,
 				store_selection_keys = "<A-p>",
-				history = true,
+				history = false,
+				-- Event on which to check for exiting a snippet's region
+				region_check_events = "InsertEnter",
+				delete_check_events = "InsertLeave",
 				update_events = "TextChanged,TextChangedI",
 				ext_opts = {
 					[require("luasnip.util.types").choiceNode] = {
@@ -22,14 +19,14 @@ return {
 							virt_text = { { "●", "GruvboxOrange" } },
 						},
 					},
-					-- [require("luasnip.util.types").insertNode] = {
-					-- 	active = {
-					-- 		virt_text = { { "●", "GruvboxBlue" } },
-					-- 	},
-					-- },
 				},
 			})
-			require("luasnip.loaders.from_vscode").load({ paths = { "./snippets" } })
+			require("luasnip.loaders.from_lua").lazy_load({ paths = "~/.config/nvim/lua/plugins/luasnip" })
+			local auto_expand = require("luasnip").expand_auto
+			require("luasnip").expand_auto = function(...)
+				vim.o.undolevels = vim.o.undolevels
+				auto_expand(...)
+			end
 		end,
 	},
 
