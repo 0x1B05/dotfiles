@@ -38,6 +38,7 @@ paths=(
     /usr/local/go/bin
     /usr/local/hadoop/bin
     /usr/local/hadoop/sbin
+    /home/liuheihei/.local/share/coursier/bin
 )
 join_by() {
     local separator="$1"
