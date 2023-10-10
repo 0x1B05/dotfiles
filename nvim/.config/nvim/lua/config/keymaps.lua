@@ -104,6 +104,36 @@ M.persistence = {
 		desc = "Load Session",
 	},
 }
+M.knap = {
+	{
+		"<leader>pk",
+		function()
+			require("knap").toggle_autopreviewing()
+		end,
+		desc = "Knap toggle auto previewing",
+	},
+	{
+		"<leader>ps",
+		function()
+			require("knap").forward_jump()
+		end,
+		desc = "Knap forward jump",
+	},
+	{
+		"<leader>pr",
+		function()
+			require("knap").process_once()
+		end,
+		desc = "Knap processes the document and refreshes the view",
+	},
+	{
+		"<leader>pc",
+		function()
+			require("knap").close_viewer()
+		end,
+		desc = "Knap closes the viewer application",
+	},
+}
 M.tmux = {
 	map("n", "<S-Up>", "<cmd>lua require('tmux').resize_top()<cr>", { desc = "Increase window height" }),
 	map("n", "<S-Down>", "<cmd>lua require('tmux').resize_bottom()<cr>", { desc = "Decrease window height" }),
