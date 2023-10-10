@@ -24,6 +24,9 @@ export HADOOP_HDFS_HOME=$HADOOP_HOME
 export HADOOP_YARN_HOME=$HADOOP_HOME
 export YARN_HOME=$HADOOP_HOME
 export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+export PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
+export MANPATH=/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH
+export INFOPATH=/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 export GOBIN=/usr/local/go/bin

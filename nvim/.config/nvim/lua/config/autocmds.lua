@@ -102,6 +102,33 @@ vim.api.nvim_create_autocmd("FileType", {
 	end,
 	group = nvim_metals_group,
 })
+-- check xelatex
+vim.api.nvim_create_autocmd("BufRead", {
+	pattern = { "*.tex" },
+	callback = function()
+		local isxelatex = false
+		local fifteenlines = vim.api.nvim_buf_get_lines(0, 0, 15, false)
+		for _, line in ipairs(fifteenlines) do
+			if
+				(line:lower():match("xelatex"))
+				or (line:match("\\usepackage[^}]*mathspec"))
+				or (line:match("\\usepackage[^}]*fontspec"))
+				or (line:match("\\usepackage[^}]*unicode-math"))
+			then
+				isxelatex = true
+				break
+			end
+		end
+		if isxelatex then
+			local knapsettings = vim.b.knap_settings or {}
+			knapsettings["textopdf"] = "xelatex -interaction=batchmode -halt-on-error -synctex=1 %docroot%"
+			vim.b.knap_settings = knapsettings
+		end
+	end,
+	group = augroup("latex"),
+	desc = "Xelatex check",
+})
+
 -- auto-save
 -- local function save()
 --   local buf = vim.api.nvim_get_current_buf()

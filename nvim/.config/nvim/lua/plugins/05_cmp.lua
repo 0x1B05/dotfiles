@@ -63,7 +63,7 @@ return {
 						c = cmp.mapping.close(),
 					}),
 					-- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-					["<CR>"] = cmp.mapping.confirm({ select = false }),
+					["<CR>"] = cmp.mapping.confirm({ select = true }),
 					["<Tab>"] = cmp.mapping(function(fallback)
 						local luasnip = require("luasnip")
 						local has_words_before = function()
