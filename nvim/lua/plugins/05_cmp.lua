@@ -64,7 +64,7 @@ return {
 					}),
 					-- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 					["<CR>"] = cmp.mapping.confirm({ select = true }),
-					["<Tab>"] = cmp.mapping(function(fallback)
+					["jk"] = cmp.mapping(function(fallback)
 						local luasnip = require("luasnip")
 						local has_words_before = function()
 							unpack = unpack or table.unpack
@@ -86,7 +86,7 @@ return {
 						"i",
 						"s",
 					}),
-					["<S-Tab>"] = cmp.mapping(function(fallback)
+					["kj"] = cmp.mapping(function(fallback)
 						local luasnip = require("luasnip")
 						if cmp.visible() then
 							cmp.select_prev_item()
@@ -98,10 +98,6 @@ return {
 					end, {
 						"i",
 						"s",
-					}),
-					["<S-CR>"] = cmp.mapping.confirm({
-						behavior = cmp.ConfirmBehavior.Replace,
-						select = true,
 					}),
 				}),
 				formatting = {
