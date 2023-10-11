@@ -4,11 +4,16 @@ local get_visual = helpers.get_visual
 local line_begin = require("luasnip.extras.expand_conditions").line_begin
 
 return {
+	-- NP.LOADTXT
 	s(
-		"date",
-		f(function()
-			return os.date("%D - %H:%M")
-		end)
+		{ trig = "nlt", snippetType = "autosnippet" },
+		fmta(
+			[[
+          np.loadtxt(<>)
+        ]],
+			{
+				d(1, get_visual),
+			}
+		)
 	),
-	s("choicenode", c(1, { t("choice 1"), t("choice 2"), t("choice 3") })),
 }

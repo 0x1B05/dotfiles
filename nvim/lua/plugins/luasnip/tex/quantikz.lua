@@ -1,25 +1,8 @@
 local ls = require("luasnip")
-local s = ls.snippet
-local sn = ls.snippet_node
-local t = ls.text_node
-local i = ls.insert_node
-local f = ls.function_node
-local c = ls.choice_node
-local d = ls.dynamic_node
-local fmt = require("luasnip.extras.fmt").fmt
-local fmta = require("luasnip.extras.fmt").fmta
-local rep = require("luasnip.extras").rep
+local helpers = require("util.luasnip")
+local get_visual = helpers.get_visual
 local line_begin = require("luasnip.extras.expand_conditions").line_begin
-
 local tex = require("util.latex")
-
-local get_visual = function(args, parent)
-	if #parent.snippet.env.SELECT_RAW > 0 then
-		return sn(nil, t(parent.snippet.env.SELECT_RAW))
-	else -- If SELECT_RAW is empty, return a blank insert node
-		return sn(nil, i(1))
-	end
-end
 
 return {
 	s(
@@ -144,157 +127,106 @@ return {
 		}),
 		{ condition = tex.in_quantikz }
 	),
-	s({ trig = "alp", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";a", snippetType = "autosnippet" }, {
 		t("\\alpha"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "Alp", snippetType = "autosnippet", wordTrig = false }, {
-		t("\\Alpha"),
-	}, { condition = tex.in_quantikz }),
-	s({ trig = "beta", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";b", snippetType = "autosnippet" }, {
 		t("\\beta"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "Beta", snippetType = "autosnippet", wordTrig = false }, {
-		t("\\Beta"),
-	}, { condition = tex.in_quantikz }),
-	s({ trig = "gam", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";g", snippetType = "autosnippet" }, {
 		t("\\gamma"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "Gam", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";G", snippetType = "autosnippet" }, {
 		t("\\Gamma"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "del", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";d", snippetType = "autosnippet" }, {
 		t("\\delta"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "Del", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";D", snippetType = "autosnippet" }, {
 		t("\\Delta"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "eps", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";e", snippetType = "autosnippet" }, {
 		t("\\epsilon"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "vps", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";ve", snippetType = "autosnippet" }, {
 		t("\\varepsilon"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "Eps", snippetType = "autosnippet", wordTrig = false }, {
-		t("\\Epsilon"),
-	}, { condition = tex.in_quantikz }),
-	s({ trig = "zeta", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";z", snippetType = "autosnippet" }, {
 		t("\\zeta"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "Zeta", snippetType = "autosnippet", wordTrig = false }, {
-		t("\\Zeta"),
-	}, { condition = tex.in_quantikz }),
-	s({ trig = "eta", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";h", snippetType = "autosnippet" }, {
 		t("\\eta"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "Eta", snippetType = "autosnippet", wordTrig = false }, {
-		t("\\Eta"),
-	}, { condition = tex.in_quantikz }),
-	s({ trig = "the", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";o", snippetType = "autosnippet" }, {
 		t("\\theta"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "The", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";vo", snippetType = "autosnippet" }, {
+		t("\\vartheta"),
+	}, { condition = tex.in_quantikz }),
+	s({ trig = ";O", snippetType = "autosnippet" }, {
 		t("\\Theta"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "iot", snippetType = "autosnippet", wordTrig = false }, {
-		t("\\iota"),
-	}, { condition = tex.in_quantikz }),
-	s({ trig = "Iot", snippetType = "autosnippet", wordTrig = false }, {
-		t("\\Iota"),
-	}, { condition = tex.in_quantikz }),
-	s({ trig = "kap", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";k", snippetType = "autosnippet" }, {
 		t("\\kappa"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "Kap", snippetType = "autosnippet", wordTrig = false }, {
-		t("\\Kappa"),
-	}, { condition = tex.in_quantikz }),
-	s({ trig = "lam", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";l", snippetType = "autosnippet" }, {
 		t("\\lambda"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "Lam", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";L", snippetType = "autosnippet" }, {
 		t("\\Lambda"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "mu", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";m", snippetType = "autosnippet" }, {
 		t("\\mu"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "Mu", snippetType = "autosnippet", wordTrig = false }, {
-		t("\\Mu"),
-	}, { condition = tex.in_quantikz }),
-	s({ trig = "nu", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";n", snippetType = "autosnippet" }, {
 		t("\\nu"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "Nu", snippetType = "autosnippet", wordTrig = false }, {
-		t("\\Nu"),
+	s({ trig = ";x", snippetType = "autosnippet" }, {
+		t("\\xi"),
 	}, { condition = tex.in_quantikz }),
-	-- s({ trig = "xi", snippetType = "autosnippet", wordTrig = false }, {
-	--   t("\\xi"),
-	-- }, { condition = tex.in_quantikz }),
-	-- s({ trig = "Xi", snippetType = "autosnippet", wordTrig = false }, {
-	--   t("\\Xi"),
-	-- }, { condition = tex.in_quantikz }),
-	s({ trig = "omi", snippetType = "autosnippet", wordTrig = false }, {
-		t("\\omicron"),
+	s({ trig = ";X", snippetType = "autosnippet" }, {
+		t("\\Xi"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "pi", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";i", snippetType = "autosnippet" }, {
 		t("\\pi"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "\\pii", snippetType = "autosnippet", wordTrig = false, priority = 2000 }, {
-		t("p_i"),
-	}, { condition = tex.in_quantikz }),
-	s({ trig = "Pi", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";I", snippetType = "autosnippet" }, {
 		t("\\Pi"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "rho", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";r", snippetType = "autosnippet" }, {
 		t("\\rho"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "Rho", snippetType = "autosnippet", wordTrig = false }, {
-		t("\\Rho"),
-	}, { condition = tex.in_quantikz }),
-	s({ trig = "sig", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";s", snippetType = "autosnippet" }, {
 		t("\\sigma"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "Sig", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";S", snippetType = "autosnippet" }, {
 		t("\\Sigma"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "tau", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";t", snippetType = "autosnippet" }, {
 		t("\\tau"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "Tau", snippetType = "autosnippet", wordTrig = false }, {
-		t("\\Tau"),
-	}, { condition = tex.in_quantikz }),
-	s({ trig = "ups", snippetType = "autosnippet", wordTrig = false }, {
-		t("\\ups"),
-	}, { condition = tex.in_quantikz }),
-	s({ trig = "Ups", snippetType = "autosnippet", wordTrig = false }, {
-		t("\\Ups"),
-	}, { condition = tex.in_quantikz }),
-	s({ trig = "phi", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";f", snippetType = "autosnippet" }, {
 		t("\\phi"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "Phi", snippetType = "autosnippet", wordTrig = false }, {
-		t("\\Phi"),
-	}, { condition = tex.in_quantikz }),
-	s({ trig = "vhi", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";vf", snippetType = "autosnippet" }, {
 		t("\\varphi"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "Vhi", snippetType = "autosnippet", wordTrig = false }, {
-		t("\\Varphi"),
+	s({ trig = ";F", snippetType = "autosnippet" }, {
+		t("\\Phi"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "chi", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";c", snippetType = "autosnippet" }, {
 		t("\\chi"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "Chi", snippetType = "autosnippet", wordTrig = false }, {
-		t("\\Chi"),
-	}, { condition = tex.in_quantikz }),
-	s({ trig = "psi", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";p", snippetType = "autosnippet" }, {
 		t("\\psi"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "Psi", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";P", snippetType = "autosnippet" }, {
 		t("\\Psi"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "ome", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";w", snippetType = "autosnippet" }, {
 		t("\\omega"),
 	}, { condition = tex.in_quantikz }),
-	s({ trig = "Ome", snippetType = "autosnippet", wordTrig = false }, {
+	s({ trig = ";W", snippetType = "autosnippet" }, {
 		t("\\Omega"),
 	}, { condition = tex.in_quantikz }),
 }
