@@ -121,7 +121,7 @@ vim.api.nvim_create_autocmd("BufRead", {
 		end
 		if isxelatex then
 			local knapsettings = vim.b.knap_settings or {}
-			knapsettings["textopdf"] = "xelatex -interaction=batchmode -halt-on-error -synctex=1 %docroot%"
+			knapsettings["textopdf"] = "xelatex -interaction=batchmode -synctex=1 %docroot%"
 			vim.b.knap_settings = knapsettings
 		end
 	end,

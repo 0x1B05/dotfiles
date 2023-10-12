@@ -42,6 +42,7 @@ paths=(
     /usr/local/hadoop/bin
     /usr/local/hadoop/sbin
     /home/liuheihei/.local/share/coursier/bin
+    /mnt/d/Tools/SumatraPDF/
 )
 join_by() {
     local separator="$1"
