@@ -8,8 +8,6 @@ end
 
 -- Reload configuration without restart nvim
 map("n", "<leader>r", ":so %<CR>")
--- Terminal mappings
--- map("n", "<C-t>", ":split | term<CR>") -- open
 
 -- move Lines
 map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })

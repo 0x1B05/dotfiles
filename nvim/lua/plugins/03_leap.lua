@@ -1,6 +1,6 @@
 local keymaps = require("config.keymaps")
 return {
-    {
+	{
 		"folke/flash.nvim",
 		event = "VeryLazy",
 		opts = {
@@ -201,7 +201,7 @@ return {
 				},
 				treesitter_search = {
 					jump = { pos = "range" },
-					search = { multi_window = true, wrap = true, incremental = false },
+					search = { multi_window = false, wrap = true, incremental = false },
 					remote_op = { restore = true },
 					label = { before = true, after = true, style = "inline" },
 				},
