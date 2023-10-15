@@ -1,6 +1,9 @@
 lastupdatecheck: 0
 recentrepos:
 - /home/liuheihei/dotfiles
+- /home/liuheihei/ysyx-workbench
+- /home/liuheihei/ysyx-workbench/am-kernels
+- /home/liuheihei/cs_learning/chisel/chisel-workbench
 startuppopupversion: 5
 customcommandshistory: []
 hidecommandlog: false

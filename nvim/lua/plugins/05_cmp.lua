@@ -73,9 +73,7 @@ return {
 								and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s")
 									== nil
 						end
-						if cmp.visible() then
-							cmp.select_next_item()
-						elseif luasnip.expand_or_locally_jumpable() then
+						if luasnip.expand_or_locally_jumpable() then
 							luasnip.expand_or_jump()
 						elseif has_words_before() then
 							cmp.complete()
@@ -88,9 +86,7 @@ return {
 					}),
 					["kj"] = cmp.mapping(function(fallback)
 						local luasnip = require("luasnip")
-						if cmp.visible() then
-							cmp.select_prev_item()
-						elseif luasnip.jumpable(-1) then
+						if luasnip.jumpable(-1) then
 							luasnip.jump(-1)
 						else
 							fallback()
