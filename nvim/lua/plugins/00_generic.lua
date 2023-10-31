@@ -13,7 +13,6 @@ return {
 				number = true,
 				relativenumber = true,
 			},
-			-- root_dirs = { "~" },
 			filters = {
 				git_ignored = false,
 				dotfiles = false,
@@ -22,9 +21,10 @@ return {
 			},
 			sync_root_with_cwd = true,
 			respect_buf_cwd = true,
+			-- root_dirs = { "~" },
 			update_focused_file = {
-				enable = true,
-				update_root = true,
+				enable = false,
+				update_root = false,
 			},
 			actions = {
 				open_file = {
