@@ -14,35 +14,28 @@ export NPC_HOME=/home/liuheihei/ysyx-workbench/npc
 export NEMU_HOME=/home/liuheihei/ysyx-workbench/nemu
 export AM_HOME=/home/liuheihei/ysyx-workbench/abstract-machine
 export NVBOARD_HOME=/home/liuheihei/ysyx-workbench/nvboard
+
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 export JRE_HOME=/usr/lib/jvm/java-17-openjdk-amd64/jre
-export HADOOP_HOME=/usr/local/hadoop
-export HADOOP_INSTALL=$HADOOP_HOME
-export HADOOP_MAPRED_HOME=$HADOOP_HOME
-export HADOOP_COMMON_HOME=$HADOOP_HOME
-export HADOOP_HDFS_HOME=$HADOOP_HOME
-export HADOOP_YARN_HOME=$HADOOP_HOME
-export YARN_HOME=$HADOOP_HOME
-export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+
 export PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
 export MANPATH=/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH
 export INFOPATH=/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH
+
 export COLLECT_GCC=riscv64-unknown-elf-gcc
 export COLLECT_LTO_WRAPPER=/home/liuheihei/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/toolchain/bin/../libexec/gcc/riscv64-unknown-elf/10.2.0/lto-wrapper
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
-export GOBIN=/usr/local/go/bin
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 paths=(
     /usr/local/bin
     /usr/bin
     /usr/sbin
     /usr/local/go/bin
-    /usr/local/hadoop/bin
-    /usr/local/hadoop/sbin
     /home/liuheihei/.local/share/coursier/bin
     /mnt/d/Tools/SumatraPDF/
     /home/liuheihei/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/toolchain/bin
@@ -181,6 +174,3 @@ bindkey "\e{" autopair
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
