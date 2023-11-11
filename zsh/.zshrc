@@ -27,6 +27,8 @@ export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
 export PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
 export MANPATH=/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH
 export INFOPATH=/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH
+export COLLECT_GCC=riscv64-unknown-elf-gcc
+export COLLECT_LTO_WRAPPER=/home/liuheihei/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/toolchain/bin/../libexec/gcc/riscv64-unknown-elf/10.2.0/lto-wrapper
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 export GOBIN=/usr/local/go/bin
@@ -43,6 +45,7 @@ paths=(
     /usr/local/hadoop/sbin
     /home/liuheihei/.local/share/coursier/bin
     /mnt/d/Tools/SumatraPDF/
+    /home/liuheihei/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/toolchain/bin
 )
 join_by() {
     local separator="$1"
