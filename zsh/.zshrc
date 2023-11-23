@@ -1,3 +1,9 @@
+[[ -f ~/dotfiles/zsh/aliases.zsh ]] && source ~/dotfiles/zsh/aliases.zsh
+[[ -f ~/dotfiles/zsh/zsh-vi-mode.plugin.zsh ]] && source ~/dotfiles/zsh/zsh-vi-mode.plugin.zsh
+[[ -f ~/dotfiles/zsh/scripts.zsh ]] && source ~/dotfiles/zsh/scripts.zsh
+[[ -f ~/dotfiles/zsh/icons.zsh ]] && source ~/dotfiles/zsh/icons.zsh
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 # Start ssh-agent
 if [ -z "$SSH_AUTH_SOCK" ]; then
     eval $(ssh-agent -s) >/dev/null 2>&1
@@ -18,12 +24,10 @@ export NVBOARD_HOME=/home/liuheihei/ysyx-workbench/nvboard
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 export JRE_HOME=/usr/lib/jvm/java-17-openjdk-amd64/jre
 
+# latex
 export PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
 export MANPATH=/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH
 export INFOPATH=/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH
-
-export COLLECT_GCC=riscv64-unknown-elf-gcc
-export COLLECT_LTO_WRAPPER=/home/liuheihei/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/toolchain/bin/../libexec/gcc/riscv64-unknown-elf/10.2.0/lto-wrapper
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 
@@ -38,42 +42,16 @@ paths=(
     /usr/local/go/bin
     /home/liuheihei/.local/share/coursier/bin
     /mnt/d/Tools/SumatraPDF/
-    /home/liuheihei/AiPi-Open-Kits/aithinker_Ai-M6X_SDK/toolchain/bin
 )
-join_by() {
-    local separator="$1"
-    shift
-    printf '%s' "$1" "${@/#/$separator}"
-}
 path=$(join_by ":" "${paths[@]}")
 export PATH="$path"
+
 autoload -U colors && colors
-
-source ~/.config/zsh/aliases.zsh
-source ~/.config/zsh/zsh-vi-mode.plugin.zsh
-# source ~/.config/zsh/icons.zsh
-
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
+autoload lfcd; zle -N lfcd
+bindkey '^o' lfcd
 
-# my scripts
-mcd(){
-    mkdir -p "$1"
-    cd "$1"
-}
-
-lfcd () {
-    tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [ -f "$tmp" ]; then
-        dir="$(cat "$tmp")"
-        rm -f "$tmp"
-        [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
-    fi
-}
-bindkey -s '^o' 'lfcd\n'
-
-# autopairs
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -92,13 +70,6 @@ fi
 # Remove older command from the history if a duplicate is to be added.
 setopt HIST_IGNORE_ALL_DUPS
 
-
-# Prompt for spelling correction of commands.
-#setopt CORRECT
-
-# Customize spelling correction prompt.
-#SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
-
 # Remove path separator from WORDCHARS.
 WORDCHARS=${WORDCHARS//[\/]}
 
@@ -106,37 +77,12 @@ WORDCHARS=${WORDCHARS//[\/]}
 # Zim configuration
 # -----------------
 
-# Use degit instead of git as the default tool to install and update modules.
-#zstyle ':zim:zmodule' use 'degit'
-
 # --------------------
 # Module configuration
 # --------------------
-
-#
 # zsh-autosuggestions
-#
-
-# Disable automatic widget re-binding on each precmd. This can be set when
-# zsh-users/zsh-autosuggestions is the last module in your ~/.zimrc.
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-
-# Customize the style that the suggestions are shown with.
-# See https://github.com/zsh-users/zsh-autosuggestions/blob/master/README.md#suggestion-highlight-style
-#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
-
-#
-# zsh-syntax-highlighting
-#
-
-# Set what highlighters will be used.
-# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-
-# Customize the main highlighter styles.
-# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md#how-to-tweak-it
-#typeset -A ZSH_HIGHLIGHT_STYLES
-#ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
 
 # ------------------
 # Initialize modules
@@ -170,7 +116,4 @@ bindkey "\e(" autopair
 bindkey "\e[" autopair
 bindkey "\e{" autopair
 # }}} End configuration added by Zim install
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 

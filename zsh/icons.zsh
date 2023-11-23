@@ -1,4 +1,4 @@
-export LF_ICONS = "di	📁
+export LF_ICONS="di	📁
 fi	📃
 tw	🤝
 ow	📂
@@ -32,11 +32,11 @@ ex	🎯
 *.xlsx	📓
 *.tex	📜
 *.md	📘
-*.r	    📊
-*.R	    📊
+*.r	📊
+*.R	📊
 *.rmd	📊
 *.Rmd	📊
-*.m	    📊
+*.m	📊
 *.mp3	🎵
 *.opus	🎵
 *.ogg	🎵
@@ -63,15 +63,15 @@ ex	🎯
 *.gba	🎮
 *.nes	🎮
 *.gdi	🎮
-*.1	    ℹ
+*.1	ℹ
 *.nfo	ℹ
 *.info	ℹ
 *.log	📙
 *.iso	📀
-*.img   📀
-*.bib   🎓
+*.img	📀
+*.bib	🎓
 *.ged   👪
-*.part  💔
-*.torrent 🔽
-*.jar   ♨
+*.part	💔
+*.torrent	🔽
+*.jar	♨
 *.java	♨"

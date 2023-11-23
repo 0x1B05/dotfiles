@@ -1,10 +1,3 @@
-# Start configuration added by Zim install {{{
-#
-# This is not sourced during shell startup, and it's only used to configure the
-# zimfw plugin manager.
-#
-
-# Start configuration added by Zim install {{{
 # Sets sane Zsh built-in environment options.
 zmodule environment
 # Provides handy git aliases and functions.
@@ -26,18 +19,15 @@ zmodule zsh-users/zsh-completions
 # Enables and configures smart and extensive tab completion.
 # completion must be sourced after zsh-users/zsh-completions
 zmodule completion
-# Fish-like autosuggestions for Zsh.
-zmodule zsh-users/zsh-autosuggestions
 # Fish-like syntax highlighting for Zsh.
 # zsh-users/zsh-syntax-highlighting must be sourced after completion
 zmodule zsh-users/zsh-syntax-highlighting
 # Fish-like history search (up arrow) for Zsh.
 # zsh-users/zsh-history-substring-search must be sourced after zsh-users/zsh-syntax-highlighting
 zmodule zsh-users/zsh-history-substring-search
-# }}} End configuration added by Zim install
 
-# zmodule DarrinTisdale/zsh-aliases-exa # 添加多个 alias, 使用 exa 代替 ls，要求有安装 exa
 zmodule wookayin/fzf-fasd
 zmodule zdharma-continuum/fast-syntax-highlighting
-zmodule hlissner/zsh-autopair
 zmodule Aloxaf/fzf-tab
+# Fish-like autosuggestions for Zsh.
+zmodule zsh-users/zsh-autosuggestions
