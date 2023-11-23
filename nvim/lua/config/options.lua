@@ -8,7 +8,7 @@ M.opt_g = {
 	termdebug_wide = "1",
 	markdown_recommended_style = 0,
 	-- knap
-	knap_setting = {
+	knap_settings = {
 		htmloutputext = "html",
 		htmltohtml = "none",
 		htmltohtmlviewerlaunch = "falkon %outputfile%",
