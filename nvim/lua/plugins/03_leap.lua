@@ -43,7 +43,7 @@ return {
 				-- max pattern length. If the pattern length is equal to this
 				-- labels will no longer be skipped. When it exceeds this length
 				-- it will either end in a jump or terminate the search
-				max_length = nil, ---@type number?
+				max_length = false, ---@type number|false
 			},
 			jump = {
 				-- save location in the jumplist
@@ -133,7 +133,7 @@ return {
 				search = {
 					-- when `true`, flash will be activated during regular search by default.
 					-- You can always toggle when searching with `require("flash").toggle()`
-					enabled = true,
+					enabled = false,
 					highlight = { backdrop = false },
 					jump = { history = true, register = true, nohlsearch = true },
 					search = {
@@ -149,10 +149,13 @@ return {
 					-- dynamic configuration for ftFT motions
 					config = function(opts)
 						-- autohide flash when in operator-pending mode
-						opts.autohide = vim.fn.mode(true):find("no") and vim.v.operator == "y"
+						opts.autohide = opts.autohide or (vim.fn.mode(true):find("no") and vim.v.operator == "y")
 
 						-- disable jump labels when enabled and when using a count
-						opts.jump_labels = opts.jump_labels and vim.v.count == 0
+						opts.jump_labels = opts.jump_labels
+							and vim.v.count == 0
+							and vim.fn.reg_executing() == ""
+							and vim.fn.reg_recording() == ""
 
 						-- Show jump labels only in operator-pending mode
 						-- opts.jump_labels = vim.v.count == 0 and vim.fn.mode(true):find("o")

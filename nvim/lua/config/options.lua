@@ -40,32 +40,37 @@ M.opt_o = {
 	-----------------------------------------------------------
 	-- General
 	-----------------------------------------------------------
-	mouse = "a", -- Enable mouse support
-	clipboard = "unnamedplus", -- Copy/paste to system clipboard
-	swapfile = false, -- Don't use swapfile
-	confirm = true, -- confirm to save changes before exit
 	backup = false,
+	clipboard = "unnamedplus", -- Copy/paste to system clipboard
+	confirm = true, -- confirm to save changes before exit
 	grepformat = "%f:%l:%c:%m",
 	grepprg = "rg --vimgrep",
+	hlsearch = true,
+	ignorecase = true, -- Ignore case
+	inccommand = "nosplit",
+	incsearch = true,
+	mouse = "a", -- Enable mouse support
+	number = true,
 	pumblend = 10, -- Popup blend
 	pumheight = 10, -- Maximum number of entries in a Popup
-	splitbelow = true, -- Put new windows below current
-	splitright = true, -- Put new windows right of current
-	termguicolors = true, -- True color support
-	winminwidth = 5, -- Minimum window width
+	relativenumber = true,
+	ruler = true,
+	scrolloff = 8,
+	showmode = false, -- Dont show mode since we have a statusline
+	sidescrolloff = 8,
+	signcolumn = "yes", -- Always show the signcolumn, otherwise it would shift the text each time
+	smartcase = true,
 	spell = true, -- Enable spell check
 	spelloptions = "camel", -- Enable camel case
-	smartcase = true,
-	termencoding = "utf-8",
-	syntax = "enable",
+	splitbelow = true, -- Put new windows below current
+	splitkeep = "screen",
+	splitright = true, -- Put new windows right of current
+	swapfile = false, -- Don't use swapfile
+	termguicolors = true, -- True color support
+	virtualedit = "block", -- Allow cursor to move where there is no text in visual block mode
+	wildmode = "longest:full,full", -- Command-line completion mode
+	winminwidth = 5, -- Minimum window width
 	wrap = true,
-	ruler = true,
-	incsearch = true,
-	hlsearch = true,
-	number = true,
-	relativenumber = true,
-	scrolloff = 8,
-	sidescrolloff = 8,
 
 	-----------------------------------------------------------
 	-- Code Fold
@@ -78,26 +83,27 @@ M.opt_o = {
 	-- Neovim UI
 	-----------------------------------------------------------
 	cursorline = true, -- highlight cursorline
+	laststatus = 3,
 	list = true, -- Show some invisible characters (tabs...
 
 	-----------------------------------------------------------
 	-- Tabs, indent
 	-----------------------------------------------------------
+	expandtab = true,
 	formatoptions = "jqlnt", -- tcqj
 	shiftround = true, -- Round indent
-	tabstop = 4, -- Number of spaces tabs count for
 	shiftwidth = 4, -- Size of an indent
 	smartindent = false, -- Insert indents automatically
-	expandtab = true,
+	tabstop = 4, -- Number of spaces tabs count for
 
 	-----------------------------------------------------------
 	-- Memory, CPU
 	-----------------------------------------------------------
-	undolevels = 1000,
 	hidden = true, -- Enable background buffers
 	history = 1000, -- Remember N lines in history
 	lazyredraw = true, -- Faster scrolling
 	synmaxcol = 240, -- Max column for syntax highlight
+	undolevels = 1000,
 	updatetime = 250, -- ms to wait for trigger an event
 }
 -- to be used by lazy
@@ -105,8 +111,8 @@ M.plugins = {
 	-- stylua: ignore
 	lsp_servers = {
 		'clangd',
-		'pyright',
 		'lua_ls',
+		'pyright',
 		'rust_analyzer',
 	},
 
@@ -123,10 +129,10 @@ M.plugins = {
 					"-style={BasedOnStyle: Google, IndentWidth: 4, DerivePointerAlignment: true, PointerAlignment: Right }",
 				},
 			}),
-			formatting.stylua,
-			formatting.shfmt,
 			formatting.latexindent,
 			formatting.markdownlint,
+			formatting.shfmt,
+			formatting.stylua,
 
 			-- linters
 			diagnostics.clang_check,

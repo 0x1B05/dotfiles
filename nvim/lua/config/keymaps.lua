@@ -6,9 +6,6 @@ local function map(mode, lhs, rhs, opts)
 	vim.keymap.set(mode, lhs, rhs, options)
 end
 
--- Reload configuration without restart nvim
-map("n", "<leader>r", ":so %<CR>")
-
 -- move Lines
 map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
 map("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move up" })
@@ -63,10 +60,10 @@ map(
 local util = require("config.util")
 local M = {}
 M.telescope = {
-	{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "TL file" },
-	{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "TL grep" },
-	{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "TL buffer" },
-	{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "TL tags" },
+	{ "<leader>fb", "<cmd>Telescope buffers<cr>", desc = "Telescope find buffer" },
+	{ "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Telescope find file" },
+	{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Telescope grep" },
+	{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Telescope find help tags" },
 }
 M.nvim_tree = {
 	{ "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Explorer" },
@@ -78,21 +75,21 @@ M.spectre = { {
 	end,
 }, desc = "Spectre" }
 M.lsp = {
-	{ "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", desc = "show the declaration" },
-	{ "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", desc = "go to definition" },
 	-- {"K", "<cmd>lua vim.lsp.buf.hover()<CR>", },
+	{ "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", desc = "show the declaration" },
 	{ "gI", "<cmd>lua vim.lsp.buf.implementation()<CR>", desc = "go to implementation" },
-	{ "gr", "<cmd>lua vim.lsp.buf.references()<CR>", desc = "go to references" },
+	{ "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", desc = "go to definition" },
 	{ "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", desc = "diagnostic float" },
-	{ "<leader>lf", util.format, desc = "Format" },
-	{ "<leader>li", "<cmd>LspInfo<cr>", desc = "LspInfo" },
+	{ "gr", "<cmd>lua vim.lsp.buf.references()<CR>", desc = "go to references" },
 	{ "<leader>lI", "<cmd>LspInstallInfo<cr>", desc = "LspInstallInfo" },
 	{ "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "code action" },
+	{ "<leader>lf", util.format, desc = "Format" },
+	{ "<leader>li", "<cmd>LspInfo<cr>", desc = "LspInfo" },
 	{ "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", desc = "go to next diagnostic" },
 	{ "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", desc = "go to prev diagnostic" },
+	{ "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", desc = "set loclist" },
 	{ "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "rename buffer" },
 	{ "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", desc = "signature help" },
-	{ "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>", desc = "set loclist" },
 }
 M.persistence = {
 	{
