@@ -62,6 +62,7 @@ fi
 # Start configuration added by Zim install {{{
 #
 # User configuration sourced by interactive shells
+
 # -----------------
 # Zsh configuration
 # -----------------
@@ -73,13 +74,10 @@ setopt HIST_IGNORE_ALL_DUPS
 # Remove path separator from WORDCHARS.
 WORDCHARS=${WORDCHARS//[\/]}
 
-# -----------------
-# Zim configuration
-# -----------------
-
 # --------------------
 # Module configuration
 # --------------------
+
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
@@ -104,16 +102,9 @@ if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
   source ${ZIM_HOME}/zimfw.zsh init -q
 fi
 
-source ${ZIM_HOME}/modules/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ${ZIM_HOME}/init.zsh
-source ${ZIM_HOME}/modules/zsh-autopair/autopair.zsh
+source /home/liuheihei/.zim/modules/zsh-autopair/autopair.zsh
+autopair-init
 
-# autoload -Uz is-at-least
-zle -N autopair
-bindkey "\e\"" autopair
-bindkey "\e'" autopair
-bindkey "\e(" autopair
-bindkey "\e[" autopair
-bindkey "\e{" autopair
 # }}} End configuration added by Zim install
 
