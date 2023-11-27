@@ -16,10 +16,10 @@ export SAVEHIST=10000
 export HISTFILE=~/.zsh_history
 
 # env-variables
-export NPC_HOME=/home/liuheihei/ysyx-workbench/npc
-export NEMU_HOME=/home/liuheihei/ysyx-workbench/nemu
-export AM_HOME=/home/liuheihei/ysyx-workbench/abstract-machine
-export NVBOARD_HOME=/home/liuheihei/ysyx-workbench/nvboard
+export NPC_HOME=/home/ethan/ysyx-workbench/npc
+export NEMU_HOME=/home/ethan/ysyx-workbench/nemu
+export AM_HOME=/home/ethan/ysyx-workbench/abstract-machine
+export NVBOARD_HOME=/home/ethan/ysyx-workbench/nvboard
 
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 export JRE_HOME=/usr/lib/jvm/java-17-openjdk-amd64/jre
@@ -40,7 +40,7 @@ paths=(
     /usr/bin
     /usr/sbin
     /usr/local/go/bin
-    /home/liuheihei/.local/share/coursier/bin
+    /home/ethan/.local/share/coursier/bin
     /mnt/d/Tools/SumatraPDF/
 )
 path=$(join_by ":" "${paths[@]}")
@@ -103,7 +103,7 @@ if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
 fi
 
 source ${ZIM_HOME}/init.zsh
-source /home/liuheihei/.zim/modules/zsh-autopair/autopair.zsh
+source /home/ethan/.zim/modules/zsh-autopair/autopair.zsh
 autopair-init
 
 # }}} End configuration added by Zim install
