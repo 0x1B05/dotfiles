@@ -126,7 +126,7 @@ M.plugins = {
 			-- formatters
 			formatting.clang_format.with({
 				extra_args = {
-					"-style={BasedOnStyle: Google, IndentWidth: 4, DerivePointerAlignment: true, PointerAlignment: Right }",
+					"-style={BasedOnStyle: Google, IndentWidth: 4, DerivePointerAlignment: true, PointerAlignment: Right, SortIncludes: false}",
 				},
 			}),
 			formatting.latexindent,

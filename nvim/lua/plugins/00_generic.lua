@@ -14,14 +14,13 @@ return {
 				relativenumber = true,
 			},
 			filters = {
-				git_ignored = false,
+				git_ignored = true,
 				dotfiles = false,
 				custom = { ".git", ".aux" },
-				exclude = { ".json" },
+				exclude = { "compile_commands.json" },
 			},
 			sync_root_with_cwd = true,
 			respect_buf_cwd = true,
-			-- root_dirs = { "~" },
 			update_focused_file = {
 				enable = false,
 				update_root = false,
