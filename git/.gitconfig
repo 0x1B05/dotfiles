@@ -1,0 +1,14 @@
+[user]
+	email = liuheihei677@163.com
+	name = 0x1B05
+[core]
+	editor = nvim
+    excludesfile = .DS_Store
+[color]
+	ui = true
+[url "git@github.com:"]
+    insteadOf = https://github.com/
+    insteadOf = http://github.com/
+[merge]
+    ff = only
+[alias]
