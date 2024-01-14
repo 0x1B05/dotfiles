@@ -2,6 +2,7 @@
 [[ -f ~/dotfiles/zsh/zsh-vi-mode.plugin.zsh ]] && source ~/dotfiles/zsh/zsh-vi-mode.plugin.zsh
 [[ -f ~/dotfiles/zsh/scripts.zsh ]] && source ~/dotfiles/zsh/scripts.zsh
 [[ -f ~/dotfiles/zsh/icons.zsh ]] && source ~/dotfiles/zsh/icons.zsh
+[[ -f ~/dotfiles/zsh/history.zsh ]] && source ~/dotfiles/zsh/history.zsh
 
 # Start ssh-agent
 if [ -z "$SSH_AUTH_SOCK" ]; then
@@ -10,11 +11,6 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
 fi
 
 eval "$(starship init zsh)"
-
-# History in cache directory:
-export HISTSIZE=10000
-export SAVEHIST=10000
-export HISTFILE=~/.zsh_history
 
 # env-variables
 export NPC_HOME=$HOME/ysyx-workbench/npc
@@ -57,9 +53,6 @@ bindkey '^o' lfcd
 # Zsh configuration
 # -----------------
 
-# History
-# Remove older command from the history if a duplicate is to be added.
-setopt HIST_IGNORE_ALL_DUPS
 
 # Remove path separator from WORDCHARS.
 WORDCHARS=${WORDCHARS//[\/]}
@@ -77,20 +70,20 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 # ------------------
 
 ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
-# # Download zimfw plugin manager if missing.
-# if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
-#   if (( ${+commands[curl]} )); then
-#     curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
-#         https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-#   else
-#     mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh \
-#         https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-#   fi
-# fi
-# # Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
-# if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
-#   source ${ZIM_HOME}/zimfw.zsh init -q
-# fi
+# Download zimfw plugin manager if missing.
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  if (( ${+commands[curl]} )); then
+    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+  else
+    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+  fi
+fi
+# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+  source ${ZIM_HOME}/zimfw.zsh init -q
+fi
 
 source ${ZIM_HOME}/init.zsh
 source ${ZIM_HOME}/modules/zsh-autopair/autopair.zsh
