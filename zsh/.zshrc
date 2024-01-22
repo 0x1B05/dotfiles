@@ -3,17 +3,18 @@
 [[ -f ~/dotfiles/zsh/scripts.zsh ]] && source ~/dotfiles/zsh/scripts.zsh
 [[ -f ~/dotfiles/zsh/icons.zsh ]] && source ~/dotfiles/zsh/icons.zsh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+[[ -f ~/dotfiles/zsh/history.zsh ]] && source ~/dotfiles/zsh/history.zsh
 
 # Start ssh-agent
 if [ -z "$SSH_AUTH_SOCK" ]; then
     eval $(ssh-agent -s) >/dev/null 2>&1
-    ssh-add ~/.ssh/id_rsa >/dev/null 2>&1
-fi
 
-# History in cache directory:
-export HISTSIZE=10000
-export SAVEHIST=10000
-export HISTFILE=~/.zsh_history
+    for key_file in ~/.ssh/id_*; do
+        if [ -f "$key_file" ] && [[ "$key_file" != *.pub ]]; then
+            ssh-add "$key_file" >/dev/null 2>&1
+        fi
+    done
+fi
 
 # env-variables
 export NPC_HOME=/home/ethan/ysyx-workbench/npc
@@ -67,9 +68,6 @@ fi
 # Zsh configuration
 # -----------------
 
-# History
-# Remove older command from the history if a duplicate is to be added.
-setopt HIST_IGNORE_ALL_DUPS
 
 # Remove path separator from WORDCHARS.
 WORDCHARS=${WORDCHARS//[\/]}
