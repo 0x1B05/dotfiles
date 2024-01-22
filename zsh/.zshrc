@@ -7,7 +7,12 @@
 # Start ssh-agent
 if [ -z "$SSH_AUTH_SOCK" ]; then
     eval $(ssh-agent -s) >/dev/null 2>&1
-    ssh-add ~/.ssh/id_rsa >/dev/null 2>&1
+
+    for key_file in ~/.ssh/id_*; do
+        if [ -f "$key_file" ] && [[ "$key_file" != *.pub ]]; then
+            ssh-add "$key_file" >/dev/null 2>&1
+        fi
+    done
 fi
 
 eval "$(starship init zsh)"
