@@ -11,3 +11,7 @@ alias c="clear"
 alias t="tmux"
 alias ta="tmux a"
 alias lg="lazygit"
+
+alias r=trash
+alias rl='ls ~/.trash/'
+alias ur=undelfile
