@@ -261,7 +261,7 @@ return {
 				desc = "Flash line",
 			},
 			{
-				"S",
+				"{",
 				mode = { "n", "o", "x" },
 				function()
 					require("flash").treesitter()
