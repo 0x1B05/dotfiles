@@ -81,7 +81,41 @@ M.spectre = {
         end,
     },
     desc = "Spectre"
+M.treesitter = {
+	node_incremental = "v",
+	node_decremental = "V",
 }
+M.leap = {
+	{
+		" ",
+		mode = { "n", "x", "o" },
+		function()
+			require("flash").jump()
+		end,
+		desc = "Flash",
+	},
+	{
+		",",
+		mode = { "n", "x", "o" },
+		function()
+			require("flash").jump({
+				search = { mode = "search", max_length = 0 },
+				label = { after = { 0, 0 } },
+				pattern = "^",
+			})
+		end,
+		desc = "Flash line",
+	},
+	{
+		"{",
+		mode = { "n", "o", "x" },
+		function()
+			require("flash").treesitter()
+		end,
+		desc = "Flash Treesitter",
+	},
+}
+
 M.lsp = {
     -- {"K", "<cmd>lua vim.lsp.buf.hover()<CR>", },
     { "gD",         "<cmd>lua vim.lsp.buf.declaration()<CR>",            desc = "show the declaration" },
