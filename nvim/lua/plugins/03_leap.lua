@@ -239,36 +239,7 @@ return {
 				motion = false,
 			},
 		},
-		keys = {
-			{
-				" ",
-				mode = { "n", "x", "o" },
-				function()
-					require("flash").jump()
-				end,
-				desc = "Flash",
-			},
-			{
-				",",
-				mode = { "n", "x", "o" },
-				function()
-					require("flash").jump({
-						search = { mode = "search", max_length = 0 },
-						label = { after = { 0, 0 } },
-						pattern = "^",
-					})
-				end,
-				desc = "Flash line",
-			},
-			{
-				"{",
-				mode = { "n", "o", "x" },
-				function()
-					require("flash").treesitter()
-				end,
-				desc = "Flash Treesitter",
-			},
-		},
+		keys = keymaps.leap,
 	},
 	{
 		"nvim-telescope/telescope.nvim",
