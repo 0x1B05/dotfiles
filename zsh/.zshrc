@@ -2,7 +2,6 @@
 [[ -f ~/dotfiles/zsh/zsh-vi-mode.plugin.zsh ]] && source ~/dotfiles/zsh/zsh-vi-mode.plugin.zsh
 [[ -f ~/dotfiles/zsh/scripts.zsh ]] && source ~/dotfiles/zsh/scripts.zsh
 [[ -f ~/dotfiles/zsh/icons.zsh ]] && source ~/dotfiles/zsh/icons.zsh
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 [[ -f ~/dotfiles/zsh/history.zsh ]] && source ~/dotfiles/zsh/history.zsh
 
 # Start ssh-agent
@@ -16,11 +15,13 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
     done
 fi
 
+eval "$(starship init zsh)"
+
 # env-variables
-export NPC_HOME=/home/liuheihei/ysyx-workbench/npc
-export NEMU_HOME=/home/liuheihei/ysyx-workbench/nemu
-export AM_HOME=/home/liuheihei/ysyx-workbench/abstract-machine
-export NVBOARD_HOME=/home/liuheihei/ysyx-workbench/nvboard
+export NPC_HOME=$HOME/ysyx-workbench/npc
+export NEMU_HOME=$HOME/ysyx-workbench/nemu
+export AM_HOME=$HOME/ysyx-workbench/abstract-machine
+export NVBOARD_HOME=$HOME/ysyx-workbench/nvboard
 
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
 export JRE_HOME=/usr/lib/jvm/java-17-openjdk-amd64/jre
@@ -32,16 +33,12 @@ export INFOPATH=/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
 paths=(
     /usr/local/bin
     /usr/bin
     /usr/sbin
     /usr/local/go/bin
-    /home/liuheihei/.local/share/coursier/bin
+    $HOME/.local/share/coursier/bin
     /mnt/d/Tools/SumatraPDF/
 )
 path=$(join_by ":" "${paths[@]}")
@@ -52,13 +49,6 @@ autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
 autoload lfcd; zle -N lfcd
 bindkey '^o' lfcd
-
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
 
 # Start configuration added by Zim install {{{
 #
@@ -101,8 +91,7 @@ if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
 fi
 
 source ${ZIM_HOME}/init.zsh
-source /home/liuheihei/.zim/modules/zsh-autopair/autopair.zsh
+source ${ZIM_HOME}/modules/zsh-autopair/autopair.zsh
 autopair-init
 
 # }}} End configuration added by Zim install
-
