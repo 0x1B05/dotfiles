@@ -450,10 +450,6 @@ return {
 				"vim",
 				"yaml",
 			},
-			incremental_selection = {
-				enable = true,
-				keymaps = keymaps.treesitter,
-			},
 			rainbow = {
 				enable = false,
 				query = { latex = "rainbow-parens" },

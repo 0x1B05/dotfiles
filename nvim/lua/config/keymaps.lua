@@ -81,10 +81,6 @@ M.spectre = {
 	},
 	desc = "Spectre",
 }
-M.treesitter = {
-	node_incremental = "v",
-	node_decremental = "V",
-}
 M.leap = {
 	{
 		" ",
