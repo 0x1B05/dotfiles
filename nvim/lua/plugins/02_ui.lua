@@ -461,7 +461,7 @@ return {
 		},
 		config = function(_, opts)
 			require("nvim-treesitter.configs").setup(opts)
-			require("ts_context_commentstring").setup({})
+			-- require("ts_context_commentstring").setup({})
 		end,
 	},
 	-- Git labels
