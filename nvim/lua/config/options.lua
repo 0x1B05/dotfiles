@@ -44,34 +44,34 @@ M.opt_o = {
     -----------------------------------------------------------
     backup = false,
     clipboard = "unnamedplus", -- Copy/paste to system clipboard
-    confirm = true,         -- confirm to save changes before exit
+    confirm = true,            -- confirm to save changes before exit
     grepformat = "%f:%l:%c:%m",
     grepprg = "rg --vimgrep",
     hlsearch = true,
     ignorecase = true, -- Ignore case
     inccommand = "nosplit",
     incsearch = true,
-    mouse = "a", -- Enable mouse support
+    mouse = "a",    -- Enable mouse support
     number = true,
-    pumblend = 10, -- Popup blend
+    pumblend = 10,  -- Popup blend
     pumheight = 10, -- Maximum number of entries in a Popup
     relativenumber = true,
     ruler = true,
     scrolloff = 8,
-    showmode = false,            -- Dont show mode since we have a statusline
+    showmode = false,               -- Dont show mode since we have a statusline
     sidescrolloff = 8,
-    signcolumn = "yes",          -- Always show the signcolumn, otherwise it would shift the text each time
+    signcolumn = "yes",             -- Always show the signcolumn, otherwise it would shift the text each time
     smartcase = true,
-    spell = false,                -- Enable spell check
-    spelloptions = "camel",      -- Enable camel case
-    splitbelow = true,           -- Put new windows below current
+    spell = false,                  -- Enable spell check
+    spelloptions = "camel",         -- Enable camel case
+    splitbelow = true,              -- Put new windows below current
     splitkeep = "screen",
-    splitright = true,           -- Put new windows right of current
-    swapfile = false,            -- Don't use swapfile
-    termguicolors = true,        -- True color support
-    virtualedit = "block",       -- Allow cursor to move where there is no text in visual block mode
+    splitright = true,              -- Put new windows right of current
+    swapfile = false,               -- Don't use swapfile
+    termguicolors = true,           -- True color support
+    virtualedit = "block",          -- Allow cursor to move where there is no text in visual block mode
     wildmode = "longest:full,full", -- Command-line completion mode
-    winminwidth = 5,             -- Minimum window width
+    winminwidth = 5,                -- Minimum window width
     wrap = true,
 
     -----------------------------------------------------------
@@ -86,27 +86,27 @@ M.opt_o = {
     -----------------------------------------------------------
     cursorline = true, -- highlight cursorline
     laststatus = 3,
-    list = true,    -- Show some invisible characters (tabs...
+    list = true,       -- Show some invisible characters (tabs...
 
     -----------------------------------------------------------
     -- Tabs, indent
     -----------------------------------------------------------
     expandtab = true,
     formatoptions = "jqlnt", -- tcqj
-    shiftround = true,    -- Round indent
-    shiftwidth = 4,       -- Size of an indent
-    smartindent = false,  -- Insert indents automatically
-    tabstop = 4,          -- Number of spaces tabs count for
+    shiftround = true,       -- Round indent
+    shiftwidth = 4,          -- Size of an indent
+    smartindent = false,     -- Insert indents automatically
+    tabstop = 4,             -- Number of spaces tabs count for
 
     -----------------------------------------------------------
     -- Memory, CPU
     -----------------------------------------------------------
-    hidden = true,  -- Enable background buffers
-    history = 1000, -- Remember N lines in history
+    hidden = true,     -- Enable background buffers
+    history = 1000,    -- Remember N lines in history
     lazyredraw = true, -- Faster scrolling
-    synmaxcol = 240, -- Max column for syntax highlight
+    synmaxcol = 240,   -- Max column for syntax highlight
     undolevels = 1000,
-    updatetime = 250, -- ms to wait for trigger an event
+    updatetime = 250,  -- ms to wait for trigger an event
 }
 -- to be used by lazy
 M.plugins = {
@@ -120,9 +120,7 @@ M.plugins = {
 
     -- null-ls sources: formatter and linter
     nls_sources = function(nls)
-        -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/formatting
         local formatting = nls.builtins.formatting
-        -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
         local diagnostics = nls.builtins.diagnostics
         return {
             -- formatters
@@ -131,8 +129,8 @@ M.plugins = {
                     "-style={BasedOnStyle: Google, IndentWidth: 4, DerivePointerAlignment: true, PointerAlignment: Right, SortIncludes: false}",
                 },
             }),
-            formatting.latexindent,
-            formatting.markdownlint,
+            -- formatting.latexindent,
+            formatting.prettier,
             formatting.shfmt,
             formatting.stylua,
 
