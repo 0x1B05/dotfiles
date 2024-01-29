@@ -51,9 +51,6 @@ map("n", "<leader>th", "<cmd>lua _HTOP_TOGGLE()<cr>", { desc = "Open htop termin
 -- save file
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save file" })
 
--- select all
-map({ "i", "v", "n", "s" }, "<C-a>", "<esc>ggVG", { desc = "Select all" })
-
 -- refresh snippets
 map(
 	"n",
