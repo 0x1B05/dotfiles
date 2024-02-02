@@ -1,10 +1,10 @@
-Host *
-    StrictHostKeyChecking no
 Host github.com
     HostName ssh.github.com
     User git
     Port 443
+    IdentityFile ~/.ssh/id_ed25519_github
 Host aliyun
     HostName 47.113.149.219
     User ethan
     Port 22
+    IdentityFile ~/.ssh/id_ed25519_aliyun
