@@ -7,6 +7,3 @@ lfcd () {
         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
     fi
 }
-
-autoload lfcd; zle -N lfcd
-bindkey '^o' lfcd
