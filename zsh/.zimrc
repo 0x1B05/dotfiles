@@ -26,3 +26,4 @@ zmodule Aloxaf/fzf-tab
 # Fish-like autosuggestions for Zsh.
 zmodule zsh-users/zsh-autosuggestions
 zmodule hlissner/zsh-autopair
+zmodule jeffreytse/zsh-vi-mode --source zsh-vi-mode.plugin.zsh

@@ -1,22 +1,3 @@
-[[ -f ~/dotfiles/zsh/aliases.zsh ]] && source ~/dotfiles/zsh/aliases.zsh
-[[ -f ~/dotfiles/zsh/zsh-vi-mode.plugin.zsh ]] && source ~/dotfiles/zsh/zsh-vi-mode.plugin.zsh
-[[ -f ~/dotfiles/zsh/scripts.zsh ]] && source ~/dotfiles/zsh/scripts.zsh
-[[ -f ~/dotfiles/zsh/icons.zsh ]] && source ~/dotfiles/zsh/icons.zsh
-[[ -f ~/dotfiles/zsh/history.zsh ]] && source ~/dotfiles/zsh/history.zsh
-
-# Start ssh-agent
-if [ -z "$SSH_AUTH_SOCK" ]; then
-    eval $(ssh-agent -s) >/dev/null 2>&1
-
-    for key_file in ~/.ssh/id_*; do
-        if [ -f "$key_file" ] && [[ "$key_file" != *.pub ]]; then
-            ssh-add "$key_file" >/dev/null 2>&1
-        fi
-    done
-fi
-
-eval "$(starship init zsh)"
-
 # env-variables
 export EDITOR=nvim
 export NPC_HOME=$HOME/ysyx-workbench/npc
@@ -34,6 +15,12 @@ export INFOPATH=/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 
+
+[[ -f ~/dotfiles/zsh/aliases.zsh ]] && source ~/dotfiles/zsh/aliases.zsh
+[[ -f ~/dotfiles/zsh/scripts.zsh ]] && source ~/dotfiles/zsh/scripts.zsh
+[[ -f ~/dotfiles/zsh/icons.zsh ]] && source ~/dotfiles/zsh/icons.zsh
+[[ -f ~/dotfiles/zsh/history.zsh ]] && source ~/dotfiles/zsh/history.zsh
+
 paths=(
     /usr/local/bin
     /usr/bin
@@ -41,6 +28,20 @@ paths=(
 )
 path=$(join_by ":" "${paths[@]}")
 export PATH="$path"
+
+# Start ssh-agent
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    eval $(ssh-agent -s) >/dev/null 2>&1
+
+    for key_file in ~/.ssh/id_*; do
+        if [ -f "$key_file" ] && [[ "$key_file" != *.pub ]]; then
+            ssh-add "$key_file" >/dev/null 2>&1
+        fi
+    done
+fi
+
+eval "$(starship init zsh)"
+
 
 autoload -U colors && colors
 
@@ -90,8 +91,6 @@ if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
 fi
 
 source ${ZIM_HOME}/init.zsh
-source ${ZIM_HOME}/modules/zsh-autopair/autopair.zsh
-autopair-init
 
 # }}} End configuration added by Zim install
 
