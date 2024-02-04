@@ -1,80 +1,32 @@
-# Remove some defaults
-map d
-map f
-map F
-map t
-map y
-map r
-map dd cut
 map <c-f> $lf -remote "send $id select \"$(fzf)\""
-# custom f to fzf search directory
-map f $lf -remote "send $id select \"$(find -type d 2>/dev/null | fzf)\""
 map J $lf -remote "send $id cd $(sed -e 's/\s*#.*//' -e '/^$/d' -e 's/^\S*\s*//' ${XDG_CONFIG_HOME:-$HOME/.config}/shell/bm-dirs | fzf)"
-map . set hidden!
-map C push :zip<space>
-map D trash
-map x delete
-map X extract
-map M push :mkdir<space>
-map U :diskmount
-map R reload
-map <c-j> push 10j
-map <c-k> push 10k
-map <c-p> img
-map <c-o> jump-prev # default is [
-map <c-r> jump-next # default is ]
-map <c-s> :fzf_search
-map <c-g> push $lazygit<enter>
+map gh
+map g top
+map D delete
+map E extract
+map C copyto
+map M moveto
+map <c-n> push :mkdir<space>""<left>
+map <c-r> reload
+map <c-s> set hidden!
 map <enter> shell
-map o push :openwith<space>
-#map o &mimeopen $f
-#map O $mimeopen --ask $f
-map A rename # at the very end
-map I push A<c-a> # at the very beginning
-map i push A<a-b><a-b><a-f> # before extension
-map a push A<a-b> # after extension
-map r bulk-rename
+map x $$f
+map X !$f
+map o &mimeopen "$f"
+map O $mimeopen --ask "$f"
+
+map A :rename; cmd-end # at the very end
+map c push A<c-u> # new rename
+map I :rename; cmd-home # at the very beginning
+map i :rename # before extension
+map a :rename; cmd-right # after extension
+map B bulkrename
 map b $setbg $f
+
 map <c-e> down
 map <c-y> up
 map V push :!nvim<space>
-# show 1 pannel or 2 pannel
-map w %lf -remote "send $id set ratios 1:2"
-map W %lf -remote "send $id set ratios 1:2:3"
 
-# map copy file or file name
-map yy copy
-map yd $dirname -- "$f" | head -c-1 | xclip -i -selection clipboard
-map yp $printf "%s" "$fx" | xclip -selection clipboard
-map yn $basename -a -- $fx | head -c-1 | xclip -i -selection clipboard
-map ye yank-basename-without-extension 
-# jump to file
-map zz push :z<space>
+map W $setsid -f $TERMINAL >/dev/null 2>&1
 
-# Dragon mapping
-map dr dragon
-map ds dragon-stay
-map di dragon-individual
-map dm mvdragon
-map dc cpdragon
-map dl dlfile
-# Trash Mappings
-# map dd trash
-map tc clear_trash
-map tr restore_trash
-
-# Source Bookmarks
-
-# map ga cd ~/audit
-# map gc cd ~/.config
-# map gD cd ~/Documents
-# map gd cd ~/Downloads
-# map gi cd ~/github
-# map gph cd ~/Pictures
-# map gpi cd ~/Pictures/inkscape/封面
-# map gt cd ~/tmp
-# map gv cd ~/vimwiki
-# map gV cd ~/Videos
-# map gu cd /run/media/nigo
-# map gT cd ~/.local/share/Trash/files
-# map gw cd ~/.deepinwine/Deepin-WeChat/dosdevices/y:/tmp
+map Y $printf "%s" "$fx" | xclip -selection clipboard

@@ -25,6 +25,7 @@ paths=(
     /usr/local/bin
     /usr/bin
     /usr/sbin
+    $HOME/.local/bin
 )
 path=$(join_by ":" "${paths[@]}")
 export PATH="$path"
