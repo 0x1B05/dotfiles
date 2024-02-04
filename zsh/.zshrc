@@ -3,7 +3,6 @@
 [[ -f ~/dotfiles/zsh/scripts.zsh ]] && source ~/dotfiles/zsh/scripts.zsh
 [[ -f ~/dotfiles/zsh/icons.zsh ]] && source ~/dotfiles/zsh/icons.zsh
 [[ -f ~/dotfiles/zsh/history.zsh ]] && source ~/dotfiles/zsh/history.zsh
-[[ -f ~/dotfiles/zsh/lfcd.zsh ]] && source ~/dotfiles/zsh/lfcd.zsh
 
 # Start ssh-agent
 if [ -z "$SSH_AUTH_SOCK" ]; then
@@ -46,9 +45,9 @@ export PATH="$path"
 autoload -U colors && colors
 
 autoload edit-command-line; zle -N edit-command-line
-bindkey '^e' edit-command-line
+bindkey '\ee' edit-command-line
 autoload lfcd; zle -N lfcd
-bindkey '^o' lfcd
+bindkey '\eo' lfcd
 
 # Start configuration added by Zim install {{{
 #
