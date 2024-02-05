@@ -59,8 +59,8 @@ return {
 				pyright = require("plugins.lspconfig.langs.pyright"),
 				clangd = require("plugins.lspconfig.langs.clangd"),
 				cmake = require("plugins.lspconfig.langs.cmake-language-server"),
-
 				lua_ls = require("plugins.lspconfig.langs.lua_ls"),
+				typst_lsp = require("plugins.lspconfig.langs.typst_lsp"),
 			},
 			-- you can do any additional lsp server setup here
 			-- return true if you don't want this server to be setup with lspconfig

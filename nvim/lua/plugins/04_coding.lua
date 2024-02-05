@@ -178,7 +178,11 @@ return {
 			end
 		end,
 	},
-
+	{
+		"kaarmu/typst.vim",
+		lazy = true,
+		ft = "typst",
+	},
 	--{
 	--    "mg979/vim-visual-multi",
 	--},
