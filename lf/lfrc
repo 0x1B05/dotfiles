@@ -9,5 +9,5 @@ set autoquit true
 source ~/.config/lf/cmds.sh
 source ~/.config/lf/bindings
 
-set previewer ~/.config/lf/previewSandbox.sh
-set cleaner ~/.config/lf/clear_img.sh
+set previewer ~/.config/lf/preview
+set cleaner ~/.config/lf/cleaner
