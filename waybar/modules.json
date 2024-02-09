@@ -314,6 +314,13 @@
         "format-icons": [" ", " ", " ", " ", " "]
     },
 
+    // backlight
+    "backlight": {
+        "scroll-step": 5,
+        "format": "{icon} {percent}% ",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
+    },
+
     // Pulseaudio
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float

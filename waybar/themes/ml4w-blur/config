@@ -51,6 +51,7 @@
     "modules-right": [
         "custom/updates",
         "pulseaudio",
+        "backlight",
         // START BT TOOGLE
         "bluetooth",
         // END BT TOOGLE
