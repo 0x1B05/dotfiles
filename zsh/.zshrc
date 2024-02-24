@@ -5,8 +5,8 @@ export NEMU_HOME=$HOME/ysyx-workbench/nemu
 export AM_HOME=$HOME/ysyx-workbench/abstract-machine
 export NVBOARD_HOME=$HOME/ysyx-workbench/nvboard
 
-export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-export JRE_HOME=/usr/lib/jvm/java-17-openjdk-amd64/jre
+export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+export JRE_HOME=/usr/lib/jvm/java-17-openjdk/jre
 
 # latex
 export PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
@@ -26,6 +26,7 @@ paths=(
     /usr/bin
     /usr/sbin
     $HOME/.local/bin
+    $HOME/.local/share/coursier/bin
 )
 path=$(join_by ":" "${paths[@]}")
 export PATH="$path"
