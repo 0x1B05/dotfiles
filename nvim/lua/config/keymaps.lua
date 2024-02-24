@@ -52,6 +52,8 @@ map("n", "<leader>th", "<cmd>lua _HTOP_TOGGLE()<cr>", { desc = "Open htop termin
 -- save file
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save file" })
 
+-- paste image
+map({ "i" }, "<A-S-v>", "<cmd>Pastify<cr>", { desc = "Save file" })
 -- refresh snippets
 map(
 	"n",
