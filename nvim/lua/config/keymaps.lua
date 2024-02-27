@@ -53,13 +53,14 @@ map("n", "<leader>th", "<cmd>lua _HTOP_TOGGLE()<cr>", { desc = "Open htop termin
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save file" })
 
 -- paste image
-map({ "i" }, "<A-S-v>", "<cmd>Pastify<cr>", { desc = "Save file" })
+map({ "i" }, "<C-A-v>", "<cmd>Pastify<cr>", { desc = "Save file" })
+
 -- refresh snippets
 map(
 	"n",
 	"<leader>U",
-	"<Cmd>lua require('luasnip.loaders.from_lua').lazy_load({paths = '~/.config/nvim/LuaSnip/'})<CR><Cmd>echo 'Snippets refreshed!'",
-	{ desc = "Snippets refreshed!" }
+	"<Cmd>lua require('luasnip.loaders.from_lua').load({paths = '~/dotfiles/nvim/lua/plugins/luasnip'})<CR>",
+	{ desc = "Hot reload snippets." }
 )
 
 -- keymaps for plugins

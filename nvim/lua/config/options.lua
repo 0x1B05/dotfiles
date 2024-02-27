@@ -133,6 +133,7 @@ M.plugins = {
 			formatting.prettier,
 			formatting.shfmt,
 			formatting.stylua,
+			formatting.typstfmt,
 
 			-- linters
 			diagnostics.clang_check,
