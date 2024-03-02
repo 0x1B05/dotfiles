@@ -56,7 +56,6 @@ return {
 			},
 			-- LSP Server Settings
 			servers = {
-				pyright = require("plugins.lspconfig.langs.pyright"),
 				clangd = require("plugins.lspconfig.langs.clangd"),
 				cmake = require("plugins.lspconfig.langs.cmake-language-server"),
 				lua_ls = require("plugins.lspconfig.langs.lua_ls"),

@@ -22,11 +22,11 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 [[ -f ~/dotfiles/zsh/history.zsh ]] && source ~/dotfiles/zsh/history.zsh
 
 paths=(
+    $HOME/.local/bin
+    $HOME/.local/share/coursier/bin
     /usr/local/bin
     /usr/bin
     /usr/sbin
-    $HOME/.local/bin
-    $HOME/.local/share/coursier/bin
 )
 path=$(join_by ":" "${paths[@]}")
 export PATH="$path"

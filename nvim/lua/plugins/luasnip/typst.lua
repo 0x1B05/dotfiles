@@ -9,19 +9,16 @@ return {
 		{ trig = ";c", dscr = "code block", snippetType = "autosnippet" },
 		fmta(
 			[[
-            #code()[
+            #code(<>)[
             ```<>
             <>
             ```
             ]<>
         ]],
-			{ i(1), i(2), i(3) }
+			{ i(1), i(2), i(3), i(4) }
 		),
 		{ condition = line_begin }
 	),
-	s({ trig = ";i", snippetType = "autosnippet" }, fmta("_<>_", i(1))),
-	s({ trig = ";b", snippetType = "autosnippet" }, fmta("*<>*", i(1))),
-	s({ trig = ";p", snippetType = "autosnippet" }, fmta("#image(<>)", i(1))),
 	s(
 		{ trig = ";t", snippetType = "autosnippet" },
 		fmta(
@@ -31,6 +28,10 @@ return {
     ]
 ]],
 			i(1)
-		)
+		),
+		{ condition = line_begin }
 	),
+	s({ trig = ";i", snippetType = "autosnippet" }, fmta("_<>_", i(1))),
+	s({ trig = ";b", snippetType = "autosnippet" }, fmta("*<>*", i(1))),
+	s({ trig = ";p", snippetType = "autosnippet" }, fmta("#image(<>)", i(1))),
 }

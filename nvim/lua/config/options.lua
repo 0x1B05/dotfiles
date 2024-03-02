@@ -113,8 +113,6 @@ M.plugins = {
     lsp_servers = {
         'clangd',
         'lua_ls',
-        'pyright',
-        'rust_analyzer',
         'typst_lsp'
     },
 
@@ -134,10 +132,10 @@ M.plugins = {
 			formatting.shfmt,
 			formatting.stylua,
 			formatting.typstfmt,
+			formatting.black,
 
 			-- linters
-			diagnostics.clang_check,
-			diagnostics.flake8,
+			diagnostics.pylint,
 		}
 	end,
 

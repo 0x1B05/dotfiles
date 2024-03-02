@@ -14,7 +14,7 @@ return {
 				relativenumber = true,
 			},
 			filters = {
-				git_ignored = true,
+				git_ignored = false,
 				dotfiles = false,
 				custom = { ".git", ".aux" },
 				exclude = { "compile_commands.json" },
