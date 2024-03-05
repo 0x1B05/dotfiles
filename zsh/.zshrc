@@ -23,6 +23,7 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
 
 paths=(
     $HOME/.local/bin
+    $HOME/.cargo/bin
     $HOME/.local/share/coursier/bin
     /usr/local/bin
     /usr/bin
