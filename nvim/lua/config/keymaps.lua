@@ -55,6 +55,9 @@ map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save file" })
 -- paste image
 map({ "i" }, "<C-A-v>", "<cmd>Pastify<cr>", { desc = "Save file" })
 
+-- preview typst
+map("n", "<leader>pt", "<cmd>TypstWatch<cr>", { desc = "Typst preview" })
+
 -- refresh snippets
 map(
 	"n",
