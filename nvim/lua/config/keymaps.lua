@@ -62,7 +62,7 @@ map("n", "<leader>pt", "<cmd>TypstWatch<cr>", { desc = "Typst preview" })
 map(
 	"n",
 	"<leader>U",
-	"<Cmd>lua require('luasnip.loaders.from_lua').load({paths = '~/dotfiles/nvim/lua/plugins/luasnip'})<CR>",
+	"<Cmd>lua require('luasnip.loaders.from_lua').load({paths = '~/dotfiles/nvim/lua/plugins/luasnip'})<CR><Cmd>echo 'Snippets reloaded.'<CR>",
 	{ desc = "Hot reload snippets." }
 )
 

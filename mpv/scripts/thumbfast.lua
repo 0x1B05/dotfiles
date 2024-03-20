@@ -3,7 +3,6 @@
 -- High-performance on-the-fly thumbnailer
 --
 -- Built for easy integration in third-party UIs.
--- https://github.com/po5/thumbfast
 
 --[[
 This Source Code Form is subject to the terms of the Mozilla Public
@@ -730,20 +729,23 @@ local function draw(w, h, script)
 				scale_h,
 			})
 		else
-			mp.command_native_async({
-				"overlay-add",
-				options.overlay_id,
-				x,
-				y,
-				options.thumbnail .. ".bgra",
-				0,
-				"bgra",
-				w,
-				h,
-				(4 * w),
-				scale_w,
-				scale_h,
-			}, function() end)
+			mp.command_native_async(
+				{
+					"overlay-add",
+					options.overlay_id,
+					x,
+					y,
+					options.thumbnail .. ".bgra",
+					0,
+					"bgra",
+					w,
+					h,
+					(4 * w),
+					scale_w,
+					scale_h,
+				},
+				function() end
+			)
 		end
 	elseif script then
 		local json, err = mp.utils.format_json({

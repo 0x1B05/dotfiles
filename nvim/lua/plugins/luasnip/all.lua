@@ -10,5 +10,4 @@ return {
 			return os.date("%D - %H:%M")
 		end)
 	),
-	s("choicenode", c(1, { t("choice 1"), t("choice 2"), t("choice 3") })),
 }
