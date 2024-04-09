@@ -113,7 +113,8 @@ M.plugins = {
     lsp_servers = {
         'clangd',
         'lua_ls',
-        'typst_lsp'
+        'typst_lsp',
+        'jdtls'
     },
 
 	-- null-ls sources: formatter and linter

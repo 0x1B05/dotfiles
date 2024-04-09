@@ -58,6 +58,9 @@ map({ "i" }, "<C-A-v>", "<cmd>Pastify<cr>", { desc = "Save file" })
 -- preview typst
 map("n", "<leader>pt", "<cmd>TypstWatch<cr>", { desc = "Typst preview" })
 
+-- compile java
+map("n", "<leader>pj", "<cmd>make PACKAGE=%:p:h:t run_%:t:r<cr>", { desc = "Typst preview" })
+
 -- refresh snippets
 map(
 	"n",
