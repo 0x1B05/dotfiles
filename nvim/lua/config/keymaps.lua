@@ -59,7 +59,7 @@ map({ "i" }, "<C-A-v>", "<cmd>Pastify<cr>", { desc = "Save file" })
 map("n", "<leader>pt", "<cmd>TypstWatch<cr>", { desc = "Typst preview" })
 
 -- compile java
-map("n", "<leader>pj", "<cmd>make PACKAGE=%:p:h:t run_%:t:r<cr>", { desc = "Typst preview" })
+map("n", "<leader>pj", "<cmd>make PACKAGE=%:p:h:t %:t:r<cr>", { desc = "Java single-file compile." })
 
 -- refresh snippets
 map(
