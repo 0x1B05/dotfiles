@@ -9,23 +9,22 @@
 // ----------------------------------------------------- 
 //
 {
-    // Workspaces
+// Workspaces
     "hyprland/workspaces" : {
         "on-click": "activate",
         "active-only": false,
         "all-outputs": true,
         "format": "{}",
         "format-icons": {
-			"urgent": "",
-			"active": "",
-			"default": ""
+            "urgent": "",
+            "active": "",
+            "default": ""
         },
         "persistent-workspaces": {
-            // START WORKSPACES
-"*": 6
-            // END WORKSPACES
-        }       
+            "*": 6
+        }
     },
+
 
     // Taskbar
     "wlr/taskbar": {
@@ -35,7 +34,8 @@
         "on-click": "activate",
         "on-click-middle": "close",
         "ignore-list": [
-           "Alacritty"
+            "Alacritty",
+            "kitty"
         ],
         "app_ids-mapping": {
             "firefoxdeveloperedition": "firefox-developer-edition"
@@ -58,15 +58,6 @@
         "separate-outputs": true
     },
 
-    // Youtube Subscriber Count
-    "custom/youtube": {
-        "format": " {}",
-        "exec": "python ~/private/youtube.py",
-        "restart-interval": 600,
-        "on-click": "chromium https://studio.youtube.com",
-        "tooltip": false
-    },
-    
     // Cliphist
     "custom/cliphist": {
         "format": "",
@@ -125,26 +116,12 @@
         "tooltip": false
     },
 
-    // Outlook Launcher
-    "custom/outlook": {
-        "format": "",
-        "on-click": "chromium --app=https://outlook.office.com/mail/",
-        "tooltip": false
-    },
-
-    // Teams Launcher
-    "custom/teams": {
-        "format": "",
-        "on-click": "chromium --app=https://teams.microsoft.com/go",
-        "tooltip": false
-    },
-
     // Browser Launcher
     "custom/browser": {
         "format": "",
         "on-click": "~/dotfiles/.settings/browser.sh",
         "tooltip": false
-    },    
+    },
 
     // ChatGPT Launcher
     "custom/chatgpt": {
@@ -157,13 +134,6 @@
     "custom/calculator": {
         "format": "",
         "on-click": "qalculate-gtk",
-        "tooltip": false
-    },
-
-    // Windows VM
-    "custom/windowsvm": {
-        "format": "",
-        "on-click": "~/dotfiles/scripts/launchvm.sh",
         "tooltip": false
     },
 
@@ -277,7 +247,7 @@
         "orientation": "horizontal",
         "modules": [
             // START CHATGPT TOOGLE
-            "custom/chatgpt",
+//"custom/chatgpt",
             // END CHATGPT TOOGLE
             "custom/filemanager",
             "custom/browser"
@@ -331,13 +301,13 @@
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", " ", " "]
+            "headphone": " ",
+            "hands-free": " ",
+            "headset": " ",
+            "phone": " ",
+            "portable": " ",
+            "car": " ",
+            "default": [" ", " ", " "]
         },
         "on-click": "pavucontrol"
     },
@@ -358,6 +328,7 @@
         "icon": false,
     },
 
+    // Idle Inhibator
     "idle_inhibitor": {
         "format": "{icon}",
         "tooltip": true,
@@ -365,6 +336,6 @@
             "activated": "",
             "deactivated": ""
         },
-        "on-click-right": "swaylock"        
+        "on-click-right": "hyprlock"        
     }
 }

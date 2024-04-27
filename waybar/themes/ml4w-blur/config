@@ -65,7 +65,7 @@
         "idle_inhibitor",
         // END IDLE TOOGLE
         // START TRAY TOOGLE
-        "tray",
+"tray",
         // END TRAY TOOGLE
         "custom/exit",
         "clock"
