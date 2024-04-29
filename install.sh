@@ -39,9 +39,7 @@ source .install/yay.sh
 source .install/backup.sh
 source .install/preparation.sh
 source .install/profile.sh
-if [[ $profile == *"Hyprland"* ]]; then
-    source .install/hyprland-version.sh
-fi
+source .install/hyprland-version.sh
 
 source .install/installer.sh
 
@@ -49,16 +47,9 @@ source .install/general.sh
 source .install/general-packages.sh
 source .install/install-packages.sh
 
-if [[ $profile == *"Hyprland"* ]]; then
-    source .install/hyprland.sh
-    source .install/hyprland-packages.sh
-    source .install/install-packages.sh
-fi
-if [[ $profile == *"Qtile"* ]]; then
-    source .install/qtile.sh
-    source .install/qtile-packages.sh
-    source .install/install-packages.sh
-fi
+source .install/hyprland.sh
+source .install/hyprland-packages.sh
+source .install/install-packages.sh
 source .install/pywal.sh
 source .install/wallpaper.sh
 source .install/displaymanager.sh
@@ -70,12 +61,7 @@ source .install/hook.sh
 source .install/copy.sh
 source .install/config-folder.sh
 source .install/init-pywal.sh
-if [[ $profile == *"Hyprland"* ]]; then
-    source .install/hyprland-dotfiles.sh
-fi
-if [[ $profile == *"Qtile"* ]]; then
-    source .install/qtile-dotfiles.sh
-fi
+source .install/hyprland-dotfiles.sh
 source .install/bashrc.sh
 source .install/monitor.sh
 source .install/cleanup.sh
