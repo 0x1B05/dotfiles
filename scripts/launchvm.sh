@@ -5,9 +5,6 @@
 # | |__| (_| | |_| | | | | (__| | | |   \ V / | |  | | 
 # |_____\__,_|\__,_|_| |_|\___|_| |_|    \_/  |_|  |_| 
 #                                                      
-#  
-# by Stephan Raabe (2023) 
-# ----------------------------------------------------- 
 
 if [ -f ~/private/win11-credentials.sh ]; then
     echo "Credential file exists. Using the file."
