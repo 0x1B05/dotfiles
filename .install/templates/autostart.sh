@@ -5,8 +5,6 @@
 # | |_| || |  | || |___| |___   ___) | || (_| | |  | |_  
 #  \__\_\|_| |___|_____|_____| |____/ \__\__,_|_|   \__| 
 #                                                        
-#  
-# by Stephan Raabe (2023) 
 # ----------------------------------------------------- 
 
 # My screen resolution
@@ -19,7 +17,7 @@
 setxkbmap KEYBOARD_LAYOUT
 
 # Load picom
-picom &
+# picom &
 
 # Load power manager
 xfce4-power-manager &

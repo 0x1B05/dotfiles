@@ -18,17 +18,17 @@ return {
 		{ condition = line_begin }
 	),
 	-- CURLY BRACES
-	s(
-		{ trig = "df", snippetType = "autosnippet", priority = 1000 },
-		fmta(
-			[[
-        {
-            <>
-        }
-        ]],
-			{ d(1, get_visual) }
-		)
-	),
+	-- s(
+	-- 	{ trig = "df", snippetType = "autosnippet", priority = 1000 },
+	-- 	fmta(
+	-- 		[[
+	--        {
+	--            <>
+	--        }
+	--        ]],
+	-- 		{ d(1, get_visual) }
+	-- 	)
+	-- ),
 	-- class
 	s(
 		{ trig = "pcc", snippetType = "autosnippet" },

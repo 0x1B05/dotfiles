@@ -6,7 +6,7 @@ packagesPacman=(
     "neovim"
     "wget"
     "unzip"
-    "alacritty"
+    "alacritty" 
     "kitty"
     "rofi-wayland"
     "firefox"
@@ -47,11 +47,15 @@ packagesPacman=(
     "networkmanager"
     "network-manager-applet"
     "xclip"
+    # 声音固件
+    "sof-firmware alsa-firmware"
+    "pulseaudio-bluetooth"
+    "xorg-xrdb"
 );
 
 packagesYay=(
-    "pfetch" 
-    "bibata-cursor-theme" 
+    "pfetch"
+    "bibata-cursor-theme"
     "trizen"
     "pacseek"
 );

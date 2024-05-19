@@ -6,6 +6,18 @@ local line_begin = require("luasnip.extras.expand_conditions").line_begin
 return {
 	s({ trig = "ii", snippetType = "autosnippet" }, fmta("$<>$", i(1))),
 	s(
+		{ trig = ";a", dscr = "attention block", snippetType = "autosnippet" },
+		fmta(
+			[[
+    #attention("Attention")[
+        <>
+    ]
+]],
+			i(1)
+		),
+		{ condition = line_begin }
+	),
+	s(
 		{ trig = ";c", dscr = "code block", snippetType = "autosnippet" },
 		fmta(
 			[[
