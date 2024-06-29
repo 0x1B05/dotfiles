@@ -246,11 +246,6 @@ return {
 		keys = keymaps.telescope,
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {
-			defaults = {
-				prompt_prefix = " ",
-				selection_caret = " ",
-				path_display = { "smart" },
-			},
 			pickers = {
 				-- Default configuration for builtin pickers goes here:
 				-- picker_name = {
