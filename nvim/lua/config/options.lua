@@ -1,6 +1,8 @@
 local M = {}
 
 M.opt_g = {
+	loaded_node_provider = 0,
+	loaded_perl_provider = 0,
 	mapleader = ";",
 	maplocalleader = ";",
 	-- split gdb and source code window vertical
@@ -113,7 +115,7 @@ M.plugins = {
     lsp_servers = {
         'clangd',
         'lua_ls',
-        'typst_lsp',
+        'tinymist',
         'jdtls'
     },
 

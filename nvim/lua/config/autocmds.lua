@@ -116,6 +116,16 @@ vim.api.nvim_create_autocmd("BufRead", {
 	desc = "Xelatex check",
 })
 
+vim.api.nvim_create_autocmd({
+	"BufNewFile",
+	"BufRead",
+}, {
+	pattern = "*.typ",
+	callback = function()
+		local buf = vim.api.nvim_get_current_buf()
+		vim.api.nvim_set_option_value("modeline", false, { buf = buf })
+	end,
+})
 -- auto-save
 -- local function save()
 --   local buf = vim.api.nvim_get_current_buf()

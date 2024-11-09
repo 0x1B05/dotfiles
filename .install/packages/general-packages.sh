@@ -47,6 +47,7 @@ packagesPacman=(
     "networkmanager"
     "network-manager-applet"
     "xclip"
+    "perl"
     # 声音固件
     "sof-firmware alsa-firmware"
     "pulseaudio-bluetooth"
