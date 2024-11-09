@@ -21,13 +21,13 @@ blur=$(cat $blur_file)
 # Create cache file if not exists
 if [ ! -f $cache_file ] ;then
     touch $cache_file
-    echo "$HOME/wallpaper/default.jpg" > "$cache_file"
+    echo "$HOME/Beauti/wallpaper/default.jpg" > "$cache_file"
 fi
 
 # Create rasi file if not exists
 if [ ! -f $rasi_file ] ;then
     touch $rasi_file
-    echo "* { current-image: url(\"$HOME/wallpaper/default.jpg\", height); }" > "$rasi_file"
+    echo "* { current-image: url(\"$HOME/Beauti/wallpaper/default.jpg\", height); }" > "$rasi_file"
 fi
 
 current_wallpaper=$(cat "$cache_file")
@@ -40,27 +40,27 @@ case $1 in
         if [ -f $cache_file ]; then
             wal -q -i $current_wallpaper
         else
-            wal -q -i ~/wallpaper/
+            wal -q -i ~/Beauti/wallpaper/
         fi
     ;;
 
     # Select wallpaper with rofi
     "select")
         sleep 0.2
-        selected=$( find "$HOME/wallpaper" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -exec basename {} \; | sort -R | while read rfile
+        selected=$( find "$HOME/Beauti/wallpaper" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -exec basename {} \; | sort -R | while read rfile
         do
-            echo -en "$rfile\x00icon\x1f$HOME/wallpaper/${rfile}\n"
+            echo -en "$rfile\x00icon\x1f$HOME/Beauti/wallpaper/${rfile}\n"
         done | rofi -dmenu -i -replace -config ~/dotfiles/rofi/config-wallpaper.rasi)
         if [ ! "$selected" ]; then
             echo "No wallpaper selected"
             exit
         fi
-        wal -q -i ~/wallpaper/$selected
+        wal -q -i ~/Beauti/wallpaper/$selected
     ;;
 
     # Randomly select wallpaper 
     *)
-        wal -q -i ~/wallpaper/
+        wal -q -i ~/Beauti/wallpaper/
     ;;
 
 esac
@@ -74,7 +74,7 @@ echo ":: Wallpaper: $wallpaper"
 # ----------------------------------------------------- 
 # get wallpaper image name
 # ----------------------------------------------------- 
-newwall=$(echo $wallpaper | sed "s|$HOME/wallpaper/||g")
+newwall=$(echo $wallpaper | sed "s|$HOME/Beauti/wallpaper/||g")
 
 # ----------------------------------------------------- 
 # Reload waybar with new colors

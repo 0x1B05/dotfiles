@@ -26,7 +26,7 @@ extension="${current_wallpaper##*.}"
 
 sudo cp $current_wallpaper /usr/share/sddm/themes/sugar-candy/Backgrounds/current_wallpaper.$extension
 echo "Current wallpaper copied into /usr/share/sddm/themes/sugar-candy/Backgrounds/"
-new_wall=$(echo $current_wallpaper | sed "s|$HOME/wallpaper/||g")
+new_wall=$(echo $current_wallpaper | sed "s|$HOME/Beauti/wallpaper/||g")
 sudo cp $HOME/dotfiles/sddm/theme.conf /usr/share/sddm/themes/sugar-candy/
 sudo sed -i 's/CURRENTWALLPAPER/'"current_wallpaper.$extension"'/' /usr/share/sddm/themes/sugar-candy/theme.conf
 
