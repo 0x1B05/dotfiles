@@ -50,8 +50,7 @@ autoload -U colors && colors
 
 autoload edit-command-line; zle -N edit-command-line
 bindkey '\ee' edit-command-line
-autoload lfcd; zle -N lfcd
-bindkey '\eo' lfcd
+bindkey -s '^[o' 'y\n'
 
 # Start configuration added by Zim install {{{
 #

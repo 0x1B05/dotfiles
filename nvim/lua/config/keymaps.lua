@@ -78,9 +78,20 @@ M.telescope = {
 	{ "<leader>fg", "<cmd>Telescope live_grep<cr>", desc = "Telescope grep" },
 	{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Telescope find help tags" },
 }
-M.nvim_tree = {
-	{ "<leader>e", "<cmd>NvimTreeToggle<cr>", desc = "Explorer" },
+
+M.yazi = {
+	show_help = "<f1>",
+	open_file_in_vertical_split = "<c-/>",
+	open_file_in_horizontal_split = "<c-->",
+	open_file_in_tab = "<cr>",
+	grep_in_directory = "<c-s>",
+	replace_in_directory = "<c-g>",
+	cycle_open_buffers = "<tab>",
+	copy_relative_path_to_selected_files = "<c-y>",
+	send_to_quickfix_list = "<c-q>",
+	change_working_directory = "<c-\\>",
 }
+
 M.spectre = {
 	{
 		"<leader>sr",

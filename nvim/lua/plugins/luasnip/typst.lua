@@ -21,11 +21,12 @@ return {
 		{ trig = ";c", dscr = "code block", snippetType = "autosnippet" },
 		fmta(
 			[[
-            #code(caption: [<>])[
+            #figure(
             ```<>
             <>
-            ```
-            ]<>
+            ```,
+            caption: [<>]
+            )<>
         ]],
 			{ i(1), i(2), i(3), i(4) }
 		),
