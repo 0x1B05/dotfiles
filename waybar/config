@@ -1,16 +1,7 @@
-// __        __          _                 
-// \ \      / /_ _ _   _| |__   __ _ _ __  
-//  \ \ /\ / / _` | | | | '_ \ / _` | '__| 
-//   \ V  V / (_| | |_| | |_) | (_| | |    
-//    \_/\_/ \__,_|\__, |_.__/ \__,_|_|    
-//                 |___/                   
-//  
-// by Stephan Raabe (2023) 
-// ----------------------------------------------------- 
-//
 {
     // General Settings
-    "layer": "top",
+    "position": "bottom",
+    "margin-top": 0,
     "margin-bottom": 0,
     "layer": "top",
     "margin-left": 0,
@@ -22,21 +13,24 @@
 
     // Modules Left
     "modules-left": [
-        "custom/appmenuicon",
-        "hyprland/workspaces",
+        "custom/appmenu",
         "group/settings",
-        "group/quicklinks"
+        "custom/ml4w-welcome",
+        "wlr/taskbar",
+        "group/quicklinks",
+        "hyprland/window",
+        "custom/empty"
     ],
 
     // Modules Center
     "modules-center": [
-        "hyprland/window",
-        "custom/empty"
+        "hyprland/workspaces"
     ],
 
     // Modules Right    
     "modules-right": [
         "custom/updates",
+        "backlight",
         "pulseaudio",
         "bluetooth",
         "battery", 
@@ -44,9 +38,8 @@
         "group/hardware",
         "custom/cliphist",
         "idle_inhibitor",
-        "custom/exit",
-        "clock",
         "tray",
-        "custom/ml4w-welcome"
+        "custom/exit",
+        "clock"
     ]
 }
