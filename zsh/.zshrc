@@ -8,6 +8,9 @@ export NVBOARD_HOME=$HOME/ysyx-workbench/nvboard
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 export JRE_HOME=/usr/lib/jvm/java-17-openjdk/jre
 
+# zoxide history directory
+export XDG_DATA_HOME=$HOME/.local/share
+
 # latex
 export PATH=/usr/local/texlive/2023/bin/x86_64-linux:$PATH
 export MANPATH=/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH
@@ -43,11 +46,7 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
     done
 fi
 
-eval "$(starship init zsh)"
-
-
 autoload -U colors && colors
-
 autoload edit-command-line; zle -N edit-command-line
 bindkey '\ee' edit-command-line
 bindkey -s '^[o' 'y\n'
@@ -96,3 +95,5 @@ source ${ZIM_HOME}/init.zsh
 
 # }}} End configuration added by Zim install
 
+eval "$(zoxide init zsh)"
+eval "$(starship init zsh)"
