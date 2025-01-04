@@ -105,22 +105,30 @@ M.yazi2 = {
 	open_file_in_vertical_split = "<c-/>",
 	open_file_in_horizontal_split = "<c-->",
 	open_file_in_tab = false,
-	grep_in_directory = "<c-s>",
-	replace_in_directory = "<c-g>",
+	grep_in_directory = false,
+	replace_in_directory = false,
 	cycle_open_buffers = "<tab>",
 	copy_relative_path_to_selected_files = "<c-y>",
 	send_to_quickfix_list = "<c-q>",
 	change_working_directory = "<c-\\>",
 }
 
-M.spectre = {
+M.grug_far = {
 	{
 		"<leader>sr",
 		function()
-			require("spectre").open()
+			local grug = require("grug-far")
+			local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
+			grug.open({
+				transient = true,
+				prefills = {
+					filesFilter = ext and ext ~= "" and "*." .. ext or nil,
+				},
+			})
 		end,
+		mode = { "n", "v" },
+		desc = "Search and Replace",
 	},
-	desc = "Spectre",
 }
 M.leap = {
 	{

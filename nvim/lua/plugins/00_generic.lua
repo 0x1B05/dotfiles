@@ -3,35 +3,6 @@ local keymaps = require("config.keymaps")
 return {
 	{ "folke/lazy.nvim", version = "*" },
 	-- file explorer
-	-- {
-	-- 	"nvim-tree/nvim-tree.lua",
-	-- 	cmd = { "NvimTreeToggle" },
-	-- 	keys = keymaps.nvim_tree,
-	-- 	opts = {
-	-- 		view = {
-	-- 			width = 40,
-	-- 			number = true,
-	-- 			relativenumber = true,
-	-- 		},
-	-- 		filters = {
-	-- 			git_ignored = false,
-	-- 			dotfiles = false,
-	-- 			custom = { ".git", ".aux" },
-	-- 			exclude = { "compile_commands.json" },
-	-- 		},
-	-- 		sync_root_with_cwd = true,
-	-- 		respect_buf_cwd = true,
-	-- 		update_focused_file = {
-	-- 			enable = false,
-	-- 			update_root = false,
-	-- 		},
-	-- 		actions = {
-	-- 			open_file = {
-	-- 				quit_on_open = true,
-	-- 			},
-	-- 		},
-	-- 	},
-	-- },
 	---@type LazySpec
 	{
 		"mikavilpas/yazi.nvim",
@@ -172,36 +143,9 @@ return {
 	-- search/replace in multiple files
 	{
 		"MagicDuck/grug-far.nvim",
-		config = function()
-			require("grug-far").setup({
-				-- options, see Configuration section below
-				-- there are no required options atm
-				-- engine = 'ripgrep' is default, but 'astgrep' can be specified
-				keymaps = {
-					replace = { n = "<localleader>sr" },
-					qflist = { n = "<localleader>q" },
-					syncLocations = { n = "<localleader>s" },
-					syncLine = { n = "<localleader>l" },
-					close = { n = "<localleader>c" },
-					historyOpen = { n = "<localleader>t" },
-					historyAdd = { n = "<localleader>a" },
-					refresh = { n = "<localleader>f" },
-					openLocation = { n = "<localleader>o" },
-					openNextLocation = { n = "<down>" },
-					openPrevLocation = { n = "<up>" },
-					gotoLocation = { n = "<enter>" },
-					pickHistoryEntry = { n = "<enter>" },
-					abort = { n = "<localleader>b" },
-					help = { n = "g?" },
-					toggleShowCommand = { n = "<localleader>p" },
-					swapEngine = { n = "<localleader>e" },
-					previewLocation = { n = "<localleader>i" },
-					swapReplacementInterpreter = { n = "<localleader>x" },
-					applyNext = { n = "<localleader>j" },
-					applyPrev = { n = "<localleader>k" },
-				},
-			})
-		end,
+		opts = { headerMaxWidth = 80 },
+		cmd = "GrugFar",
+		keys = keymaps.grug_far,
 	},
 	-- session management
 	{
