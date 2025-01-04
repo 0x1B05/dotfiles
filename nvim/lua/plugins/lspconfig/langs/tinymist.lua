@@ -1,5 +1,5 @@
 return {
-	offset_encoding = "utf-8",
+	offset_encoding = "utf-16",
 	cmd = { "tinymist" },
 	filetypes = { "typst" },
 	root_dir = function()
