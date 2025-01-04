@@ -79,11 +79,32 @@ M.telescope = {
 	{ "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Telescope find help tags" },
 }
 
-M.yazi = {
+M.yazi1 = {
+	-- 👇 in this section, choose your own keymappings!
+	{
+		"<leader>E",
+		"<cmd>Yazi<cr>",
+		desc = "Open yazi at the current file",
+	},
+	{
+		-- Open in the current working directory
+		"<leader>e",
+		"<cmd>Yazi cwd<cr>",
+		desc = "Open the file manager in nvim's working directory",
+	},
+	-- {
+	-- 	-- NOTE: this requires a version of yazi that includes
+	-- 	-- https://github.com/sxyazi/yazi/pull/1305 from 2024-07-18
+	-- 	"<c-up>",
+	-- 	"<cmd>Yazi toggle<cr>",
+	-- 	desc = "Resume the last yazi session",
+	-- },
+}
+M.yazi2 = {
 	show_help = "<f1>",
 	open_file_in_vertical_split = "<c-/>",
 	open_file_in_horizontal_split = "<c-->",
-	open_file_in_tab = "<cr>",
+	open_file_in_tab = false,
 	grep_in_directory = "<c-s>",
 	replace_in_directory = "<c-g>",
 	cycle_open_buffers = "<tab>",

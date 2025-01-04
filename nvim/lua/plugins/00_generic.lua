@@ -36,27 +36,7 @@ return {
 	{
 		"mikavilpas/yazi.nvim",
 		event = "VeryLazy",
-		keys = {
-			-- 👇 in this section, choose your own keymappings!
-			{
-				"<leader>e",
-				"<cmd>Yazi<cr>",
-				desc = "Open yazi at the current file",
-			},
-			{
-				-- Open in the current working directory
-				"<leader>E",
-				"<cmd>Yazi cwd<cr>",
-				desc = "Open the file manager in nvim's working directory",
-			},
-			{
-				-- NOTE: this requires a version of yazi that includes
-				-- https://github.com/sxyazi/yazi/pull/1305 from 2024-07-18
-				"<c-up>",
-				"<cmd>Yazi toggle<cr>",
-				desc = "Resume the last yazi session",
-			},
-		},
+		keys = keymaps.yazi1,
 		---@type YaziConfig
 		opts = {
 			-- Below is the default configuration. It is optional to set these values.
@@ -82,7 +62,7 @@ return {
 			-- open visible splits as yazi tabs for easy navigation. Requires a yazi
 			-- version more recent than 2024-08-11
 			-- https://github.com/mikavilpas/yazi.nvim/pull/359
-			open_multiple_tabs = false,
+			open_multiple_tabs = true,
 
 			highlight_groups = {
 				-- See https://github.com/mikavilpas/yazi.nvim/pull/180
@@ -105,7 +85,9 @@ return {
 
 			-- what Neovim should do a when a file was opened (selected) in yazi.
 			-- Defaults to simply opening the file.
-			open_file_function = function(chosen_file, config, state) end,
+			open_file_function = function(chosen_file, config, state)
+				require("yazi.openers").open_file(chosen_file)
+			end,
 
 			-- customize the keymaps that are active when yazi is open and focused. The
 			-- defaults are listed below. Note that the keymaps simply hijack input and
@@ -116,7 +98,7 @@ return {
 			-- - use e.g. `open_file_in_tab = false` to disable a keymap
 			-- - you can customize only some of the keymaps (not all of them)
 			-- - you can opt out of all keymaps by setting `keymaps = false`
-			keymaps = keymaps.yazi,
+			keymaps = keymaps.yazi2,
 
 			-- completely override the keymappings for yazi. This function will be
 			-- called in the context of the yazi terminal buffer.
@@ -172,7 +154,7 @@ return {
 			future_features = {
 				-- Whether to use `ya emit reveal` to reveal files in the file manager.
 				-- Requires yazi 0.4.0 or later (from 2024-12-08).
-				ya_emit_reveal = false,
+				ya_emit_reveal = true,
 
 				-- Use `ya emit open` as a more robust implementation for opening files
 				-- in yazi. This can prevent conflicts with custom keymappings for the enter
@@ -189,9 +171,37 @@ return {
 	},
 	-- search/replace in multiple files
 	{
-		"windwp/nvim-spectre",
-		lazy = true,
-		keys = keymaps.spectre,
+		"MagicDuck/grug-far.nvim",
+		config = function()
+			require("grug-far").setup({
+				-- options, see Configuration section below
+				-- there are no required options atm
+				-- engine = 'ripgrep' is default, but 'astgrep' can be specified
+				keymaps = {
+					replace = { n = "<localleader>sr" },
+					qflist = { n = "<localleader>q" },
+					syncLocations = { n = "<localleader>s" },
+					syncLine = { n = "<localleader>l" },
+					close = { n = "<localleader>c" },
+					historyOpen = { n = "<localleader>t" },
+					historyAdd = { n = "<localleader>a" },
+					refresh = { n = "<localleader>f" },
+					openLocation = { n = "<localleader>o" },
+					openNextLocation = { n = "<down>" },
+					openPrevLocation = { n = "<up>" },
+					gotoLocation = { n = "<enter>" },
+					pickHistoryEntry = { n = "<enter>" },
+					abort = { n = "<localleader>b" },
+					help = { n = "g?" },
+					toggleShowCommand = { n = "<localleader>p" },
+					swapEngine = { n = "<localleader>e" },
+					previewLocation = { n = "<localleader>i" },
+					swapReplacementInterpreter = { n = "<localleader>x" },
+					applyNext = { n = "<localleader>j" },
+					applyPrev = { n = "<localleader>k" },
+				},
+			})
+		end,
 	},
 	-- session management
 	{
@@ -335,13 +345,13 @@ return {
 				opts = {
 					absolute_path = false, -- use absolute or relative path to the working directory
 					apikey = "", -- Api key, required for online saving
-					local_path = "/content/images/", -- The path to put local files in, ex ~/Projects/<name>/images/<imgname>.png
+					local_path = "content/images/", -- The path to put local files in, ex ~/Projects/<name>/images/<imgname>.png
 					save = "local", -- Either 'local' or 'online'
 				},
 				ft = { -- Custom snippets for different filetypes, will replace $IMG$ with the image url
 					html = '<img src="$IMG$" alt="">',
 					markdown = "![]($IMG$)",
-					typst = '#image("$IMG$")',
+					typst = '#figure(caption: [])[#image("$IMG$")]',
 					tex = [[\includegraphics[width=\linewidth]{$IMG$}]],
 				},
 			})
