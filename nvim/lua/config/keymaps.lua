@@ -80,36 +80,33 @@ M.telescope = {
 }
 
 M.yazi1 = {
-	-- 👇 in this section, choose your own keymappings!
 	{
-		"<leader>E",
+		"<Leader>o",
 		"<cmd>Yazi<cr>",
 		desc = "Open yazi at the current file",
 	},
 	{
 		-- Open in the current working directory
-		"<leader>e",
+		"<leader>O",
 		"<cmd>Yazi cwd<cr>",
 		desc = "Open the file manager in nvim's working directory",
 	},
-	-- {
-	-- 	-- NOTE: this requires a version of yazi that includes
-	-- 	-- https://github.com/sxyazi/yazi/pull/1305 from 2024-07-18
-	-- 	"<c-up>",
-	-- 	"<cmd>Yazi toggle<cr>",
-	-- 	desc = "Resume the last yazi session",
-	-- },
+	{
+		"<Leader>e",
+		"<cmd>Yazi toggle<cr>",
+		desc = "Resume the last yazi session",
+	},
 }
 M.yazi2 = {
 	show_help = "<f1>",
 	open_file_in_vertical_split = "<c-/>",
 	open_file_in_horizontal_split = "<c-->",
-	open_file_in_tab = false,
-	grep_in_directory = false,
-	replace_in_directory = false,
+	open_file_in_tab = "<c-t>",
+	grep_in_directory = "<c-g>",
+	replace_in_directory = "<c-r>",
 	cycle_open_buffers = "<tab>",
 	copy_relative_path_to_selected_files = "<c-y>",
-	send_to_quickfix_list = "<c-q>",
+	send_to_quickfix_list = false,
 	change_working_directory = "<c-\\>",
 }
 

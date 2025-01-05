@@ -243,6 +243,7 @@ return {
 	},
 	{
 		"nvim-telescope/telescope.nvim",
+		branch = "0.1.x",
 		keys = keymaps.telescope,
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {
