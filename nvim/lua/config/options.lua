@@ -116,31 +116,9 @@ M.plugins = {
         'clangd',
         'lua_ls',
         'tinymist',
-        'jdtls'
+        'jdtls',
+        'cmake'
     },
-
-	-- null-ls sources: formatter and linter
-	nls_sources = function(nls)
-		local formatting = nls.builtins.formatting
-		local diagnostics = nls.builtins.diagnostics
-		return {
-			-- formatters
-			formatting.clang_format.with({
-				extra_args = {
-					"-style={BasedOnStyle: Google, IndentWidth: 4, DerivePointerAlignment: true, PointerAlignment: Right, SortIncludes: false}",
-				},
-			}),
-			-- formatting.latexindent,
-			formatting.prettier,
-			formatting.shfmt,
-			formatting.stylua,
-			formatting.typstfmt,
-			formatting.black,
-
-			-- linters
-			diagnostics.pylint,
-		}
-	end,
 
 	-- lsp format timeout
 	fmt_timeout_ms = 4000,

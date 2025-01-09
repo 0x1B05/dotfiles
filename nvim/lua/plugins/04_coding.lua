@@ -115,7 +115,7 @@ return {
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		opts = {
-			disable_filetype = { "TelescopePrompt", "spectre_panel" },
+			disable_filetype = { "TelescopePrompt" },
 			fast_wrap = {
 				map = "<M-e>",
 				chars = { "{", "[", "(", '"', "'", "`", "<" },
@@ -177,11 +177,6 @@ return {
 				htop:toggle()
 			end
 		end,
-	},
-	{
-		"kaarmu/typst.vim",
-		lazy = true,
-		ft = "typst",
 	},
 	--{
 	--    "mg979/vim-visual-multi",

@@ -81,18 +81,17 @@ M.telescope = {
 
 M.yazi1 = {
 	{
-		"<Leader>o",
+		"<Leader>e",
 		"<cmd>Yazi<cr>",
 		desc = "Open yazi at the current file",
 	},
 	{
-		-- Open in the current working directory
-		"<leader>O",
+		"<leader>E",
 		"<cmd>Yazi cwd<cr>",
 		desc = "Open the file manager in nvim's working directory",
 	},
 	{
-		"<Leader>e",
+		"<Leader>o",
 		"<cmd>Yazi toggle<cr>",
 		desc = "Resume the last yazi session",
 	},

@@ -79,16 +79,6 @@ vim.api.nvim_create_autocmd("BufWritePost", {
 	group = augroup("reload_on_save"),
 	desc = "Reload config on save",
 })
--- autoformat code on save
-vim.api.nvim_create_autocmd("BufWritePre", {
-	pattern = { "*.cpp", "*.h", "*.c", "*.lua", "*.py" },
-	callback = function()
-		require("config.util").format()
-	end,
-	group = augroup("auto_format_on_save"),
-	desc = "Autoformat code on save",
-})
-
 -- check xelatex
 vim.api.nvim_create_autocmd("BufRead", {
 	pattern = { "*.tex" },
