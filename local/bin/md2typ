@@ -1,0 +1,21 @@
+#!/bin/bash
+
+find . -type f -name "*.md" -exec sh -c 'mv "$1" "${1%.md}.typ"' _ {} \;
+
+sed -i \
+    -e 's/^##### /===== /g' \
+    -e 's/^#### /==== /g' \
+    -e 's/^### /=== /g' \
+    -e 's/^## /== /g' \
+    -e 's/^# /= /g' \
+    -e 's/!\[\](\([^)]*\))/#image("\1")/g' \
+    -e 's/\[\([^)]*\)\](\([^)]*\))/#link("\2")\[\1\]/g' \
+    -e 's/\*\*/\*/g' \
+    -e 's/\$\$/\$/g' \
+    -e 's/\\geq/gt.eq/g' \
+    -e 's/\\sum/sum/g' \
+    -e 's/\\Delta/Delta/g' \
+    -e 's/\\oplus/xor/g' \
+    -e 's/\\cdot/dot.op/g' \
+    -e 's/\\mod/"mod"/g' \
+    *.typ
