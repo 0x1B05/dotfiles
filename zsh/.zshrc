@@ -9,6 +9,7 @@ export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 export JRE_HOME=/usr/lib/jvm/java-17-openjdk/jre
 
 # zoxide history directory
+export XDG_CONFIG_HOME=$HOME/.config
 export XDG_DATA_HOME=$HOME/.local/share
 
 # latex
@@ -29,6 +30,7 @@ paths=(
     $HOME/.cargo/bin
     $HOME/.local/share/coursier/bin
     /usr/local/bin
+    /usr/lib/ccache/bin
     /usr/bin
     /usr/sbin
 )
