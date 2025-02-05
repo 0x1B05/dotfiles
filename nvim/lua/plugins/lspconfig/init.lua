@@ -233,7 +233,7 @@ return {
         opts = {
             events = { "BufWritePost", "BufReadPost", "InsertLeave" },
             linters_by_ft = {
-                markdown = { "markdownlint" },
+                -- markdown = { "markdownlint" },
                 cpp = { "verilator" },
             },
             ---@type table<string,table>
