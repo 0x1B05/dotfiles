@@ -1,7 +1,27 @@
 /* -----------------------------------------------------
  * Import Pywal colors 
  * ----------------------------------------------------- */
-@import '../../../../../.cache/wal/colors-waybar.css';
+/* @import '../../../../../.cache/wal/colors-waybar.css'; */
+@define-color foreground #c4c1cf;
+@define-color background #09080D;
+@define-color cursor #c4c1cf;
+
+@define-color color0 #09080D;
+@define-color color1 #BE866F;
+@define-color color2 #395B8C;
+@define-color color3 #526692;
+@define-color color4 #566B99;
+@define-color color5 #6E88B6;
+@define-color color6 #7695C6;
+@define-color color7 #c4c1cf;
+@define-color color8 #898790;
+@define-color color9 #BE866F;
+@define-color color10 #395B8C;
+@define-color color11 #526692;
+@define-color color12 #566B99;
+@define-color color13 #6E88B6;
+@define-color color14 #7695C6;
+@define-color color15 #c4c1cf;
 
 @define-color backgroundlight #000000;
 @define-color backgrounddark #000000;
@@ -268,7 +288,7 @@ window#waybar.empty #window {
  * Hardware Group
  * ----------------------------------------------------- */
 
- #disk,#memory,#cpu,#language {
+ #disk,#memory,#cpu {
     margin:0px;
     padding:0px;
     font-size:22px;

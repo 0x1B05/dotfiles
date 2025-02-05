@@ -28,10 +28,6 @@
         "value": true
     },
     {
-        "key": "waybar_chatgpt",
-        "value": false
-    },
-    {
         "key": "waybar_systray",
         "value": true
     },

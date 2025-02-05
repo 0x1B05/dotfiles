@@ -66,7 +66,7 @@
         "format": "  {}",
         "tooltip-format": "{}",
         "escape": true,
-        "return-type": "json",       
+        "return-type": "json",
         "exec": "~/dotfiles/scripts/updates.sh",
         "restart-interval": 60,
         "on-click": "alacritty -e ~/dotfiles/scripts/installupdates.sh",
@@ -82,20 +82,6 @@
         "tooltip": false
     },
 
-    // Waybar Themes
-    "custom/waybarthemes": {
-        "format": "",
-        "on-click": "~/dotfiles/waybar/themeswitcher.sh",
-        "tooltip": false
-    },
-
-    // Settings
-    "custom/settings": {
-        "format": "",
-        "on-click": "~/dotfiles/apps/ML4W_Dotfiles_Settings-x86_64.AppImage",
-        "tooltip": false
-    },
-
     // Keybindings
     "custom/keybindings": {
         "format": "",
@@ -106,14 +92,14 @@
     // Filemanager Launcher
     "custom/filemanager": {
         "format": "",
-        "on-click": "~/dotfiles/.settings/filemanager.sh",
+        "on-click": "thunar",
         "tooltip": false
     },
 
     // Browser Launcher
     "custom/browser": {
-        "format": "",
-        "on-click": "~/dotfiles/.settings/browser.sh",
+        "format": "",
+        "on-click": "firefox",
         "tooltip": false
     },
 
@@ -222,8 +208,6 @@
     "group/settings": {
         "orientation": "horizontal",
         "modules": [
-            "custom/settings",
-            "custom/waybarthemes",
             "custom/wallpaper"
         ]
     },
