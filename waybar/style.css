@@ -311,7 +311,7 @@ window#waybar.empty #window {
     padding: 1px 10px 0px 10px;
     margin: 6px 15px 6px 0px;
     opacity:0.8;
-    border:3px solid @bordercolor;   
+    border:3px solid @bordercolor;
 }
 
 /* -----------------------------------------------------
