@@ -16,16 +16,6 @@ return {
 			}
 		)
 	),
-	-- ECHO
-	s(
-		{ trig = "pp", wordTrig = false, snippetType = "autosnippet" },
-		fmta(
-			[[
-        @echo 
-        ]],
-			{}
-		)
-	),
 	-- PHONY target
 	s(
 		{ trig = "PP", wordTrig = false, snippetType = "autosnippet" },

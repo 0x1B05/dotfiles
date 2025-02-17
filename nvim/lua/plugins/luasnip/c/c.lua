@@ -96,9 +96,9 @@ return {
 		t("->"),
 	}),
 	-- NULL POINTER SYMBOLIC CONSTANT
-	s({ trig = "00", snippetType = "autosnippet", wordTrig = false }, {
-		t("NULL"),
-	}),
+	-- s({ trig = "00", snippetType = "autosnippet", wordTrig = false }, {
+	-- 	t("NULL"),
+	-- }),
 	-- RETURN
 	s({ trig = "rr", snippetType = "autosnippet", wordTrig = false }, {
 		t("return"),
