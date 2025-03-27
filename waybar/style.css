@@ -329,10 +329,10 @@ window#waybar.empty #window {
 }
 
 /* -----------------------------------------------------
- * Pulseaudio
+ * wireplumber
  * ----------------------------------------------------- */
 
-#pulseaudio {
+#wireplumber {
     background-color: @backgroundlight;
     font-size:22px;
     color: @textcolor2;
@@ -342,7 +342,7 @@ window#waybar.empty #window {
     opacity:0.8;
 }
 
-#pulseaudio.muted {
+#wireplumber.muted {
     background-color: @backgrounddark;
     color: @textcolor1;
 }

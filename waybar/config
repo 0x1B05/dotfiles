@@ -30,7 +30,7 @@
     "modules-right": [
         "custom/updates",
         "backlight",
-        "pulseaudio",
+        "wireplumber",
         "bluetooth",
         "battery", 
         "network",
