@@ -248,7 +248,7 @@ return {
                     lualine_y = {},
                     lualine_z = {},
                     -- These will be filled later
-                    lualine_c = {},
+                    lualine_c = { 'g:metals_status' },
                     lualine_x = {},
                 },
                 inactive_sections = {

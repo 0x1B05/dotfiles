@@ -174,10 +174,11 @@ return {
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
-        -- ft = { "scala", "sbt", "java" },
-        ft = { "scala", "sbt" },
+        ft = { "scala", "sbt", "java" },
         opts = function()
             local metals_config = require("metals").bare_config()
+            metals_config.init_options.statusBarProvider = "on"
+            metals_config.capabilities = require("cmp_nvim_lsp").default_capabilities()
             metals_config.on_attach = function(client, bufnr)
                 -- your on_attach function
             end
