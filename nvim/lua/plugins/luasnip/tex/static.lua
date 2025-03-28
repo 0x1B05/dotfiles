@@ -6,29 +6,29 @@ local tex = require("util.latex")
 
 -- Return snippet tables
 return {
-	s({ trig = "q" }, {
-		t("\\quad "),
-	}),
-	s({ trig = "qq", snippetType = "autosnippet" }, {
-		t("\\qquad "),
-	}),
-	s({ trig = "npp", snippetType = "autosnippet" }, {
-		t({ "\\newpage", "" }),
-	}, { condition = line_begin }),
-	s({ trig = "toc", snippetType = "autosnippet" }, {
-		t("\\tableofcontents"),
-	}, { condition = line_begin }),
-	s({ trig = "inff", snippetType = "autosnippet" }, {
-		t("\\infty"),
-	}),
-	s({ trig = "ii", snippetType = "autosnippet" }, {
-		t("\\item "),
-	}, { condition = line_begin }),
-	s(
-		{ trig = "--", snippetType = "autosnippet" },
-		{ t("% --------------------------------------------- %") },
-		{ condition = line_begin }
-	),
-	-- HLINE WITH EXTRA VERTICAL SPACE
-	s({ trig = "hl" }, { t("\\hline {\\rule{0pt}{2.5ex}} \\hspace{-7pt}") }, { condition = line_begin }),
+    s({ trig = "q" }, {
+        t("\\quad "),
+    }),
+    s({ trig = "qq", snippetType = "autosnippet" }, {
+        t("\\qquad "),
+    }),
+    s({ trig = "npp", snippetType = "autosnippet" }, {
+        t({ "\\newpage", "" }),
+    }, { condition = line_begin }),
+    s({ trig = "toc", snippetType = "autosnippet" }, {
+        t("\\tableofcontents"),
+    }, { condition = line_begin }),
+    s({ trig = "inff", snippetType = "autosnippet" }, {
+        t("\\infty"),
+    }),
+    s({ trig = "ii", snippetType = "autosnippet" }, {
+        t("\\item "),
+    }, { condition = line_begin }),
+    s(
+        { trig = "--", snippetType = "autosnippet" },
+        { t("% --------------------------------------------- %") },
+        { condition = line_begin }
+    ),
+    -- HLINE WITH EXTRA VERTICAL SPACE
+    s({ trig = "hl" }, { t("\\hline {\\rule{0pt}{2.5ex}} \\hspace{-7pt}") }, { condition = line_begin }),
 }

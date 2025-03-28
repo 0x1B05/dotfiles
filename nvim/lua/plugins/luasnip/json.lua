@@ -4,11 +4,11 @@ local get_visual = helpers.get_visual
 local line_begin = require("luasnip.extras.expand_conditions").line_begin
 
 return {
-	-- RUN HUGO SERVER
-	s(
-		{ trig = "hugo" },
-		fmta(
-			[[
+    -- RUN HUGO SERVER
+    s(
+        { trig = "hugo" },
+        fmta(
+            [[
         {
           "name": "Project",
           "cmd": "xdg-open http://localhost:1313/ && hugo serve --enableGitInfo",
@@ -16,16 +16,16 @@ return {
           "count": <>
         }
         ]],
-			{
-				i(1, "1"),
-			}
-		)
-	),
-	-- COMPILE TAILWIND
-	s(
-		{ trig = "tw" },
-		fmta(
-			[[
+            {
+                i(1, "1"),
+            }
+        )
+    ),
+    -- COMPILE TAILWIND
+    s(
+        { trig = "tw" },
+        fmta(
+            [[
         {
           "name": "Compile Tailwind CSS",
           "cmd": "npm run compile-tailwind",
@@ -33,16 +33,16 @@ return {
           "count": <>
         }
         ]],
-			{
-				i(1, "2"),
-			}
-		)
-	),
-	-- LARAVEL projects
-	s(
-		{ trig = "laravel" },
-		fmta(
-			[[
+            {
+                i(1, "2"),
+            }
+        )
+    ),
+    -- LARAVEL projects
+    s(
+        { trig = "laravel" },
+        fmta(
+            [[
         {
           "tasks": [
             {
@@ -66,14 +66,14 @@ return {
           ]
         }
         ]],
-			{}
-		)
-	),
-	-- NPM RUN DEV
-	s(
-		{ trig = "dev" },
-		fmta(
-			[[
+            {}
+        )
+    ),
+    -- NPM RUN DEV
+    s(
+        { trig = "dev" },
+        fmta(
+            [[
         {
           "name": "Run",
           "cmd": "npm run dev",
@@ -81,9 +81,9 @@ return {
           "count": <>
         }
         ]],
-			{
-				i(1, "2"),
-			}
-		)
-	),
+            {
+                i(1, "2"),
+            }
+        )
+    ),
 }
