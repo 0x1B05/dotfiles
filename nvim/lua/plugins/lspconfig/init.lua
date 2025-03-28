@@ -184,7 +184,6 @@ return {
                 c = { "clang_format" },
                 cpp = { "clang_format" },
                 scala = { "scalafmt" },
-
                 python = function(bufnr)
                     if require("conform").get_formatter_info("ruff_format", bufnr).available then
                         return { "ruff_format" }
@@ -195,19 +194,17 @@ return {
                 bash = { "shfmt" },
                 sh = { "shfmt" },
                 lua = { "stylua" },
-
                 typst = { "typstyle" },
-
-                html = { "prettierd" },
-                javascript = { "prettierd" },
-                typescript = { "prettierd" },
-                vue = { "prettier_d" },
-                zig = { "zigfmt" },
+                html = { "prettier" },
+                markdown = { 'prettier' },
+                javascript = { "prettier" },
+                typescript = { "prettier" },
+                vue = { "prettier" },
             },
             formatters = {
                 clang_format = {
                     command = "clang-format",
-                    -- 	"--style={BasedOnStyle: Google, IndentWidth: 4, DerivePointerAlignment: true, PointerAlignment: Right, SortIncludes: false}",
+                    -- "--style={BasedOnStyle: Google, IndentWidth: 4, DerivePointerAlignment: true, PointerAlignment: Right, SortIncludes: false}",
                     args = {
                         [[--style="{
                         BasedOnStyle: Google,
@@ -233,7 +230,7 @@ return {
         opts = {
             events = { "BufWritePost", "BufReadPost", "InsertLeave" },
             linters_by_ft = {
-                -- markdown = { "markdownlint" },
+                markdown = { "markdownlint" },
                 cpp = { "verilator" },
             },
             ---@type table<string,table>

@@ -85,11 +85,11 @@ return {
         event = "VeryLazy",
         opts = {
             options = {
-                numbers = "none",        -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
-                close_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
+                numbers = "none",                    -- | "ordinal" | "buffer_id" | "both" | function({ ordinal, id, lower, raise }): string,
+                close_command = "Bdelete! %d",       -- can be a string | function, see "Mouse actions"
                 right_mouse_command = "Bdelete! %d", -- can be a string | function, see "Mouse actions"
-                left_mouse_command = "buffer %d", -- can be a string | function, see "Mouse actions"
-                middle_mouse_command = nil, -- can be a string | function, see "Mouse actions"
+                left_mouse_command = "buffer %d",    -- can be a string | function, see "Mouse actions"
+                middle_mouse_command = nil,          -- can be a string | function, see "Mouse actions"
                 -- NOTE: this plugin is designed with this icon in mind,
                 -- and so changing this is NOT recommended, this is intended
                 -- as an escape hatch for people who cannot bear it for whatever reason
@@ -103,7 +103,7 @@ return {
                 max_name_length = 30,
                 max_prefix_length = 30, -- prefix used when a buffer is de-duplicated
                 tab_size = 21,
-                diagnostics = false, -- | "nvim_lsp" | "coc",
+                diagnostics = false,    -- | "nvim_lsp" | "coc",
                 diagnostics_update_in_insert = false,
                 offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
                 show_buffer_icons = true,
@@ -111,7 +111,7 @@ return {
                 show_close_icon = true,
                 show_tab_indicators = true,
                 persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
-                separator_style = "thin", -- | "thick" | "thin" | { 'any', 'any' },
+                separator_style = "thin",   -- | "thick" | "thin" | { 'any', 'any' },
                 enforce_regular_tabs = true,
                 always_show_bufferline = true,
             },
@@ -276,7 +276,7 @@ return {
                 function()
                     return "▊"
                 end,
-                color = { fg = colors.blue }, -- Sets highlighting of component
+                color = { fg = colors.blue },      -- Sets highlighting of component
                 padding = { left = 0, right = 1 }, -- We don't need space before this
             })
 
@@ -352,9 +352,9 @@ return {
             ins_left({
                 -- Lsp server name .
                 function()
-                    local msg = "No Active Lsp"
-                    local buf_ft = vim.api.nvim_buf_get_option(0, "filetype")
-                    local clients = vim.lsp.get_active_clients()
+                    local msg = 'No Active Lsp'
+                    local buf_ft = vim.api.nvim_get_option_value('filetype', { buf = 0 })
+                    local clients = vim.lsp.get_clients()
                     if next(clients) == nil then
                         return msg
                     end
@@ -366,13 +366,13 @@ return {
                     end
                     return msg
                 end,
-                icon = " LSP:",
-                color = { fg = "#ffffff", gui = "bold" },
+                icon = ' LSP:',
+                color = { fg = '#ffffff', gui = 'bold' },
             })
 
             -- Add components to right sections
             ins_right({
-                "o:encoding", -- option component same as &encoding in viml
+                "o:encoding",       -- option component same as &encoding in viml
                 fmt = string.upper, -- I'm not sure why it's upper case either ;)
                 cond = conditions.hide_in_width,
                 color = { fg = colors.green, gui = "bold" },
@@ -430,11 +430,14 @@ return {
             require("lazy.core.loader").add_to_rtp(plugin)
             require("nvim-treesitter.query_predicates")
         end,
+        cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
         dependencies = { "nvim-treesitter/nvim-treesitter-textobjects", "HiPhish/nvim-ts-rainbow2" },
+        opts_extend = { "ensure_installed" },
+        ---@type TSConfig
+        ---@diagnostic disable-next-line: missing-fields
         opts = {
             highlight = { enable = true },
             indent = { enable = true },
-            autopairs = { enable = true },
             ensure_installed = {
                 "bash",
                 "c",
@@ -482,7 +485,6 @@ return {
         },
         config = function(_, opts)
             require("nvim-treesitter.configs").setup(opts)
-            -- require("ts_context_commentstring").setup({})
         end,
     },
     -- Git labels
@@ -521,8 +523,8 @@ return {
                 },
             },
             signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-            numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
-            linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+            numhl = false,     -- Toggle with `:Gitsigns toggle_numhl`
+            linehl = false,    -- Toggle with `:Gitsigns toggle_linehl`
             word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
             watch_gitdir = {
                 interval = 1000,

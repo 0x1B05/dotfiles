@@ -77,7 +77,7 @@ end
 M.sympy_calc = function()
     local selected_text = vim.fn.getreg("v")
     print(selected_text)
-    vim.api.nvim_out_write(selected_text)
+    vim.api.nvim_echo(selected_text, true, {})
 end
 
 return M
