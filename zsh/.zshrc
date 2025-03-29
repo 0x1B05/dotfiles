@@ -11,6 +11,7 @@ export JRE_HOME=/usr/lib/jvm/java-17-openjdk/jre
 
 # zoxide history directory
 export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 
 # latex
@@ -19,7 +20,7 @@ export MANPATH=/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH
 export INFOPATH=/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
-
+export CLIPHIST_MAX_ITEMS=100
 
 [[ -f ~/dotfiles/zsh/aliases.zsh ]] && source ~/dotfiles/zsh/aliases.zsh
 [[ -f ~/dotfiles/zsh/scripts.zsh ]] && source ~/dotfiles/zsh/scripts.zsh
