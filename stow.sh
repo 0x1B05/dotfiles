@@ -12,8 +12,9 @@ stow tmux
 
 ln -s $HOME/dotfiles/zsh/.zshrc $HOME/.zshrc
 ln -s $HOME/dotfiles/zsh/.zimrc $HOME/.zimrc
+ln -s $HOME/dotfiles/gtkwave/.gtkwaverc $HOME/.gtkwaverc
 
-cd local 
+cd local
 stow --target=$HOME/.local/bin bin
 cd share
 stow --target=$HOME/.local/share/applications applications
