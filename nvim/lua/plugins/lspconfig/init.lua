@@ -200,6 +200,7 @@ return {
                 javascript = { "prettier" },
                 typescript = { "prettier" },
                 vue = { "prettier" },
+                verilog = { "verible" },
             },
             formatters = {
                 clang_format = {
