@@ -1,8 +1,9 @@
-mkdir ~/.config/lazygit && stow --target=$HOME/.config/lazygit lazygit
-mkdir ~/.config/yazi && stow --target=$HOME/.config/yazi yazi
-mkdir ~/.config/mpv && stow --target=$HOME/.config/mpv mpv
-mkdir ~/.config/mpd && stow --target=$HOME/.config/mpd mpd
-mkdir ~/.config/zathura && stow --target=$HOME/.config/zathura zathura
+mkdir $HOME/.config/lazygit && stow --target=$HOME/.config/lazygit lazygit
+mkdir $HOME/.config/yazi && stow --target=$HOME/.config/yazi yazi
+mkdir $HOME/.config/mpv && stow --target=$HOME/.config/mpv mpv
+mkdir $HOME/.config/mpd && stow --target=$HOME/.config/mpd mpd
+mkdir $HOME/.config/zathura && stow --target=$HOME/.config/zathura zathura
+mkdir $HOME/.config/surfer && stow --target=$HOME/.config/surfer surfer
 
 stow --target=$HOME/.config chromium
 stow --target=$HOME/.ssh/ ssh
