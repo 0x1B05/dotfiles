@@ -24,11 +24,6 @@ rev = "0725851"
 hash = "15b2ff7f6563c14d5b2e93b3e9da35de"
 
 [[plugin.deps]]
-use = "KKV9/compress"
-rev = "60b24af"
-hash = "ee025be766240cc98e671754ac836da3"
-
-[[plugin.deps]]
 use = "yazi-rs/plugins:hide-preview"
 rev = "0725851"
 hash = "55904f17e1053cfb91dacd9015a99f9d"
