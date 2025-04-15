@@ -5,6 +5,7 @@ export NEMU_HOME=$HOME/ysyx-workbench/nemu
 export AM_HOME=$HOME/ysyx-workbench/abstract-machine
 export NVBOARD_HOME=$HOME/ysyx-workbench/nvboard
 export NAVY_HOME=$HOME/ysyx-workbench/navy-apps
+export SOC_HOME=$HOME/ysyx-workbench/ysyxSoC
 
 export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
 export JRE_HOME=/usr/lib/jvm/java-17-openjdk/jre
