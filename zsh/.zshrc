@@ -21,7 +21,6 @@ export MANPATH=/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH
 export INFOPATH=/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
-export CLIPHIST_MAX_ITEMS=100
 
 [[ -f ~/dotfiles/zsh/aliases.zsh ]] && source ~/dotfiles/zsh/aliases.zsh
 [[ -f ~/dotfiles/zsh/scripts.zsh ]] && source ~/dotfiles/zsh/scripts.zsh
