@@ -43,7 +43,6 @@ return {
     },
 
     -- comments
-    { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
     {
         "numToStr/Comment.nvim",
         lazy = true,
