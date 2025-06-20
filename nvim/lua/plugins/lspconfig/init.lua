@@ -9,8 +9,8 @@ return {
         keys = keymaps.lsp,
         dependencies = {
             -- load for lsp server setup
-            "williamboman/mason.nvim",
-            "williamboman/mason-lspconfig.nvim",
+            "mason-org/mason.nvim",
+            "mason-org/mason-lspconfig.nvim",
 
             {
                 "hrsh7th/cmp-nvim-lsp",
@@ -132,7 +132,7 @@ return {
     },
     -- manage LSP servers, DAP servers, linters, and formatters
     {
-        "williamboman/mason.nvim",
+        "mason-org/mason.nvim",
         cmd = "Mason",
         keys = { { "<cmd>Mason<cr>", desc = "Mason" } },
         build = ":MasonUpdate",
@@ -141,7 +141,7 @@ return {
             max_concurrent_installers = 4,
             ui = {
                 -- disable check on :Mason window
-                check_outdated_packages_on_open = false,
+                check_outdated_packages_on_open = true,
                 border = "rounded",
                 width = 0.8,
                 height = 0.8,
@@ -155,14 +155,14 @@ return {
     },
     -- easy lspconfig: implicitly load mason and auto install lsp servers
     {
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason-lspconfig.nvim",
         lazy = true,
         opts = {
             ensure_installed = require("config.options").plugins.lsp_servers,
             automatic_installation = false,
         },
         dependencies = {
-            "williamboman/mason.nvim",
+            "mason-org/mason.nvim",
             "neovim/nvim-lspconfig",
         },
     },
@@ -318,6 +318,10 @@ return {
             })
         end,
     },
+
+    -- pin to v1 for now
+    { "mason-org/mason.nvim",           version = "^1.0.0" },
+    { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
 
     -- cpp
     {
