@@ -4,6 +4,7 @@ mkdir $HOME/.config/mpv && stow --target=$HOME/.config/mpv mpv
 mkdir $HOME/.config/mpd && stow --target=$HOME/.config/mpd mpd
 mkdir $HOME/.config/zathura && stow --target=$HOME/.config/zathura zathura
 mkdir $HOME/.config/surfer && stow --target=$HOME/.config/surfer surfer
+mkdir $HOME/.config/swaync && stow --target=$HOME/.config/swaync swaync
 
 stow --target=$HOME/.config chromium
 stow --target=$HOME/.ssh/ ssh

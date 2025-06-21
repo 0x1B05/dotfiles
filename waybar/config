@@ -32,12 +32,13 @@
         "backlight",
         "wireplumber",
         "bluetooth",
-        "battery", 
+        "battery",
         "network",
         "group/hardware",
         "custom/cliphist",
         "idle_inhibitor",
         "tray",
+        "custom/notification",
         "custom/exit",
         "clock"
     ]
