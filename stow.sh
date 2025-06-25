@@ -6,6 +6,7 @@ mkdir $HOME/.config/zathura && stow --target=$HOME/.config/zathura zathura
 mkdir $HOME/.config/surfer && stow --target=$HOME/.config/surfer surfer
 mkdir $HOME/.config/swaync && stow --target=$HOME/.config/swaync swaync
 mkdir $HOME/.config/cliphist && stow --target=$HOME/.config/cliphist cliphist
+mkdir $HOME/.config/swayimg && stow --target=$HOME/.config/swayimg swayimg
 
 stow --target=$HOME/.config chromium
 stow --target=$HOME/.ssh/ ssh
