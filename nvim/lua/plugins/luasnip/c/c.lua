@@ -89,7 +89,8 @@ return {
                 i(1),
                 i(0),
             }
-        )
+        ),
+        { condition = line_begin }
     ),
     -- -> DEREFERENCE STRUCTURE PROPERTY
     s({ trig = ">>", snippetType = "autosnippet", wordTrig = false }, {
