@@ -51,9 +51,28 @@ if [ -z "$SSH_AUTH_SOCK" ]; then
 fi
 
 autoload -U colors && colors
-autoload edit-command-line; zle -N edit-command-line
+autoload edit-command-line;
+autoload run_tmux;
+autoload run_yazi;
+autoload run_lazygit;
+
+zle -N edit-command-line
 bindkey '\ee' edit-command-line
-bindkey -s '^[o' 'y\n'
+
+function run_tmux() {
+  BUFFER="tmux"
+  zle accept-line
+}
+zle -N run_tmux
+bindkey '\et' run_tmux
+
+function run_yazi() { yazi }
+zle -N run_yazi
+bindkey '\ey' run_yazi
+
+function run_lazygit() { lazygit }
+zle -N run_lazygit
+bindkey '\eg' run_lazygit
 
 # Start configuration added by Zim install {{{
 #
