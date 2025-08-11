@@ -7,6 +7,7 @@ mkdir $HOME/.config/surfer && stow --target=$HOME/.config/surfer surfer
 mkdir $HOME/.config/swaync && stow --target=$HOME/.config/swaync swaync
 mkdir $HOME/.config/cliphist && stow --target=$HOME/.config/cliphist cliphist
 mkdir $HOME/.config/swayimg && stow --target=$HOME/.config/swayimg swayimg
+mkdir $HOME/.config/tmux && stow --target=$HOME/.config/tmux tmux
 
 stow --target=$HOME/.config chromium
 stow --target=$HOME/.ssh/ ssh
