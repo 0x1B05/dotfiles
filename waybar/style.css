@@ -23,15 +23,24 @@
 @define-color color14 #7695C6;
 @define-color color15 #c4c1cf;
 
-@define-color backgroundlight #000000;
-@define-color backgrounddark #000000;
-@define-color workspacesbackground1 #000000;
-@define-color workspacesbackground2 #222222;
-@define-color bordercolor #000000;
-@define-color textcolor1 #FFFFFF;
-@define-color textcolor2 #FFFFFF;
+@define-color backgroundlight #FFFFFF;
+@define-color backgrounddark #FFFFFF;
+@define-color workspacesbackground1 #FFFFFF;
+@define-color workspacesbackground2 #CCCCCC;
+@define-color bordercolor #FFFFFF;
+@define-color textcolor1 #000000;
+@define-color textcolor2 #000000;
 @define-color textcolor3 #000000;
-@define-color iconcolor #000000;
+@define-color iconcolor #FFFFFF;
+/* @define-color backgroundlight #000000; */
+/* @define-color backgrounddark #000000; */
+/* @define-color workspacesbackground1 #000000; */
+/* @define-color workspacesbackground2 #222222; */
+/* @define-color bordercolor #000000; */
+/* @define-color textcolor1 #FFFFFF; */
+/* @define-color textcolor2 #FFFFFF; */
+/* @define-color textcolor3 #000000; */
+/* @define-color iconcolor #000000; */
 
 * {
     font-family: "Fira Sans Semibold", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
