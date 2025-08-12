@@ -66,7 +66,10 @@ function run_tmux() {
 zle -N run_tmux
 bindkey '\et' run_tmux
 
-function run_yazi() { yazi }
+function run_yazi() {
+  zle -I
+  y
+}
 zle -N run_yazi
 bindkey '\ey' run_yazi
 
