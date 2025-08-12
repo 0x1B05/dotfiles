@@ -24,7 +24,8 @@
         "on-click-middle": "close",
         "ignore-list": [
             "Alacritty",
-            "kitty"
+            "kitty",
+            "foot"
         ],
         "app_ids-mapping": {
             "firefoxdeveloperedition": "firefox-developer-edition"
@@ -197,13 +198,13 @@
     // CPU
     "cpu": {
         "format": "/ C {usage}% ",
-        "on-click": "kitty htop"
+        "on-click": "foot htop"
     },
 
     // Memory
     "memory": {
         "format": "/ M {}% ",
-        "on-click": "kitty htop"
+        "on-click": "foot htop"
     },
 
     // Harddisc space used
@@ -211,7 +212,7 @@
         "interval": 30,
         "format": "D {percentage_used}% ",
         "path": "/",
-        "on-click": "kitty htop"
+        "on-click": "foot htop"
     },
 
     // Group Hardware
