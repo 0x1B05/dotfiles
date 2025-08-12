@@ -1,4 +1,5 @@
 command_timeout=8000
+
 [character]
 success_symbol = "[>](bold green)"
 error_symbol = "[x](bold red)"
