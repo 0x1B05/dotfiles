@@ -77,49 +77,33 @@ function run_lazygit() { lazygit }
 zle -N run_lazygit
 bindkey '\eg' run_lazygit
 
-# Start configuration added by Zim install {{{
-#
-# User configuration sourced by interactive shells
+# Created by Zap installer
+ZAP_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zap"
+[ -f "$ZAP_HOME/zap.zsh" ] && source "$ZAP_HOME/zap.zsh"
 
-# -----------------
-# Zsh configuration
-# -----------------
+plug "zap-zsh/supercharge"
+plug "zsh-users/zsh-autosuggestions"
+plug "zsh-users/zsh-syntax-highlighting"
+plug "zsh-users/zsh-completions"
+# Fish-like syntax highlighting for Zsh.
+# zsh-users/zsh-syntax-highlighting must be sourced after completion
+plug "zsh-users/zsh-syntax-highlighting"
+# Fish-like history search (up arrow) for Zsh.
+# zsh-users/zsh-history-substring-search must be sourced after zsh-users/zsh-syntax-highlighting
+plug "zsh-users/zsh-history-substring-search"
+plug "wookayin/fzf-fasd"
+plug "zdharma-continuum/fast-syntax-highlighting"
+plug "Aloxaf/fzf-tab"
+# Fish-like autosuggestions for Zsh.
+plug "zsh-users/zsh-autosuggestions"
+plug "hlissner/zsh-autopair"
+# plug "jeffreytse/zsh-vi-mode" --source zsh-vi-mode.plugin.zsh
+plug "jeffreytse/zsh-vi-mode"
+source $ZAP_HOME/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
-
-# Remove path separator from WORDCHARS.
-WORDCHARS=${WORDCHARS//[\/]}
-
-# --------------------
-# Module configuration
-# --------------------
-
-# zsh-autosuggestions
-ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-
-# ------------------
-# Initialize modules
-# ------------------
-
-ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
-# Download zimfw plugin manager if missing.
-if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
-  if (( ${+commands[curl]} )); then
-    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
-        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-  else
-    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh \
-        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
-  fi
-fi
-# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
-if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
-  source ${ZIM_HOME}/zimfw.zsh init -q
-fi
-
-source ${ZIM_HOME}/init.zsh
-
-# }}} End configuration added by Zim install
+# Load and initialise completion system
+autoload -Uz compinit
+compinit
 
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
