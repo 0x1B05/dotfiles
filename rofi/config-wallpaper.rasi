@@ -8,7 +8,6 @@ configuration {
     me-accept-entry:            "MousePrimary";
     drun-display-format:        "{name}";
     window-format:              "{w} · {c} · {t}";
-    
 }
 
 /* ---- Load font ---- */
