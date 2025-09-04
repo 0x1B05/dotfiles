@@ -1,4 +1,7 @@
+mkdir $HOME/.config/hypr && stow --target=$HOME/.config/hypr hypr
+mkdir $HOME/.config/waybar && stow --target=$HOME/.config/waybar waybar
 mkdir $HOME/.config/lazygit && stow --target=$HOME/.config/lazygit lazygit
+mkdir $HOME/.config/rofi && stow --target=$HOME/.config/rofi rofi
 mkdir $HOME/.config/yazi && stow --target=$HOME/.config/yazi yazi
 mkdir $HOME/.config/mpv && stow --target=$HOME/.config/mpv mpv
 mkdir $HOME/.config/mpd && stow --target=$HOME/.config/mpd mpd
@@ -10,14 +13,12 @@ mkdir $HOME/.config/swayimg && stow --target=$HOME/.config/swayimg swayimg
 mkdir $HOME/.config/tmux && stow --target=$HOME/.config/tmux tmux
 mkdir $HOME/.config/foot && stow --target=$HOME/.config/foot foot
 
-stow --target=$HOME/.config chromium
-stow --target=$HOME/.ssh/ ssh
+stow --target=$HOME/.config starship
+stow --target=$HOME/.ssh ssh
 
 stow git
-stow tmux
 
 ln -s $HOME/dotfiles/zsh/.zshrc $HOME/.zshrc
-ln -s $HOME/dotfiles/zsh/.zimrc $HOME/.zimrc
 ln -s $HOME/dotfiles/gtkwave/.gtkwaverc $HOME/.gtkwaverc
 
 cd local
