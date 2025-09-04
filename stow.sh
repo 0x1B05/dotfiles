@@ -14,11 +14,17 @@ mkdir $HOME/.config/swayimg && stow --target=$HOME/.config/swayimg swayimg
 mkdir $HOME/.config/tmux && stow --target=$HOME/.config/tmux tmux
 mkdir $HOME/.config/foot && stow --target=$HOME/.config/foot foot
 
+mkdir $HOME/.config/gtk-3.0 && stow --target=$HOME/.config/gtk-3.0 gtk-3.0
+mkdir $HOME/.config/gtk-4.0 && stow --target=$HOME/.config/gtk-4.0 gtk-4.0
+mkdir $HOME/.config/xsettingsd && stow --target=$HOME/.config/xsettingsd xsettingsd
+
 stow --target=$HOME/.config starship
 stow --target=$HOME/.ssh ssh
 
 stow git
 
+ln -s $HOME/dotfiles/.gtkrc-2.0 $HOME/.gtkrc-2.0
+ln -s $HOME/dotfiles/.Xresources $HOME/.Xresources
 ln -s $HOME/dotfiles/zsh/.zshrc $HOME/.zshrc
 ln -s $HOME/dotfiles/gtkwave/.gtkwaverc $HOME/.gtkwaverc
 
