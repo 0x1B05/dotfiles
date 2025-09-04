@@ -18,7 +18,7 @@
     // Taskbar
     "wlr/taskbar": {
         "format": "{icon}",
-        "icon-size": 33,
+        "icon-size": 21,
         "tooltip-format": "{title}",
         "on-click": "activate",
         "on-click-middle": "close",
@@ -90,24 +90,10 @@
         "tooltip": false
     },
 
-    // Filemanager Launcher
-    "custom/filemanager": {
-        "format": "",
-        "on-click": "thunar",
-        "tooltip": false
-    },
-
     // Browser Launcher
     "custom/browser": {
         "format": "",
         "on-click": "firefox",
-        "tooltip": false
-    },
-
-    // Calculator
-    "custom/calculator": {
-        "format": "",
-        "on-click": "qalculate-gtk",
         "tooltip": false
     },
 
@@ -175,7 +161,7 @@
 
     // System tray
     "tray": {
-        "icon-size": 27,
+        "icon-size": 21,
         "spacing": 10
     },
 
@@ -191,7 +177,7 @@
 
    // System
     "custom/system": {
-        "format": " ",
+        "format": "",
         "tooltip": false
     },
 
