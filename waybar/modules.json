@@ -69,9 +69,9 @@
         "escape": true,
         "return-type": "json",
         "exec": "~/dotfiles/scripts/updates.sh",
-        "restart-interval": 60,
-        "on-click": "alacritty -e ~/dotfiles/scripts/installupdates.sh",
-        "on-click-right": "~/dotfiles/.settings/software.sh",
+        "restart-interval": 3600,
+        // "on-click": "foot -e ~/dotfiles/scripts/installupdates.sh",
+        // "on-click-right": "~/dotfiles/.settings/software.sh",
         "tooltip": false
     },
 
