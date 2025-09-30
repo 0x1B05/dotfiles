@@ -1,6 +1,6 @@
 {
     // General Settings
-    "position": "bottom",
+    "position": "top",
     "margin-top": 0,
     "margin-bottom": 0,
     "layer": "top",
