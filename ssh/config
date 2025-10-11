@@ -3,8 +3,19 @@ Host github.com
     User git
     Port 443
     IdentityFile ~/.ssh/id_ed25519_github
-Host aliyun
-    HostName 47.113.149.219
-    User ethan
-    Port 22
-    IdentityFile ~/.ssh/id_ed25519_aliyun
+
+Host ee219
+    HostName 10.15.28.50
+    User ubuntu
+    Port 22112
+    ForwardAgent yes
+    ForwardX11Trusted yes
+    ForwardX11 yes
+
+Host ee291f
+    HostName 10.15.27.104
+    User centos
+    Port 22112
+    ForwardAgent yes
+    ForwardX11Trusted yes
+    ForwardX11 yes
