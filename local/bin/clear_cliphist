@@ -1,0 +1,3 @@
+#!/bin/bash
+
+rm "$XDG_CACHE_HOME/cliphist/db"
