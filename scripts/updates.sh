@@ -6,7 +6,6 @@
 #  \___/| .__/ \__,_|\__,_|\__\___||___/ 
 #       |_|                              
 # ----------------------------------------------------- 
-# Requires pacman-contrib trizen
 
 # ----------------------------------------------------- 
 # Define threshholds for color indicators
@@ -24,7 +23,7 @@ if ! updates_arch=$(checkupdates 2> /dev/null | wc -l ); then
     updates=0
 fi
 
-if ! updates_aur=$(paru -Qua 2> /dev/null | wc -l); then
+if ! updates_aur=$(paru -Qua 2> /dev/null | grep -v -F '[ignored]' | wc -l); then
     updates_aur=0
 fi
 
