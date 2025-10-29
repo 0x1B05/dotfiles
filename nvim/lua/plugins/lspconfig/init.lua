@@ -11,147 +11,51 @@ return {
             -- load for lsp server setup
             "mason-org/mason.nvim",
             "mason-org/mason-lspconfig.nvim",
-
-            {
-                "hrsh7th/cmp-nvim-lsp",
-                config = function()
-                    return util.has("nvim-cmp")
-                end,
-            },
+            "hrsh7th/cmp-nvim-lsp",
         },
-        opts = {
-            -- options for vim.diagnostic.config()
-            diagnostics = {
-                underline = true,
-                update_in_insert = false,
-                virtual_text = {
-                    spacing = 4,
-                    source = "if_many",
-                    prefix = "●",
-                    -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-                    -- this only works on a recent 0.10.0 build. Will be set to "●" when not supported
-                    -- prefix = "icons",
-                },
-                severity_sort = true,
-            },
-            -- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
-            -- Be aware that you also will need to properly configure your LSP server to
-            -- provide the inlay hints.
-            inlay_hints = {
-                enabled = false,
-            },
-            -- add any global capabilities here
-            capabilities = {},
-            -- Automatically format on save
-            autoformat = true,
-            -- Enable this to show formatters used in a notification
-            -- Useful for debugging formatter issues
-            format_notify = false,
-            -- options for vim.lsp.buf.format
-            -- `bufnr` and `filter` is handled by the LazyVim formatter,
-            -- but can be also overridden when specified
-            format = {
-                formatting_options = nil,
-                timeout_ms = nil,
-            },
-            -- LSP Server Settings
-            servers = {
-                clangd = require("plugins.lspconfig.langs.clangd"),
-                cmake = require("plugins.lspconfig.langs.cmake-language-server"),
-                lua_ls = require("plugins.lspconfig.langs.lua_ls"),
-                tinymist = require("plugins.lspconfig.langs.tinymist"),
-            },
-            -- you can do any additional lsp server setup here
-            -- return true if you don't want this server to be setup with lspconfig
-            setup = {
-                clangd = function(_, opts)
-                    local clangd_ext_opts = require("lazy.core.plugin").values("clangd_extensions.nvim", "opts", false)
-                    require("clangd_extensions").setup(
-                        vim.tbl_deep_extend("force", clangd_ext_opts or {}, { server = opts })
-                    )
-                    return false
-                end,
-            },
-        },
-
-        config = function(_, opts)
-            local servers = opts.servers
-            local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-            local capabilities = vim.tbl_deep_extend(
-                "force",
-                {},
-                vim.lsp.protocol.make_client_capabilities(),
-                has_cmp and cmp_nvim_lsp.default_capabilities() or {},
-                opts.capabilities or {}
-            )
-
-            local function setup(server)
-                local server_opts = vim.tbl_deep_extend("force", {
-                    capabilities = vim.deepcopy(capabilities),
-                }, servers[server] or {})
-                if server_opts.enabled == false then
-                    return
-                end
-
-                if opts.setup[server] then
-                    if opts.setup[server](server, server_opts) then
-                        return
-                    end
-                elseif opts.setup["*"] then
-                    if opts.setup["*"](server, server_opts) then
-                        return
-                    end
-                end
-                require("lspconfig")[server].setup(server_opts)
-            end
-
-            -- get all the servers that are available thourgh mason-lspconfig
-            local have_mason, mlsp = pcall(require, "mason-lspconfig")
-            local all_mslp_servers = {}
-            if have_mason then
-                all_mslp_servers = vim.tbl_keys(require("mason-lspconfig.mappings.server").lspconfig_to_package)
-            end
-
-            local ensure_installed = require("config.options").plugins.lsp_servers
-            for server, server_opts in pairs(servers) do
-                if server_opts then
-                    server_opts = server_opts == true and {} or server_opts
-                    -- run manual setup if mason=false or if this is a server that cannot be installed with mason-lspconfig
-                    if server_opts.mason == false or not vim.tbl_contains(all_mslp_servers, server) then
-                        setup(server)
-                    else
-                        ensure_installed[#ensure_installed + 1] = server
-                    end
-                end
-            end
-
-            if have_mason then
-                mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
-            end
-        end,
     },
+
     -- manage LSP servers, DAP servers, linters, and formatters
     {
+
         "mason-org/mason.nvim",
         cmd = "Mason",
-        keys = { { "<cmd>Mason<cr>", desc = "Mason" } },
+        keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
         build = ":MasonUpdate",
-        opts = { -- required for :Mason
-            log_level = vim.log.levels.INFO,
-            max_concurrent_installers = 4,
+        opts_extend = { "ensure_installed" },
+        opts = {
+            ensure_installed = { "shfmt", },
             ui = {
-                -- disable check on :Mason window
-                check_outdated_packages_on_open = true,
-                border = "rounded",
-                width = 0.8,
-                height = 0.8,
                 icons = {
-                    package_installed = "◍",
-                    package_pending = "◍",
-                    package_uninstalled = "◍",
+                    package_installed = "✓",
+                    package_pending = "➜",
+                    package_uninstalled = "✗",
                 },
             },
         },
+        ---@param opts MasonSettings | {ensure_installed: string[]}
+        config = function(_, opts)
+            require("mason").setup(opts)
+            local mr = require("mason-registry")
+            mr:on("package:install:success", function()
+                vim.defer_fn(function()
+                    -- trigger FileType event to possibly load this newly installed LSP server
+                    require("lazy.core.handler.event").trigger({
+                        event = "FileType",
+                        buf = vim.api.nvim_get_current_buf(),
+                    })
+                end, 100)
+            end)
+
+            mr.refresh(function()
+                for _, tool in ipairs(opts.ensure_installed) do
+                    local p = mr.get_package(tool)
+                    if not p:is_installed() then
+                        p:install()
+                    end
+                end
+            end)
+        end,
     },
     -- easy lspconfig: implicitly load mason and auto install lsp servers
     {
@@ -159,7 +63,8 @@ return {
         lazy = true,
         opts = {
             ensure_installed = require("config.options").plugins.lsp_servers,
-            automatic_installation = false,
+            automatic_installation = true,
+            automatic_enable = true,
         },
         dependencies = {
             "mason-org/mason.nvim",
@@ -318,10 +223,6 @@ return {
             })
         end,
     },
-
-    -- pin to v1 for now
-    { "mason-org/mason.nvim",           version = "^1.0.0" },
-    { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },
 
     -- cpp
     {
