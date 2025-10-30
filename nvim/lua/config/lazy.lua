@@ -28,10 +28,7 @@ function M.load_lazy()
             lazy = true,
             version = "*",
         },
-        spec = { 
-            { import = "plugins", }, 
-            { import = "plugins.lsp", }, 
-        },
+        spec = { { import = "plugins", }, },
 
         install = {
             missing = true,
