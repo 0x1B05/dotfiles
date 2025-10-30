@@ -159,12 +159,12 @@ return {
         config = function()
             require("pastify").setup({
                 opts = {
-                    absolute_path = false, -- use absolute or relative path to the working directory
-                    apikey = "", -- Api key, required for online saving
+                    absolute_path = false,  -- use absolute or relative path to the working directory
+                    apikey = "",            -- Api key, required for online saving
                     local_path = "images/", -- The path to put local files in, ex ~/Projects/<name>/images/<imgname>.png
-                    save = "local", -- Either 'local' or 'online'
+                    save = "local",         -- Either 'local' or 'online'
                 },
-                ft = {       -- Custom snippets for different filetypes, will replace $IMG$ with the image url
+                ft = {                      -- Custom snippets for different filetypes, will replace $IMG$ with the image url
                     html = '<img src="$IMG$" alt="">',
                     markdown = "![]($IMG$)",
                     typst = '#figure(caption: [])[#image("$IMG$")]',

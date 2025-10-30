@@ -24,7 +24,7 @@ return {
         build = ":MasonUpdate",
         opts_extend = { "ensure_installed" },
         opts = {
-            ensure_installed = { "shfmt", },
+            ensure_installed = require("config.options").ensure_installed.mason_tools,
             ui = {
                 icons = {
                     package_installed = "✓",
@@ -62,7 +62,7 @@ return {
         "mason-org/mason-lspconfig.nvim",
         lazy = true,
         opts = {
-            ensure_installed = require("config.options").plugins.lsp_servers,
+            ensure_installed = require("config.options").ensure_installed.lsp_servers,
             automatic_installation = true,
             automatic_enable = true,
         },
