@@ -13,6 +13,7 @@ mkdir $HOME/.config/cliphist && stow --target=$HOME/.config/cliphist cliphist
 mkdir $HOME/.config/swayimg && stow --target=$HOME/.config/swayimg swayimg
 mkdir $HOME/.config/tmux && stow --target=$HOME/.config/tmux tmux
 mkdir $HOME/.config/foot && stow --target=$HOME/.config/foot foot
+mkdir $HOME/.config/fontconfig && stow --target=$HOME/.config/fontconfig fontconfig
 
 mkdir $HOME/.config/gtk-3.0 && stow --target=$HOME/.config/gtk-3.0 gtk-3.0
 mkdir $HOME/.config/gtk-4.0 && stow --target=$HOME/.config/gtk-4.0 gtk-4.0
