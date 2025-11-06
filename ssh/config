@@ -7,6 +7,8 @@ Host github.com
 Host ee219
     HostName 10.15.28.50
     User ubuntu
+    IdentityFile ~/.ssh/id_ed25519_ee219
+    IdentitiesOnly yes
     Port 22112
     ForwardAgent yes
     ForwardX11Trusted yes
@@ -15,6 +17,8 @@ Host ee219
 Host ee291f
     HostName 10.15.27.104
     User centos
+    IdentityFile ~/.ssh/id_ed25519_ee291f
+    IdentitiesOnly yes
     Port 22112
     ForwardAgent yes
     ForwardX11Trusted yes
