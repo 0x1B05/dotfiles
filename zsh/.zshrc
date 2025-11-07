@@ -72,6 +72,24 @@ function run_lazygit() { lazygit }
 zle -N run_lazygit
 bindkey '\eg' run_lazygit
 
+# zsh-history-substring-search is required
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# zsh-vi-mode is required
+function zvm_config() {
+    ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
+    ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
+    ZVM_VI_HIGHLIGHT_BACKGROUND='#44475a'
+    ZVM_VI_HIGHLIGHT_FOREGROUND='#f8f8f2'
+    ZVM_VI_HIGHLIGHT_EXTRASTYLE='bold'
+}
+
+function zvm_after_lazy_keybindings() {
+    bindkey -M vicmd "H" vi-beginning-of-line
+    bindkey -M vicmd "L" vi-end-of-line
+}
+
 # Created by Zap installer
 ZAP_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/zap"
 [ -f "$ZAP_HOME/zap.zsh" ] && source "$ZAP_HOME/zap.zsh"
@@ -87,14 +105,12 @@ plug "zsh-users/zsh-syntax-highlighting"
 # zsh-users/zsh-history-substring-search must be sourced after zsh-users/zsh-syntax-highlighting
 plug "zsh-users/zsh-history-substring-search"
 plug "wookayin/fzf-fasd"
-plug "zdharma-continuum/fast-syntax-highlighting"
 plug "Aloxaf/fzf-tab"
 # Fish-like autosuggestions for Zsh.
 plug "zsh-users/zsh-autosuggestions"
 plug "hlissner/zsh-autopair"
 # plug "jeffreytse/zsh-vi-mode" --source zsh-vi-mode.plugin.zsh
 plug "jeffreytse/zsh-vi-mode"
-source $ZAP_HOME/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 
 # Load and initialise completion system
 autoload -Uz compinit
