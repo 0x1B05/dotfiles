@@ -127,7 +127,7 @@ return {
                     stdin = true
                 },
             },
-            log_level = vim.log.levels.ERROR,
+            log_level = vim.log.levels.WARN,
         },
     },
     {
