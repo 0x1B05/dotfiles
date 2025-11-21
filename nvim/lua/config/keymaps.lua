@@ -52,9 +52,6 @@ map("n", "<leader>th", "<cmd>lua _HTOP_TOGGLE()<cr>", { desc = "Open htop termin
 -- save file
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save file" })
 
--- paste image
-map({ "i" }, "<C-A-v>", "<cmd>Pastify<cr>", { desc = "Save file" })
-
 -- preview typst
 map("n", "<leader>pt", "<cmd>TypstWatch<cr>", { desc = "Typst preview" })
 
@@ -107,6 +104,9 @@ M.yazi2 = {
     copy_relative_path_to_selected_files = "<c-y>",
     send_to_quickfix_list = false,
     change_working_directory = "<c-\\>",
+}
+M.img_clip = {
+    { "<C-A-v>", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
 }
 
 M.grug_far = {

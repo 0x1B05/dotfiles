@@ -154,23 +154,73 @@ return {
         end,
     },
     {
-        "TobinPalmer/pastify.nvim",
-        cmd = { "Pastify" },
-        config = function()
-            require("pastify").setup({
-                opts = {
-                    absolute_path = false,  -- use absolute or relative path to the working directory
-                    apikey = "",            -- Api key, required for online saving
-                    local_path = "images/", -- The path to put local files in, ex ~/Projects/<name>/images/<imgname>.png
-                    save = "local",         -- Either 'local' or 'online'
+        "HakonHarnes/img-clip.nvim",
+        event = "VeryLazy",
+        cmd = { "PasteImage" },
+        opts = {
+            default = {
+                ---@type string | fun(): string
+                dir_path = function()
+                    local current_file_path = vim.api.nvim_buf_get_name(0)
+                    local current_dir = vim.fn.fnamemodify(current_file_path, ":h")
+
+                    local parent_main_typ = current_dir .. "/../main.typ"
+
+                    if vim.fn.filereadable(parent_main_typ) == 1 then
+                        return "../images"
+                    else
+                        return "images"
+                    end
+                end,
+                extension = "png", ---@type string | fun(): string
+                file_name = "%Y-%m-%d-%H-%M-%S", ---@type string | fun(): string
+                use_absolute_path = false, ---@type boolean | fun(): boolean
+                relative_to_current_file = true, ---@type boolean | fun(): boolean
+
+                -- logging options
+                verbose = true, ---@type boolean | fun(): boolean
+
+                -- template options
+                template = "$FILE_PATH", ---@type string | fun(context: table): string
+                url_encode_path = false, ---@type boolean | fun(): boolean
+                relative_template_path = true, ---@type boolean | fun(): boolean
+                use_cursor_in_template = true, ---@type boolean | fun(): boolean
+                insert_mode_after_paste = true, ---@type boolean | fun(): boolean
+                insert_template_after_cursor = true, ---@type boolean | fun(): boolean
+
+                -- prompt options
+                prompt_for_file_name = true, ---@type boolean | fun(): boolean
+                show_dir_path_in_prompt = true, ---@type boolean | fun(): boolean
+
+                -- drag and drop options
+                drag_and_drop = {
+                    enabled = true, ---@type boolean | fun(): boolean
+                    insert_mode = true, ---@type boolean | fun(): boolean
                 },
-                ft = {                      -- Custom snippets for different filetypes, will replace $IMG$ with the image url
-                    html = '<img src="$IMG$" alt="">',
-                    markdown = "![]($IMG$)",
-                    typst = '#figure(caption: [])[#image("$IMG$")]',
-                    tex = [[\includegraphics[width=\linewidth]{$IMG$}]],
+            },
+
+            -- filetype specific options
+            filetypes = {
+                markdown = {
+                    url_encode_path = true, ---@type boolean | fun(): boolean
+                    template = "![$CURSOR]($FILE_PATH)", ---@type string | fun(context: table): string
+                    download_images = false, ---@type boolean | fun(): boolean
                 },
-            })
-        end,
+
+                typst = {
+                    template = [[
+#figure(
+  image("$FILE_PATH"),
+  caption: [$CURSOR],
+) <fig-$LABEL>
+    ]], ---@type string | fun(context: table): string
+                },
+
+                asciidoc = {
+                    template = 'image::$FILE_PATH[width=80%, alt="$CURSOR"]', ---@type string | fun(context: table): string
+                },
+            },
+        },
+        keys = keymaps.img_clip,
     },
 }
