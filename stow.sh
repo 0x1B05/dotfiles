@@ -20,6 +20,7 @@ mkdir $HOME/.config/gtk-4.0 && stow --target=$HOME/.config/gtk-4.0 gtk-4.0
 mkdir $HOME/.config/xsettingsd && stow --target=$HOME/.config/xsettingsd xsettingsd
 
 stow --target=$HOME/.config starship
+stow --target=$HOME/.config mimeapps
 stow --target=$HOME/.ssh ssh
 
 stow git
