@@ -1,3 +1,5 @@
+# Disable XON/XOFF flow control
+stty -ixon
 # env-variables
 export EDITOR=nvim
 export NPC_HOME=$HOME/ysyx-workbench/npc
