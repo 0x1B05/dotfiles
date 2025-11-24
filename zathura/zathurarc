@@ -15,8 +15,16 @@ set zoom-min 10
 set sandbox none
 set statusbar-h-padding 0
 set statusbar-v-padding 0
+set statusbar-home-tilde true
+set statusbar-page-percent true
 set page-padding 1
 set selection-clipboard clipboard
+
+set default-bg "#111111"
+set recolor-lightcolor "#111111"
+set statusbar-bg "#427b58"
+set recolor-darkcolor "#dddddd"
+set highlight-fg '#ffffff'
 
 map u scroll half-up
 map d scroll half-down
@@ -27,3 +35,7 @@ map K zoom in
 map J zoom out
 map i recolor
 map p print
+map r rotate rotate-cw
+map R rotate rotate-ccw
+map w adjust_window width
+map z adjust_window best-fit
