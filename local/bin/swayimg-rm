@@ -1,16 +1,20 @@
-#!/usr/bin/sh
-# @author nate zhou
-# @since 2024,2025
-# swayimg script for wmenu confirmation to remove an image
-# Shift+d = exec ~/.local/bin/swayimg-rm "%" && skip_file; reload
+#!/usr/bin/env bash
 
-source $HOME/.local/bin/wmenu-color 2>/dev/null
+FILE="$1"
+[ -z "$FILE" ] && exit 1
 
-user_choice="$(printf "no\nyes" | wmenu-color -p "["$(basename $0)"] rm? $(basename $@ | awk '{if(length($0) > 80) print substr($0, 1, 35) "..." substr($0, length($0)-34, 35); else print $0}')")"
+BASENAME=$(basename "$FILE")
 
-if [ "$user_choice" = "yes" ]; then
-    rm "$1"
-    notify-send -t 1100 -u low -r 3301 "swayimg"  "$1 is removed"
-else
-    exit 1
+ACTION=$(notify-send \
+    -u critical \
+    -t 5000 \
+    --action="delete=Delete" \
+    --action="cancel=Cancel" \
+    --wait \
+    "Delete Image?" \
+    "File: $BASENAME")
+
+if [ "$ACTION" = "delete" ]; then
+    rm "$FILE"
+    notify-send -u low -t 2000 "swayimg" "Deleted: $BASENAME"
 fi
