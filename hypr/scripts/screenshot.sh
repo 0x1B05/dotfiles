@@ -25,7 +25,7 @@ $option2)
     if [ -f "$DIR$NAME" ]; then
         # wl-copy <"$DIR$NAME"
         notify-send "Screenshot pinned" "Image is pinned to screen"
-        cat "$DIR$NAME" | swayimg --class "swayimg_pin" --size=image - &
+        cat "$DIR$NAME" | swayimg --config=info.show=no --class "swayimg_pin" --size=image - &
     fi
     ;;
 $option3)
