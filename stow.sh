@@ -1,3 +1,4 @@
+# stow in common user, not root
 mkdir $HOME/.config/hypr && stow --target=$HOME/.config/hypr hypr
 mkdir $HOME/.config/fcitx5 && stow --target=$HOME/.config/fcitx5 fcitx5
 mkdir $HOME/.config/waybar && stow --target=$HOME/.config/waybar waybar
@@ -31,6 +32,8 @@ ln -s $HOME/dotfiles/.Xresources $HOME/.Xresources
 ln -s $HOME/dotfiles/zsh/.zshrc $HOME/.zshrc
 ln -s $HOME/dotfiles/zsh/.zprofile $HOME/.zprofile
 ln -s $HOME/dotfiles/gtkwave/.gtkwaverc $HOME/.gtkwaverc
+
+sudo ln -s $HOME/dotfiles/keyd/default.conf /etc/keyd/default.conf
 
 cd local
 stow --target=$HOME/.local/bin bin
