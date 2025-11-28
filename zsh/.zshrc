@@ -81,7 +81,6 @@ bindkey '^[[B' history-substring-search-down
 # zsh-vi-mode is required
 function zvm_config() {
     ZVM_LINE_INIT_MODE=$ZVM_MODE_INSERT
-    ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
     ZVM_VI_HIGHLIGHT_BACKGROUND='#44475a'
     ZVM_VI_HIGHLIGHT_FOREGROUND='#f8f8f2'
     ZVM_VI_HIGHLIGHT_EXTRASTYLE='bold'
