@@ -1,4 +1,5 @@
 mkdir $HOME/.config/hypr && stow --target=$HOME/.config/hypr hypr
+mkdir $HOME/.config/fcitx5 && stow --target=$HOME/.config/fcitx5 fcitx5
 mkdir $HOME/.config/waybar && stow --target=$HOME/.config/waybar waybar
 mkdir $HOME/.config/wal && stow --target=$HOME/.config/wal wal
 mkdir $HOME/.config/lazygit && stow --target=$HOME/.config/lazygit lazygit
