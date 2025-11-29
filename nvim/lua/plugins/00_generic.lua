@@ -223,4 +223,11 @@ return {
         },
         keys = keymaps.img_clip,
     },
+    {
+        "keaising/im-select.nvim",
+        event = { "InsertEnter", "CmdlineEnter" },
+        config = function()
+            require("im_select").setup({})
+        end,
+    },
 }
