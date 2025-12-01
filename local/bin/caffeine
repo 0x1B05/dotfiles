@@ -1,0 +1,8 @@
+#!/bin/bash
+if pgrep -x "hypridle" > /dev/null; then
+    pkill hypridle
+    notify-send "☕ Caffeine Mode Enabled" "Hypridle paused. System will NOT sleep."
+else
+    hypridle &
+    notify-send "💤 Caffeine Mode Disabled" "Hypridle restarted. Power saving active."
+fi
