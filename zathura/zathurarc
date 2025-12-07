@@ -26,16 +26,30 @@ set statusbar-bg "#427b58"
 set recolor-darkcolor "#dddddd"
 set highlight-fg '#ffffff'
 
+map i zoom in
+map o zoom out
+map = adjust_window best-fit   # Reset view
+map w adjust_window width      # Fit width (allows scrolling)
+map e zoom original            # 100% view
+
 map u scroll half-up
 map d scroll half-down
+
+map J navigate next
+map K navigate previous
+
+map H scroll half-left
+map L scroll half-right
 map D toggle_page_mode
-map r reload
-map R rotate
-map K zoom in
-map J zoom out
-map i recolor
 map p print
 map r rotate rotate-cw
 map R rotate rotate-ccw
 map w adjust_window width
 map z adjust_window best-fit
+
+map r rotate rotate-cw
+map R rotate rotate-ccw
+map <C-r> reload
+map I recolor
+map D toggle_page_mode         # Toggle single/dual page
+map <Tab> toggle_index
