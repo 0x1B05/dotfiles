@@ -41,7 +41,7 @@ $option2)
         reset_opacity
         if [ -f "$DIR$NAME" ]; then
             notify-send "Screenshot pinned" "Image is pinned to screen"
-            cat "$DIR$NAME" | swayimg --config=info.show=no --config=viewer.scale=fit --class "swayimg_pin" --size=image - &
+            swayimg --config=info.show=no --config=viewer.scale=fit --class "swayimg_pin" --size=image "$DIR$NAME" &
         fi
     fi
     ;;

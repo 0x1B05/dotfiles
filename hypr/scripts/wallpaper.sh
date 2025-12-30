@@ -7,52 +7,45 @@ rasi_file="$HOME/.cache/current_wallpaper.rasi"
 blur_file="$HOME/dotfiles/.settings/blur.sh"
 
 blur="50x30"
-blur=$(cat $blur_file)
+[ -f "$blur_file" ] && blur=$(cat "$blur_file")
 
 # Create cache file if not exists
-if [ ! -f $cache_file ]; then
-    touch $cache_file
+if [ ! -f "$cache_file" ]; then
+    touch "$cache_file"
     echo "$HOME/Beauti/wallpaper/default.jpg" >"$cache_file"
 fi
 
 # Create rasi file if not exists
-if [ ! -f $rasi_file ]; then
-    touch $rasi_file
+if [ ! -f "$rasi_file" ]; then
+    touch "$rasi_file"
     echo "* { current-image: url(\"$HOME/Beauti/wallpaper/default.jpg\", height); }" >"$rasi_file"
 fi
 
 current_wallpaper=$(cat "$cache_file")
 
 case $1 in
-
-# Load wallpaper from .cache of last session
-"init")
-    sleep 1
-    if [ -f $cache_file ]; then
-        wal -q -i $current_wallpaper
-    else
+    "init")
+        sleep 1
+        if [ -f "$cache_file" ]; then
+            wal -q -i "$current_wallpaper"
+        else
+            wal -q -i ~/Beauti/wallpaper/
+        fi
+        ;;
+    "select")
+        sleep 0.2
+        selected=$(find "$HOME/Beauti/wallpaper" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -exec basename {} \; | sort -R | while read rfile; do
+            echo -en "$rfile\x00icon\x1f$HOME/Beauti/wallpaper/${rfile}\n"
+        done | rofi -dmenu -i -replace -config ~/dotfiles/rofi/config-wallpaper.rasi)
+        if [ -z "$selected" ]; then
+            echo "No wallpaper selected"
+            exit
+        fi
+        wal -q -i "$HOME/Beauti/wallpaper/$selected"
+        ;;
+    *)
         wal -q -i ~/Beauti/wallpaper/
-    fi
-    ;;
-
-# Select wallpaper with rofi
-"select")
-    sleep 0.2
-    selected=$(find "$HOME/Beauti/wallpaper" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -exec basename {} \; | sort -R | while read rfile; do
-        echo -en "$rfile\x00icon\x1f$HOME/Beauti/wallpaper/${rfile}\n"
-    done | rofi -dmenu -i -replace -config ~/dotfiles/rofi/config-wallpaper.rasi)
-    if [ ! "$selected" ]; then
-        echo "No wallpaper selected"
-        exit
-    fi
-    wal -q -i ~/Beauti/wallpaper/$selected
-    ;;
-
-# Randomly select wallpaper
-*)
-    wal -q -i ~/Beauti/wallpaper/
-    ;;
-
+        ;;
 esac
 
 # -----------------------------------------------------
@@ -64,7 +57,7 @@ echo ":: Wallpaper: $wallpaper"
 # -----------------------------------------------------
 # get wallpaper image name
 # -----------------------------------------------------
-newwall=$(echo $wallpaper | sed "s|$HOME/Beauti/wallpaper/||g")
+newwall=$(echo "$wallpaper" | sed "s|$HOME/Beauti/wallpaper/||g")
 
 # -----------------------------------------------------
 # Reload waybar with new colors
@@ -72,19 +65,29 @@ newwall=$(echo $wallpaper | sed "s|$HOME/Beauti/wallpaper/||g")
 ~/dotfiles/waybar/launch.sh
 
 # -----------------------------------------------------
-# Set the new wallpaper
+# Set the new wallpaper (Hyprpaper IPC Update)
 # -----------------------------------------------------
-transition_type="wipe"
-# transition_type="outer"
-# transition_type="random"
-
-# hyprpaper
 echo ":: Using hyprpaper"
-killall hyprpaper
-wal_tpl=$(cat $HOME/dotfiles/.settings/hyprpaper.tpl)
+
+# 1. Generate the config file for NEXT reboot
+wal_tpl=$(cat "$HOME/dotfiles/.settings/hyprpaper.tpl")
+# Replace WALLPAPER placeholder with actual path
 output=${wal_tpl//WALLPAPER/$wallpaper}
-echo "$output" >$HOME/dotfiles/hypr/hyprpaper.conf
-hyprpaper &
+echo "$output" > "$HOME/dotfiles/hypr/hyprpaper.conf"
+
+# 2. Apply immediately using IPC
+# Check if hyprpaper is running
+if pgrep -x "hyprpaper" > /dev/null; then
+    # Preload the new wallpaper
+    hyprctl hyprpaper preload "$wallpaper"
+    # Set the wallpaper (monitor left empty for all)
+    hyprctl hyprpaper wallpaper ",$wallpaper"
+    # Optional: Unload the old wallpaper to save memory (except the current one)
+    # hyprctl hyprpaper unload all 
+else
+    # If not running, start it (it will read the config we just wrote)
+    hyprpaper &
+fi
 
 if [ "$1" == "init" ]; then
     echo ":: Init"
@@ -103,10 +106,11 @@ else
     dunstify "Creating blurred version ..." "with image $newwall" -h int:value:66 -h string:x-dunst-stack-tag:wallpaper
 fi
 
-magick $wallpaper -resize 75% $blurred
+# Use quotes for paths to handle spaces
+magick "$wallpaper" -resize 75% "$blurred"
 echo ":: Resized to 75%"
-if [ ! "$blur" == "0x0" ]; then
-    magick $blurred -blur $blur $blurred
+if [ "$blur" != "0x0" ]; then
+    magick "$blurred" -blur "$blur" "$blurred"
     echo ":: Blurred"
 fi
 
