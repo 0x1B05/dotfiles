@@ -43,11 +43,6 @@ map("n", "<leader><tab>k", "<cmd>tabnext<cr>", { desc = "Next Tab" })
 map("n", "<leader><tab>j", "<cmd>tabprevious<cr>", { desc = "Previous Tab" })
 map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 
--- terminal
-map("n", "<leader>tg", "<cmd>lua _LAZYGIT_TOGGLE()<cr>", { desc = "Open lazygit terminal" })
-map("n", "<leader>tn", "<cmd>lua _NCDU_TOGGLE()<cr>", { desc = "Open ncdu terminal" })
-map("n", "<leader>th", "<cmd>lua _HTOP_TOGGLE()<cr>", { desc = "Open htop terminal" })
-
 -- save file
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save file" })
 
@@ -68,12 +63,6 @@ map(
 -- keymaps for plugins
 local util = require("config.util")
 local M = {}
-M.telescope = {
-    { "<leader>fb", "<cmd>Telescope buffers<cr>",    desc = "Telescope find buffer" },
-    { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Telescope find file" },
-    { "<leader>fg", "<cmd>Telescope live_grep<cr>",  desc = "Telescope grep" },
-    { "<leader>fh", "<cmd>Telescope help_tags<cr>",  desc = "Telescope find help tags" },
-}
 
 M.yazi1 = {
     {
@@ -158,18 +147,13 @@ M.leap = {
 
 M.lsp = {
     { "gh",         "<cmd>lua vim.lsp.buf.hover()<CR>",                  desc = "hover the variable definition" },
-    { "gD",         "<cmd>lua vim.lsp.buf.declaration()<CR>",            desc = "show the declaration" },
-    { "gI",         "<cmd>lua vim.lsp.buf.implementation()<CR>",         desc = "go to implementation" },
-    { "gd",         "<cmd>lua vim.lsp.buf.definition()<CR>",             desc = "go to definition" },
     { "gl",         "<cmd>lua vim.diagnostic.open_float()<CR>",          desc = "diagnostic float" },
-    { "gr",         "<cmd>lua vim.lsp.buf.references()<CR>",             desc = "go to references" },
     { "<leader>lI", "<cmd>LspInstallInfo<cr>",                           desc = "LspInstallInfo" },
     { "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>",            desc = "code action" },
     { "<leader>lf", util.format,                                         desc = "Format" },
     { "<leader>li", "<cmd>LspInfo<cr>",                                  desc = "LspInfo" },
     { "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", desc = "go to next diagnostic" },
     { "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", desc = "go to prev diagnostic" },
-    { "<leader>lq", "<cmd>lua vim.diagnostic.setloclist()<CR>",          desc = "set loclist" },
     { "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>",                 desc = "rename buffer" },
     { "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>",         desc = "signature help" },
 }
@@ -233,20 +217,5 @@ M.tmux = {
     ),
     map("n", "<C-k>", "<cmd>lua require('tmux').move_top()<cr>", { desc = "Move to the top tmux and nvim window" }),
     map("n", "<C-l>", "<cmd>lua require('tmux').move_right()<cr>", { desc = "Move to the right tmux and nvim window" }),
-}
-M.toggleterm = {
-    { "t", "<C-h>", "<C-\\><C-N><C-w>h", { desc = "Move to the left window in terminal mode." } },
-    { "t", "<C-j>", "<C-\\><C-N><C-w>j", { desc = "Move to the below window in terminal mode." } },
-    { "t", "<C-k>", "<C-\\><C-N><C-w>k", { desc = "Move to the above window in terminal mode." } },
-    { "t", "<C-l>", "<C-\\><C-N><C-w>l", { desc = "Move to the right window in terminal mode." } },
-}
-M.comment = {
-    { "gcc", mode = "n", desc = "Line-comment toggle keymap" },
-    { "gbc", mode = "n", desc = "Block-comment toggle keymap" },
-    { "gbO", mode = "n", esc = "Add comment on the line above" },
-    { "gbo", mode = "n", esc = "Add comment on the line below" },
-    { "gbA", mode = "n", esc = "Add comment at the end of line" },
-    { "gc",  mode = "v", esc = "Line-comment toggle keymap in visual mode" },
-    { "gb",  mode = "v", esc = "Line-comment toggle keymap in visual mode" },
 }
 return M
