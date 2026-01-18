@@ -117,7 +117,6 @@ M.plugins = {
         'clangd',
         'lua_ls',
         'tinymist',
-        'jdtls',
         'cmake'
     },
 
