@@ -1,132 +1,132 @@
 local M = {}
 
 M.opt_g = {
-    loaded_node_provider = 0,
-    loaded_perl_provider = 0,
-    mapleader = ";",
-    maplocalleader = ";",
-    -- split gdb and source code window vertical
-    encoding = "utf-8",
-    termdebug_wide = "1",
-    markdown_recommended_style = 0,
-    -- knap
-    knap_settings = {
-        htmloutputext = "html",
-        htmltohtml = "none",
-        htmltohtmlviewerlaunch = "falkon %outputfile%",
-        htmltohtmlviewerrefresh = "none",
-        mdoutputext = "html",
-        mdtohtml = "pandoc --standalone %docroot% -o %outputfile%",
-        mdtohtmlviewerlaunch = "falkon %outputfile%",
-        mdtohtmlviewerrefresh = "none",
-        mdtopdf = "pandoc %docroot% -o %outputfile%",
-        mdtopdfviewerlaunch = "sioyek %outputfile%",
-        mdtopdfviewerrefresh = "none",
-        markdownoutputext = "html",
-        markdowntohtml = "pandoc --standalone %docroot% -o %outputfile%",
-        markdowntohtmlviewerlaunch = "falkon %outputfile%",
-        markdowntohtmlviewerrefresh = "none",
-        markdowntopdf = "pandoc %docroot% -o %outputfile%",
-        markdowntopdfviewerlaunch = "sioyek %outputfile%",
-        markdowntopdfviewerrefresh = "none",
-        texoutputext = "pdf",
-        textopdf = "pdflatex -interaction=batchmode -synctex=1 %docroot%",
-        textopdfviewerlaunch =
-        "zathura --synctex-editor-command 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%{input}'\"'\"',%{line},0)\"' %outputfile%",
-        textopdfviewerrefresh = "none",
-        textopdfforwardjump = "zathura --synctex-forward=%line%:%column%:%srcfile% %outputfile%",
-        textopdfshorterror = 'A=%outputfile% ; LOGFILE="${A%.pdf}.log" ; rubber-info "$LOGFILE" 2>&1 | head -n 1',
-        delay = 250,
-    },
-    skip_ts_context_commentstring_module = true,
+	loaded_node_provider = 0,
+	loaded_perl_provider = 0,
+	mapleader = ";",
+	maplocalleader = ";",
+	-- split gdb and source code window vertical
+	encoding = "utf-8",
+	termdebug_wide = "1",
+	markdown_recommended_style = 0,
+	-- knap
+	knap_settings = {
+		htmloutputext = "html",
+		htmltohtml = "none",
+		htmltohtmlviewerlaunch = "falkon %outputfile%",
+		htmltohtmlviewerrefresh = "none",
+		mdoutputext = "html",
+		mdtohtml = "pandoc --standalone %docroot% -o %outputfile%",
+		mdtohtmlviewerlaunch = "falkon %outputfile%",
+		mdtohtmlviewerrefresh = "none",
+		mdtopdf = "pandoc %docroot% -o %outputfile%",
+		mdtopdfviewerlaunch = "sioyek %outputfile%",
+		mdtopdfviewerrefresh = "none",
+		markdownoutputext = "html",
+		markdowntohtml = "pandoc --standalone %docroot% -o %outputfile%",
+		markdowntohtmlviewerlaunch = "falkon %outputfile%",
+		markdowntohtmlviewerrefresh = "none",
+		markdowntopdf = "pandoc %docroot% -o %outputfile%",
+		markdowntopdfviewerlaunch = "sioyek %outputfile%",
+		markdowntopdfviewerrefresh = "none",
+		texoutputext = "pdf",
+		textopdf = "pdflatex -interaction=batchmode -synctex=1 %docroot%",
+		textopdfviewerlaunch = "zathura --synctex-editor-command 'nvim --headless -es --cmd \"lua require('\"'\"'knaphelper'\"'\"').relayjump('\"'\"'%servername%'\"'\"','\"'\"'%{input}'\"'\"',%{line},0)\"' %outputfile%",
+		textopdfviewerrefresh = "none",
+		textopdfforwardjump = "zathura --synctex-forward=%line%:%column%:%srcfile% %outputfile%",
+		textopdfshorterror = 'A=%outputfile% ; LOGFILE="${A%.pdf}.log" ; rubber-info "$LOGFILE" 2>&1 | head -n 1',
+		delay = 250,
+	},
+	skip_ts_context_commentstring_module = true,
 }
 M.opt_o = {
-    -----------------------------------------------------------
-    -- General
-    -----------------------------------------------------------
-    backup = false,
-    clipboard = "unnamedplus", -- Copy/paste to system clipboard
-    confirm = true,            -- confirm to save changes before exit
-    grepformat = "%f:%l:%c:%m",
-    grepprg = "rg --vimgrep",
-    hlsearch = true,
-    ignorecase = true, -- Ignore case
-    inccommand = "nosplit",
-    incsearch = true,
-    mouse = "a",    -- Enable mouse support
-    number = true,
-    pumblend = 10,  -- Popup blend
-    pumheight = 10, -- Maximum number of entries in a Popup
-    relativenumber = true,
-    ruler = true,
-    scrolloff = 8,
-    showmode = false,               -- Dont show mode since we have a statusline
-    sidescrolloff = 8,
-    signcolumn = "yes",             -- Always show the signcolumn, otherwise it would shift the text each time
-    smartcase = true,
-    spell = false,                  -- Enable spell check
-    spelloptions = "camel",         -- Enable camel case
-    splitbelow = true,              -- Put new windows below current
-    splitkeep = "screen",
-    splitright = true,              -- Put new windows right of current
-    swapfile = false,               -- Don't use swapfile
-    termguicolors = true,           -- True color support
-    virtualedit = "block",          -- Allow cursor to move where there is no text in visual block mode
-    wildmode = "longest:full,full", -- Command-line completion mode
-    winminwidth = 5,                -- Minimum window width
-    wrap = true,
+	-----------------------------------------------------------
+	-- General
+	-----------------------------------------------------------
+	backup = false,
+	clipboard = "unnamedplus", -- Copy/paste to system clipboard
+	confirm = true, -- confirm to save changes before exit
+	grepformat = "%f:%l:%c:%m",
+	grepprg = "rg --vimgrep",
+	hlsearch = true,
+	ignorecase = true, -- Ignore case
+	inccommand = "nosplit",
+	incsearch = true,
+	mouse = "a", -- Enable mouse support
+	number = true,
+	pumblend = 10, -- Popup blend
+	pumheight = 10, -- Maximum number of entries in a Popup
+	relativenumber = true,
+	ruler = true,
+	scrolloff = 8,
+	showmode = false, -- Dont show mode since we have a statusline
+	sidescrolloff = 8,
+	signcolumn = "yes", -- Always show the signcolumn, otherwise it would shift the text each time
+	smartcase = true,
+	spell = false, -- Enable spell check
+	spelloptions = "camel", -- Enable camel case
+	splitbelow = true, -- Put new windows below current
+	splitkeep = "screen",
+	splitright = true, -- Put new windows right of current
+	swapfile = false, -- Don't use swapfile
+	termguicolors = true, -- True color support
+	virtualedit = "block", -- Allow cursor to move where there is no text in visual block mode
+	wildmode = "longest:full,full", -- Command-line completion mode
+	winminwidth = 5, -- Minimum window width
+	wrap = true,
 
-    -----------------------------------------------------------
-    -- Code Fold
-    -----------------------------------------------------------
-    foldmethod = "expr",
-    foldexpr = "nvim_treesitter#foldexpr()",
-    foldlevel = 99,
+	-----------------------------------------------------------
+	-- Code Fold
+	-----------------------------------------------------------
+	foldmethod = "expr",
+	foldexpr = "nvim_treesitter#foldexpr()",
+	foldlevel = 99,
 
-    -----------------------------------------------------------
-    -- Neovim UI
-    -----------------------------------------------------------
-    cursorline = true, -- highlight cursorline
-    laststatus = 3,
-    list = true,       -- Show some invisible characters (tabs...
+	-----------------------------------------------------------
+	-- Neovim UI
+	-----------------------------------------------------------
+	cursorline = true, -- highlight cursorline
+	laststatus = 3,
+	list = true, -- Show some invisible characters (tabs...
 
-    -----------------------------------------------------------
-    -- Tabs, indent
-    -----------------------------------------------------------
-    expandtab = true,
-    formatoptions = "jqlnt", -- tcqj
-    shiftround = true,       -- Round indent
-    shiftwidth = 4,          -- Size of an indent
-    smartindent = false,     -- Insert indents automatically
-    tabstop = 4,             -- Number of spaces tabs count for
+	-----------------------------------------------------------
+	-- Tabs, indent
+	-----------------------------------------------------------
+	expandtab = true,
+	formatoptions = "jqlnt", -- tcqj
+	shiftround = true, -- Round indent
+	shiftwidth = 4, -- Size of an indent
+	smartindent = false, -- Insert indents automatically
+	tabstop = 4, -- Number of spaces tabs count for
 
-    -----------------------------------------------------------
-    -- Memory, CPU
-    -----------------------------------------------------------
-    hidden = true,     -- Enable background buffers
-    history = 1000,    -- Remember N lines in history
-    lazyredraw = true, -- Faster scrolling
-    synmaxcol = 240,   -- Max column for syntax highlight
-    undolevels = 1000,
-    updatetime = 250,  -- ms to wait for trigger an event
+	-----------------------------------------------------------
+	-- Memory, CPU
+	-----------------------------------------------------------
+	hidden = true, -- Enable background buffers
+	history = 1000, -- Remember N lines in history
+	lazyredraw = true, -- Faster scrolling
+	synmaxcol = 240, -- Max column for syntax highlight
+	undolevels = 1000,
+	updatetime = 250, -- ms to wait for trigger an event
 }
 -- to be used by lazy
 M.ensure_installed = {
-    mason_tools = {
-        'clang-format',
-        'markdownlint',
-        'prettier',
-        'shfmt',
-    },
-    lsp_servers = {
-        'clangd',
-        'cmake',
-        'jdtls',
-        'lua_ls',
-        'ruff',
-        'tinymist',
-        'verible',
-    }
+	mason_tools = {
+		"clang-format",
+		"markdownlint",
+		"prettier",
+		"shfmt",
+		"stylua",
+	},
+	lsp_servers = {
+		"clangd",
+		"cmake",
+		"jdtls",
+		"lua_ls",
+		"ruff",
+		"tinymist",
+		"verible",
+	},
 }
 
 -- stylua: ignore
