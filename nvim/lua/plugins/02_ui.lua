@@ -336,60 +336,37 @@ return {
     {
         "lewis6991/gitsigns.nvim",
         event = "VimEnter",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
+        dependencies = { "nvim-lua/plenary.nvim" },
         opts = {
-            signs = {
-                add = { hl = "GitSignsAdd", text = " ", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-                change = {
-                    hl = "GitSignsChange",
-                    text = " ",
-                    numhl = "GitSignsChangeNr",
-                    linehl = "GitSignsChangeLn",
-                },
-                delete = {
-                    hl = "GitSignsDelete",
-                    text = " ",
-                    numhl = "GitSignsDeleteNr",
-                    linehl = "GitSignsDeleteLn",
-                },
-                topdelete = {
-                    hl = "GitSignsDelete",
-                    text = "󱅁 ",
-                    numhl = "GitSignsDeleteNr",
-                    linehl = "GitSignsDeleteLn",
-                },
-                changedelete = {
-                    hl = "GitSignsChange",
-                    text = "󰍷 ",
-                    numhl = "GitSignsChangeNr",
-                    linehl = "GitSignsChangeLn",
-                },
+            signs                        = {
+                add          = { text = " " },
+                change       = { text = " " },
+                delete       = { text = " " },
+                topdelete    = { text = "󱅁 " },
+                changedelete = { text = "󰍷 " },
+                untracked    = { text = "┆" },
             },
-            signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-            numhl = false,     -- Toggle with `:Gitsigns toggle_numhl`
-            linehl = false,    -- Toggle with `:Gitsigns toggle_linehl`
-            word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
-            watch_gitdir = {
+            signcolumn                   = true,
+            numhl                        = false,
+            linehl                       = false,
+            word_diff                    = false,
+            watch_gitdir                 = {
                 interval = 1000,
                 follow_files = true,
             },
-            attach_to_untracked = true,
-            current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-            current_line_blame_opts = {
+            attach_to_untracked          = true,
+            current_line_blame           = false,
+            current_line_blame_opts      = {
                 virt_text = true,
-                virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
+                virt_text_pos = "eol",
                 delay = 1000,
                 ignore_whitespace = false,
             },
             current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
-            sign_priority = 6,
-            update_debounce = 100,
-            status_formatter = nil, -- Use default
-            max_file_length = 40000,
-            preview_config = {
-                -- Options passed to nvim_open_win
+            sign_priority                = 6,
+            update_debounce              = 100,
+            max_file_length              = 40000,
+            preview_config               = {
                 border = "single",
                 style = "minimal",
                 relative = "cursor",
@@ -397,5 +374,21 @@ return {
                 col = 1,
             },
         },
+        config = function(_, opts)
+            local signs_hls = {
+                Add = { text = " ", nr = "GitSignsAddNr", ln = "GitSignsAddLn" },
+                Change = { text = " ", nr = "GitSignsChangeNr", ln = "GitSignsChangeLn" },
+                Delete = { text = " ", nr = "GitSignsDeleteNr", ln = "GitSignsDeleteLn" },
+                Topdelete = { text = "󱅁 ", nr = "GitSignsDeleteNr", ln = "GitSignsDeleteLn" },
+                Changedelete = { text = "󰍷 ", nr = "GitSignsChangeNr", ln = "GitSignsChangeLn" },
+            }
+
+            for name, data in pairs(signs_hls) do
+                vim.api.nvim_set_hl(0, "GitSigns" .. name .. "Nr", { link = data.nr })
+                vim.api.nvim_set_hl(0, "GitSigns" .. name .. "Ln", { link = data.ln })
+            end
+
+            require("gitsigns").setup(opts)
+        end,
     },
 }
