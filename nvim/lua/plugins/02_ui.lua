@@ -1,85 +1,5 @@
 return {
     { "nvim-tree/nvim-web-devicons", lazy = true },
-    { "stevearc/dressing.nvim",      event = "VeryLazy" },
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        event = { "BufReadPost", "BufNewFile", "BufWritePre" },
-        main = "ibl",
-        opts = {
-            indent = {
-                char = "▎",
-                tab_char = nil,
-                highlight = "IblIndent",
-                smart_indent_cap = true,
-                priority = 1,
-            },
-            whitespace = {
-                highlight = "IblWhitespace",
-                remove_blankline_trail = true,
-            },
-            scope = {
-                enabled = true,
-                char = nil,
-                show_start = true,
-                show_end = true,
-                injected_languages = true,
-                highlight = "IblScope",
-                priority = 1024,
-                include = {
-                    node_type = {},
-                },
-                exclude = {
-                    language = {},
-                    node_type = {
-                        ["*"] = {
-                            "source_file",
-                            "program",
-                        },
-                        lua = {
-                            "chunk",
-                        },
-                        python = {
-                            "module",
-                        },
-                    },
-                },
-            },
-            exclude = {
-                filetypes = {
-                    "lspinfo",
-                    "packer",
-                    "checkhealth",
-                    "help",
-                    "man",
-                    "gitcommit",
-                    "TelescopePrompt",
-                    "TelescopeResults",
-                    "",
-                    "alpha",
-                    "dashboard",
-                    "neo-tree",
-                    "Trouble",
-                    "lazy",
-                },
-                buftypes = {
-                    "terminal",
-                    "nofile",
-                    "quickfix",
-                    "prompt",
-                },
-            },
-        },
-    },
-    {
-        "stevearc/dressing.nvim",
-        event = "VeryLazy",
-        opts = {
-            input = { relative = "editor" },
-            select = {
-                backend = { "telescope", "fzf", "builtin" },
-            },
-        },
-    },
     {
         "akinsho/bufferline.nvim",
         event = "VeryLazy",
@@ -538,9 +458,7 @@ return {
                 delay = 1000,
                 ignore_whitespace = false,
             },
-            current_line_blame_formatter_opts = {
-                relative_time = false,
-            },
+            current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
             sign_priority = 6,
             update_debounce = 100,
             status_formatter = nil, -- Use default
@@ -553,81 +471,6 @@ return {
                 row = 0,
                 col = 1,
             },
-            yadm = {
-                enable = false,
-            },
         },
-        config = function()
-            require("gitsigns").setup({})
-        end,
-    },
-    -- dashboard
-    {
-        "goolord/alpha-nvim",
-        event = "VimEnter",
-        opts = function()
-            local dashboard = require("alpha.themes.dashboard")
-
-            dashboard.section.header.val = {
-                [[                            ⡿⠉⠄⠄⠄⠄⠈⠙⠿⠟⠛⠉⠉⠉⠄⠄⠄⠈⠉⠉⠉⠛⠛⠻⢿⣿⣿⣿⣿⣿                        ]],
-                [[                            ⠁⠄⠄⠄⢀⡴⣋⣵⣮⠇⡀⠄⠄⠄⠄⠄⠄⢀⠄⠄⠄⡀⠄⠄⠄⠈⠛⠿⠋⠉                        ]],
-                [[                            ⠄⠄⠄⢠⣯⣾⣿⡿⣳⡟⣰⣿⣠⣂⡀⢀⠄⢸⡄⠄⢀⣈⢆⣱⣤⡀⢄⠄⠄⠄                        ]],
-                [[                            ⠄⠄⠄⣼⣿⣿⡟⣹⡿⣸⣿⢳⣿⣿⣿⣿⣴⣾⢻⣆⣿⣿⣯⢿⣿⣿⣷⣧⣀⣤                        ]],
-                [[                            ⠄⠄⣼⡟⣿⠏⢀⣿⣇⣿⣏⣿⣿⣿⣿⣿⣿⣿⢸⡇⣿⣿⣿⣟⣿⣿⣿⣿⣏⠋                        ]],
-                [[                            ⡆⣸⡟⣼⣯⠏⣾⣿⢸⣿⢸⣿⣿⣿⣿⣿⣿⡟⠸⠁⢹⡿⣿⣿⢻⣿⣿⣿⣿⠄                        ]],
-                [[                            ⡇⡟⣸⢟⣫⡅⣶⢆⡶⡆⣿⣿⣿⣿⣿⢿⣛⠃⠰⠆⠈⠁⠈⠙⠈⠻⣿⢹⡏⠄                        ]],
-                [[                            ⣧⣱⡷⣱⠿⠟⠛⠼⣇⠇⣿⣿⣿⣿⣿⣿⠃⣰⣿⣿⡆⠄⠄⠄⠄⠄⠉⠈⠄⠄                        ]],
-                [[ ▄▄▄     ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄    ⡏⡟⢑⠃⡠⠂⠄⠄⠈⣾⢻⣿⣿⡿⡹⡳⠋⠉⠁⠉⠙⠄⢀⠄⠄⠄⠄⠄⠂⠄    ▄▄   ▄▄ ▄▄▄ ▄▄   ▄▄ ]],
-                [[█   █   █       █       █   ⡇⠁⢈⢰⡇⠄⠄⡙⠂⣿⣿⣿⣿⣱⣿⡗⠄⠄⠄⢀⡀⠄⠈⢰⠄⠄⠄⠐⠄⠄   █  █ █  █   █  █▄█  █]],
-                [[█   █   █    ▄▄▄█   ▄   █   ⠄⠄⠘⣿⣧⠴⣄⣡⢄⣿⣿⣿⣷⣿⣿⡇⢀⠄⠤⠈⠁⣠⣠⣸⢠⠄⠄⠄⠄⠄   █  █▄█  █   █       █]],
-                [[█   █   █   █▄▄▄█  █ █  █   ⢀⠄⠄⣿⣿⣷⣬⣵⣿⣿⣿⣿⣿⣿⣿⣷⣟⢷⡶⢗⡰⣿⣿⠇⠘⠄⠄⠄⠄⠄   █       █   █       █]],
-                [[█   █▄▄▄█    ▄▄▄█  █▄█  █   ⣿⠄⠄⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣾⣿⣿⡟⢀⠃⠄⢸⡄⠁⣸   █       █   █       █]],
-                [[█       █   █▄▄▄█       █   ⣿⠄⠄⠘⢿⣿⣿⣿⣿⣿⣿⢛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣟⢄⡆⠄⢀⣪⡆⠄⣿    █     ██   █ ██▄██ █]],
-                [[█▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█   ⡟⠄⠄⠄⠄⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢿⣟⣻⣩⣾⣃⣴⣿⣿⡇⠸⢾     █▄▄▄█ █▄▄▄█▄█   █▄█]],
-            }
-
-            dashboard.section.buttons.val = {
-                dashboard.button("f", "  Find file", ":Telescope find_files <CR>"),
-                dashboard.button("e", "  New file", ":ene <BAR> startinsert <CR>"),
-                dashboard.button("p", "  Find project", ":Telescope projects <CR>"),
-                dashboard.button("r", "  Recently used files", ":Telescope oldfiles <CR>"),
-                dashboard.button("t", "󱎸  Find text", ":Telescope live_grep <CR>"),
-                dashboard.button("c", "  Configuration", ":e $MYVIMRC <CR>"),
-                dashboard.button("q", "  Quit Neovim", ":qa<CR>"),
-            }
-            for _, button in ipairs(dashboard.section.buttons.val) do
-                button.opts.hl = "AlphaButtons"
-                button.opts.hl_shortcut = "AlphaShortcut"
-            end
-            dashboard.section.header.opts.hl = "AlphaHeader"
-            dashboard.section.buttons.opts.hl = "AlphaButtons"
-            dashboard.section.footer.opts.hl = "AlphaFooter"
-            dashboard.opts.layout[1].val = 8
-            return dashboard
-        end,
-        config = function(_, dashboard)
-            -- close Lazy and re-open when the dashboard is ready
-            if vim.o.filetype == "lazy" then
-                vim.cmd.close()
-                vim.api.nvim_create_autocmd("User", {
-                    pattern = "AlphaReady",
-                    callback = function()
-                        require("lazy").show()
-                    end,
-                })
-            end
-
-            require("alpha").setup(dashboard.opts)
-
-            vim.api.nvim_create_autocmd("User", {
-                pattern = "LazyVimStarted",
-                callback = function()
-                    local stats = require("lazy").stats()
-                    local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-                    dashboard.section.footer.val = "⚡ Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
-                    pcall(vim.cmd.AlphaRedraw)
-                end,
-            })
-        end,
     },
 }

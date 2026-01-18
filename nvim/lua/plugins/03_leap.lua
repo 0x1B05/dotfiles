@@ -241,33 +241,6 @@ return {
         },
         keys = keymaps.leap,
     },
-    {
-        "nvim-telescope/telescope.nvim",
-        branch = "0.1.x",
-        keys = keymaps.telescope,
-        dependencies = { "nvim-lua/plenary.nvim" },
-        opts = {
-            pickers = {
-                -- Default configuration for builtin pickers goes here:
-                -- picker_name = {
-                --   picker_config_key = value,
-                --   ...
-                -- }
-                -- Now the picker_config_key will be applied every time you call this
-                -- builtin picker
-                planets = {
-                    show_pluto = true,
-                },
-            },
-            extensions = {
-                -- Your extension configuration goes here:
-                -- extension_name = {
-                --   extension_config_key = value,
-                -- }
-                -- please take a look at the readme of the extension you want to configure
-            },
-        },
-    },
 
     --{
     --    "mg979/vim-visual-multi",
