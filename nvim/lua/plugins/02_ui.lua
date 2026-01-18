@@ -35,79 +35,6 @@ return {
                 enforce_regular_tabs = true,
                 always_show_bufferline = true,
             },
-            highlights = {
-                fill = {
-                    fg = { attribute = "fg", highlight = "Visual" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                },
-                background = {
-                    fg = { attribute = "fg", highlight = "TabLine" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                },
-                buffer_visible = {
-                    fg = { attribute = "fg", highlight = "TabLine" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                },
-                close_button = {
-                    fg = { attribute = "fg", highlight = "TabLine" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                },
-                close_button_visible = {
-                    fg = { attribute = "fg", highlight = "TabLine" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                },
-                tab_selected = {
-                    fg = { attribute = "fg", highlight = "Normal" },
-                    bg = { attribute = "bg", highlight = "Normal" },
-                },
-                tab = {
-                    fg = { attribute = "fg", highlight = "TabLine" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                },
-                tab_close = {
-                    fg = { attribute = "fg", highlight = "TabLineSel" },
-                    bg = { attribute = "bg", highlight = "Normal" },
-                },
-                duplicate_selected = {
-                    fg = { attribute = "fg", highlight = "TabLineSel" },
-                    bg = { attribute = "bg", highlight = "TabLineSel" },
-                    underline = true,
-                },
-                duplicate_visible = {
-                    fg = { attribute = "fg", highlight = "TabLine" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                    underline = true,
-                },
-                duplicate = {
-                    fg = { attribute = "fg", highlight = "TabLine" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                    underline = true,
-                },
-                modified = {
-                    fg = { attribute = "fg", highlight = "TabLine" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                },
-                modified_selected = {
-                    fg = { attribute = "fg", highlight = "Normal" },
-                    bg = { attribute = "bg", highlight = "Normal" },
-                },
-                modified_visible = {
-                    fg = { attribute = "fg", highlight = "TabLine" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                },
-                separator = {
-                    fg = { attribute = "bg", highlight = "TabLine" },
-                    bg = { attribute = "bg", highlight = "TabLine" },
-                },
-                separator_selected = {
-                    fg = { attribute = "bg", highlight = "Normal" },
-                    bg = { attribute = "bg", highlight = "Normal" },
-                },
-                indicator_selected = {
-                    fg = { attribute = "fg", highlight = "LspDiagnosticsDefaultHint" },
-                    bg = { attribute = "bg", highlight = "Normal" },
-                },
-            },
         },
     },
     {
@@ -411,65 +338,54 @@ return {
     {
         "lewis6991/gitsigns.nvim",
         event = "VimEnter",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
+        dependencies = { "nvim-lua/plenary.nvim" },
         opts = {
-            signs = {
-                add = { hl = "GitSignsAdd", text = " ", numhl = "GitSignsAddNr", linehl = "GitSignsAddLn" },
-                change = {
-                    hl = "GitSignsChange",
-                    text = " ",
-                    numhl = "GitSignsChangeNr",
-                    linehl = "GitSignsChangeLn",
-                },
-                delete = {
-                    hl = "GitSignsDelete",
-                    text = " ",
-                    numhl = "GitSignsDeleteNr",
-                    linehl = "GitSignsDeleteLn",
-                },
-                topdelete = {
-                    hl = "GitSignsDelete",
-                    text = "󱅁 ",
-                    numhl = "GitSignsDeleteNr",
-                    linehl = "GitSignsDeleteLn",
-                },
-                changedelete = {
-                    hl = "GitSignsChange",
-                    text = "󰍷 ",
-                    numhl = "GitSignsChangeNr",
-                    linehl = "GitSignsChangeLn",
-                },
+            signs                        = {
+                add          = { text = '┃' },
+                change       = { text = '┃' },
+                delete       = { text = '_' },
+                topdelete    = { text = '‾' },
+                changedelete = { text = '~' },
+                untracked    = { text = '┆' },
             },
-            signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-            numhl = false,     -- Toggle with `:Gitsigns toggle_numhl`
-            linehl = false,    -- Toggle with `:Gitsigns toggle_linehl`
-            word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
-            watch_gitdir = {
-                interval = 1000,
-                follow_files = true,
+            signs_staged                 = {
+                add          = { text = '┃' },
+                change       = { text = '┃' },
+                delete       = { text = '_' },
+                topdelete    = { text = '‾' },
+                changedelete = { text = '~' },
+                untracked    = { text = '┆' },
             },
-            attach_to_untracked = true,
-            current_line_blame = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
-            current_line_blame_opts = {
+            signs_staged_enable          = true,
+            signcolumn                   = true,  -- Toggle with `:Gitsigns toggle_signs`
+            numhl                        = false, -- Toggle with `:Gitsigns toggle_numhl`
+            linehl                       = false, -- Toggle with `:Gitsigns toggle_linehl`
+            word_diff                    = false, -- Toggle with `:Gitsigns toggle_word_diff`
+            watch_gitdir                 = {
+                follow_files = true
+            },
+            auto_attach                  = true,
+            attach_to_untracked          = false,
+            current_line_blame           = false, -- Toggle with `:Gitsigns toggle_current_line_blame`
+            current_line_blame_opts      = {
                 virt_text = true,
-                virt_text_pos = "eol", -- 'eol' | 'overlay' | 'right_align'
+                virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
                 delay = 1000,
                 ignore_whitespace = false,
+                virt_text_priority = 100,
+                use_focus = true,
             },
-            current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
-            sign_priority = 6,
-            update_debounce = 100,
-            status_formatter = nil, -- Use default
-            max_file_length = 40000,
-            preview_config = {
+            current_line_blame_formatter = '<author>, <author_time:%R> - <summary>',
+            sign_priority                = 6,
+            update_debounce              = 100,
+            status_formatter             = nil,   -- Use default
+            max_file_length              = 40000, -- Disable if file is longer than this (in lines)
+            preview_config               = {
                 -- Options passed to nvim_open_win
-                border = "single",
-                style = "minimal",
-                relative = "cursor",
+                style = 'minimal',
+                relative = 'cursor',
                 row = 0,
-                col = 1,
+                col = 1
             },
         },
     },
