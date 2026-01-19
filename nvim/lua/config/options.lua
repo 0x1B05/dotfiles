@@ -119,6 +119,7 @@ M.ensure_installed = {
 		"stylua",
 	},
 	lsp_servers = {
+		"basedpyright",
 		"clangd",
 		"cmake",
 		"lua_ls",
