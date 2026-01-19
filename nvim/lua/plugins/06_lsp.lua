@@ -64,7 +64,6 @@ return {
 		config = function(_, opts)
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-			-- 定义 on_attach 函数，用于绑定按键
 			local function on_attach(client, bufnr)
 				-- 加载 config/keymaps.lua 中定义的 M.lsp 键位
 				if keymaps.lsp then
@@ -78,7 +77,6 @@ return {
 				end
 			end
 
-			-- 配置 Mason-LSPConfig 自动安装和设置
 			require("mason-lspconfig").setup({
 				ensure_installed = require("config.options").ensure_installed.lsp_servers,
 				automatic_installation = true,
@@ -86,15 +84,10 @@ return {
 				handlers = {
 					function(server_name)
 						local server_opts = opts.servers[server_name] or {}
-
-						-- 合并 capabilities
 						server_opts.capabilities =
 							vim.tbl_deep_extend("force", capabilities, server_opts.capabilities or {})
-
-						-- 绑定 on_attach
 						server_opts.on_attach = on_attach
 
-						-- 启动服务
 						require("lspconfig")[server_name].setup(server_opts)
 					end,
 				},
@@ -254,7 +247,6 @@ return {
 				inline = false,
 			},
 			ast = {
-				--These require codicons (https://github.com/microsoft/vscode-codicons)
 				role_icons = {
 					type = "",
 					declaration = "",
@@ -274,6 +266,34 @@ return {
 				},
 			},
 		},
+	},
+	-- java, scala
+	{
+		"scalameta/nvim-metals",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+		},
+		ft = { "scala", "sbt", "java" },
+		opts = function()
+			local metals_config = require("metals").bare_config()
+			metals_config.init_options.statusBarProvider = "on"
+			metals_config.capabilities = require("blink.cmp").get_lsp_capabilities()
+			metals_config.on_attach = function(client, bufnr)
+				-- your on_attach function
+			end
+
+			return metals_config
+		end,
+		config = function(self, metals_config)
+			local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = self.ft,
+				callback = function()
+					require("metals").initialize_or_attach(metals_config)
+				end,
+				group = nvim_metals_group,
+			})
+		end,
 	},
 	-- typst
 	{ "kaarmu/typst.vim", lazy = true, ft = "typst" },

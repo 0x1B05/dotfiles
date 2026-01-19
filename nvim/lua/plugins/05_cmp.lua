@@ -11,16 +11,12 @@ return {
 		---@module 'blink.cmp'
 		---@type blink.cmp.Config
 		opts = {
-			-- 'default' for mappings similar to built-in completion
-			-- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
-			-- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
 			keymap = {
 				preset = "none",
 				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
 				["<C-e>"] = { "hide" },
 				["<C-y>"] = { "select_and_accept" },
-				["<CR>"] = { "accept", "fallback" }, -- 如果没选中，回车就换行
-
+				["<CR>"] = { "accept", "fallback" },
 				["<C-p>"] = { "select_prev", "fallback" },
 				["<C-n>"] = { "select_next", "fallback" },
 
@@ -162,32 +158,5 @@ return {
 		-- 		end
 		-- 	end, { silent = true })
 		-- end,
-	},
-	{
-		"scalameta/nvim-metals",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-		},
-		ft = { "scala", "sbt", "java" },
-		opts = function()
-			local metals_config = require("metals").bare_config()
-			metals_config.init_options.statusBarProvider = "on"
-			metals_config.capabilities = require("blink.cmp").get_lsp_capabilities()
-			metals_config.on_attach = function(client, bufnr)
-				-- your on_attach function
-			end
-
-			return metals_config
-		end,
-		config = function(self, metals_config)
-			local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = self.ft,
-				callback = function()
-					require("metals").initialize_or_attach(metals_config)
-				end,
-				group = nvim_metals_group,
-			})
-		end,
 	},
 }
