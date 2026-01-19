@@ -9,9 +9,8 @@ return {
 		cmd = "Mason",
 		keys = { { "<leader>cm", "<cmd>Mason<cr>", desc = "Mason" } },
 		build = ":MasonUpdate",
-		opts_extend = { "ensure_installed" },
 		opts = {
-			ensure_installed = { "shfmt", "stylua" },
+			ensure_installed = require("config.options").ensure_installed.mason_tools,
 			ui = {
 				icons = {
 					package_installed = "✓",
@@ -79,7 +78,7 @@ return {
 			end
 
 			require("mason-lspconfig").setup({
-				ensure_installed = require("config.options").plugins.lsp_servers,
+				ensure_installed = require("config.options").ensure_installed.lsp_servers,
 				automatic_installation = true,
 				automatic_enable = true,
 				handlers = {

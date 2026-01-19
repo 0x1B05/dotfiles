@@ -110,17 +110,22 @@ M.opt_o = {
 	updatetime = 250, -- ms to wait for trigger an event
 }
 -- to be used by lazy
-M.plugins = {
-    -- stylua: ignore
-    lsp_servers = {
-        'clangd',
-        'lua_ls',
-        'tinymist',
-        'cmake'
-    },
-
-    -- lsp format timeout
-    fmt_timeout_ms = 4000,
+M.ensure_installed = {
+	mason_tools = {
+		"clang-format",
+		"markdownlint",
+		"prettier",
+		"shfmt",
+		"stylua",
+	},
+	lsp_servers = {
+		"clangd",
+		"cmake",
+		"lua_ls",
+		"ruff",
+		"tinymist",
+		"verible",
+	},
 }
 
 -- stylua: ignore
