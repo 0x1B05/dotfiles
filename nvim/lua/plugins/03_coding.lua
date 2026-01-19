@@ -1,5 +1,27 @@
 local keymaps = require("config.keymaps")
 return {
+	-- leap
+	{
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		---@type Flash.Config
+		opts = {
+
+			modes = {
+				char = {
+					enabled = true,
+					keys = { "f", "F", "t", "T" },
+					char_actions = function(motion)
+						return {
+							[motion:lower()] = "next",
+							[motion:upper()] = "prev",
+						}
+					end,
+				},
+			},
+		},
+		keys = keymaps.leap,
+	},
 	-- snippets
 	{
 		"L3MON4D3/LuaSnip",
