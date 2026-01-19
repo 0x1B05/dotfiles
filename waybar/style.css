@@ -432,9 +432,13 @@ window#waybar.empty #window {
 }
 
 @keyframes blink {
+    from {
+        background-color: #f53c3c;
+        color: #ffffff;
+    }
     to {
         background-color: @backgroundlight;
-        color: @textcolor2;
+        color: #f53c3c;
     }
 }
 
@@ -442,7 +446,7 @@ window#waybar.empty #window {
     background-color: #f53c3c;
     color: @textcolor3;
     animation-name: blink;
-    animation-duration: 0.5s;
+    animation-duration: 0.8s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
