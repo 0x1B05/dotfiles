@@ -93,10 +93,10 @@ M.yazi2 = {
 	send_to_quickfix_list = false,
 	change_working_directory = "<c-\\>",
 }
+
 M.img_clip = {
 	{ "<C-A-v>", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
 }
-
 M.grug_far = {
 	{
 		"<leader>sr",
@@ -160,7 +160,6 @@ M.leap = {
 		desc = "Treesitter Search",
 	},
 }
-
 M.lsp = {
 	{ "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", desc = "hover the variable definition" },
 	{ "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", desc = "diagnostic float" },
@@ -218,6 +217,10 @@ M.knap = {
 		end,
 		desc = "Knap closes the viewer application",
 	},
+}
+M.remote = {
+	{ "<leader>rs", "<cmd>RemoteStart<cr>", desc = "Remote Start" },
+	{ "<leader>ri", "<cmd>RemoteInfo<cr>", desc = "Remote Info" },
 }
 M.tmux = {
 	map("n", "<S-Up>", "<cmd>lua require('tmux').resize_top()<cr>", { desc = "Increase window height" }),

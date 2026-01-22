@@ -120,7 +120,7 @@ return {
 			},
 
 			completion = {
-				menu = { border = "single" },
+				menu = { border = "none" },
 				documentation = { window = { border = "single" }, auto_show = true, auto_show_delay_ms = 200 },
 				list = { selection = { preselect = true, auto_insert = false } },
 			},
