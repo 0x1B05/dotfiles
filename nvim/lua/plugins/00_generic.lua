@@ -209,10 +209,11 @@ return {
 
 				typst = {
 					template = [[
-#figure(
-  image("$FILE_PATH"),
-  caption: [$CURSOR],
-) <fig-$LABEL>
+#align(center)[
+    #figure(
+        image("$FILE_PATH", width: 80%), caption: [$CURSOR],
+    ) <fig-$LABEL>
+]
     ]], ---@type string | fun(context: table): string
 				},
 
@@ -229,5 +230,17 @@ return {
 		config = function()
 			require("im_select").setup({})
 		end,
+	},
+	{
+		"amitds1997/remote-nvim.nvim",
+		version = "*", -- Pin to GitHub releases
+		cmd = { "RimoteStart", "RemoteInfo", "RemoteStop", "RemoteLog" },
+		keys = keymaps.remote,
+		dependencies = {
+			"nvim-lua/plenary.nvim", -- For standard functions
+			"MunifTanjim/nui.nvim", -- To build the plugin UI
+			"nvim-telescope/telescope.nvim", -- For picking b/w different remote methods
+		},
+		config = true,
 	},
 }
