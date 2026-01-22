@@ -222,6 +222,51 @@ M.remote = {
 	{ "<leader>rs", "<cmd>RemoteStart<cr>", desc = "Remote Start" },
 	{ "<leader>ri", "<cmd>RemoteInfo<cr>", desc = "Remote Info" },
 }
+M.harpoon = {
+	{
+		"<leader>a",
+		function()
+			require("harpoon"):list():add()
+		end,
+		desc = "Harpoon Add File",
+	},
+	{
+		"<C-e>",
+		function()
+			local harpoon = require("harpoon")
+			harpoon.ui:toggle_quick_menu(harpoon:list())
+		end,
+		desc = "Harpoon Menu",
+	},
+	{
+		"<A-1>",
+		function()
+			require("harpoon"):list():select(1)
+		end,
+		desc = "Harpoon to 1",
+	},
+	{
+		"<A-2>",
+		function()
+			require("harpoon"):list():select(2)
+		end,
+		desc = "Harpoon to 2",
+	},
+	{
+		"<A-3>",
+		function()
+			require("harpoon"):list():select(3)
+		end,
+		desc = "Harpoon to 3",
+	},
+	{
+		"<A-4>",
+		function()
+			require("harpoon"):list():select(4)
+		end,
+		desc = "Harpoon to 4",
+	},
+}
 M.tmux = {
 	map("n", "<S-Up>", "<cmd>lua require('tmux').resize_top()<cr>", { desc = "Increase window height" }),
 	map("n", "<S-Down>", "<cmd>lua require('tmux').resize_bottom()<cr>", { desc = "Decrease window height" }),
