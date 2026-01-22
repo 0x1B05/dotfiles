@@ -1,6 +1,7 @@
-Host github
-    HostName github.com
+Host github.com github
+    HostName ssh.github.com
     User git
+    Port 443
     IdentityFile ~/.ssh/id_ed25519_github
     IdentitiesOnly yes
     ProxyCommand none
