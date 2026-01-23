@@ -53,6 +53,33 @@ return {
 				end,
 			}
 
+			local harpoon_component = function()
+				local harpoon = require("harpoon")
+				local items = harpoon:list().items
+				local current_file_path = vim.api.nvim_buf_get_name(0)
+				local contents = {}
+
+				for i, item in ipairs(items) do
+					local fname = vim.fn.fnamemodify(item.value, ":t")
+					if fname == "" then
+						fname = "[No Name]"
+					end
+
+					local item_path = vim.fn.fnamemodify(item.value, ":p")
+					local is_active = (item_path == current_file_path)
+
+					local text = string.format("%d:%s", i, fname)
+					if is_active then
+						text = "󰛢 " .. text
+					end
+					table.insert(contents, text)
+				end
+
+				if #contents == 0 then
+					return ""
+				end
+				return " " .. table.concat(contents, "  ") .. " "
+			end
 			-- Config
 			local configs = {
 				options = {
@@ -65,6 +92,22 @@ return {
 						-- are just setting default looks o statusline
 						normal = { c = { fg = colors.fg, bg = colors.bg } },
 						inactive = { c = { fg = colors.fg, bg = colors.bg } },
+					},
+				},
+				tabline = {
+					lualine_c = {
+						{
+							function()
+								return "%="
+							end,
+						},
+						{
+							harpoon_component,
+							cond = function()
+								return #require("harpoon"):list().items > 0
+							end,
+							color = { fg = colors.orange, gui = "bold" },
+						},
 					},
 				},
 				sections = {
@@ -107,12 +150,32 @@ return {
 			})
 
 			ins_left({
-				-- mode component
 				function()
-					return ""
+					local mode_names = {
+						n = "NORMAL",
+						i = "INSERT",
+						v = "VISUAL",
+						V = "V-LINE",
+						[" "] = "V-BLOCK",
+						c = "COMMAND",
+						no = "OPERATOR",
+						s = "SELECT",
+						S = "S-LINE",
+						ic = "INSERT",
+						R = "REPLACE",
+						Rv = "V-REPLACE",
+						cv = "VIM EX",
+						ce = "NORMAL EX",
+						r = "PROMPT",
+						rm = "MORE",
+						["r?"] = "CONFIRM",
+						["!"] = "SHELL",
+						t = "TERMINAL",
+					}
+					local m = vim.fn.mode()
+					return " " .. (mode_names[m] or m)
 				end,
 				color = function()
-					-- auto change color according to neovims mode
 					local mode_color = {
 						n = colors.red,
 						i = colors.green,
@@ -133,27 +196,57 @@ return {
 						["!"] = colors.red,
 						t = colors.red,
 					}
-					return { fg = mode_color[vim.fn.mode()] }
+					return { fg = mode_color[vim.fn.mode()], gui = "bold" }
 				end,
 				padding = { right = 1 },
 			})
-
-			ins_left({
-				-- filesize component
-				"filesize",
-				cond = conditions.buffer_not_empty,
-			})
-
 			ins_left({
 				"filename",
 				cond = conditions.buffer_not_empty,
 				color = { fg = colors.magenta, gui = "bold" },
 			})
-
 			ins_left({ "location" })
+			-- ins_left({ "progress", color = { fg = colors.fg, gui = "bold" } })
 
-			ins_left({ "progress", color = { fg = colors.fg, gui = "bold" } })
+			-- Insert mid section. You can make any number of sections in neovim :)
+			-- for lualine it's any number greater then 2
+			ins_left({
+				function()
+					return "%="
+				end,
+			})
 
+			ins_left({
+				function()
+					local formatters = {}
+
+					local status, conform = pcall(require, "conform")
+					if status then
+						local l_formatters = conform.list_formatters(0)
+						for _, f in ipairs(l_formatters) do
+							table.insert(formatters, f.name)
+						end
+					end
+
+					if #formatters == 0 then
+						return ""
+					end
+					return "󰉼 FMT:" .. table.concat(formatters, ", ")
+				end,
+				color = { fg = colors.cyan, gui = "bold" },
+				cond = conditions.hide_in_width,
+			})
+			ins_left({
+				function()
+					local clients = vim.lsp.get_clients({ bufnr = 0 })
+					if #clients == 0 then
+						return ""
+					end
+					return clients[1].name
+				end,
+				icon = " LSP:",
+				color = { fg = colors.fg, gui = "bold" },
+			})
 			ins_left({
 				"diagnostics",
 				sources = { "nvim_diagnostic" },
@@ -165,35 +258,6 @@ return {
 				},
 			})
 
-			-- Insert mid section. You can make any number of sections in neovim :)
-			-- for lualine it's any number greater then 2
-			ins_left({
-				function()
-					return "%="
-				end,
-			})
-
-			ins_left({
-				-- Lsp server name .
-				function()
-					local msg = "No Active Lsp"
-					local buf_ft = vim.api.nvim_get_option_value("filetype", { buf = 0 })
-					local clients = vim.lsp.get_clients()
-					if next(clients) == nil then
-						return msg
-					end
-					for _, client in ipairs(clients) do
-						local filetypes = client.config.filetypes
-						if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-							return client.name
-						end
-					end
-					return msg
-				end,
-				icon = " LSP:",
-				color = { fg = "#ffffff", gui = "bold" },
-			})
-
 			-- Add components to right sections
 			ins_right({
 				"o:encoding", -- option component same as &encoding in viml
@@ -201,32 +265,18 @@ return {
 				cond = conditions.hide_in_width,
 				color = { fg = colors.green, gui = "bold" },
 			})
-
 			ins_right({
-				"fileformat",
-				fmt = string.upper,
-				icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-				color = { fg = colors.green, gui = "bold" },
-			})
-
-			ins_right({
-				"branch",
-				icon = "",
+				function()
+					local current_tab = vim.fn.tabpagenr()
+					local total_tabs = vim.fn.tabpagenr("$")
+					if total_tabs > 1 then
+						return "󰓩 " .. current_tab .. "/" .. total_tabs
+					end
+					return ""
+				end,
 				color = { fg = colors.violet, gui = "bold" },
+				padding = { left = 1, right = 1 },
 			})
-
-			ins_right({
-				"diff",
-				-- Is it me or the symbol for modified us really weird
-				symbols = { added = " ", modified = "󰝤 ", removed = " " },
-				diff_color = {
-					added = { fg = colors.green },
-					modified = { fg = colors.orange },
-					removed = { fg = colors.red },
-				},
-				cond = conditions.hide_in_width,
-			})
-
 			ins_right({
 				function()
 					return "▊"
