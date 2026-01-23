@@ -7,47 +7,7 @@ return {
 	---@type snacks.Config
 	opts = {
 		bigfile = { enabled = true },
-		dashboard = {
-			enabled = true,
-			preset = {
-				header = [[
-                            ⡿⠉⠄⠄⠄⠄⠈⠙⠿⠟⠛⠉⠉⠉⠄⠄⠄⠈⠉⠉⠉⠛⠛⠻⢿⣿⣿⣿⣿⣿                        
-                            ⠁⠄⠄⠄⢀⡴⣋⣵⣮⠇⡀⠄⠄⠄⠄⠄⠄⢀⠄⠄⠄⡀⠄⠄⠄⠈⠛⠿⠋⠉                        
-                            ⠄⠄⠄⢠⣯⣾⣿⡿⣳⡟⣰⣿⣠⣂⡀⢀⠄⢸⡄⠄⢀⣈⢆⣱⣤⡀⢄⠄⠄⠄                        
-                            ⠄⠄⠄⣼⣿⣿⡟⣹⡿⣸⣿⢳⣿⣿⣿⣿⣴⣾⢻⣆⣿⣿⣯⢿⣿⣿⣷⣧⣀⣤                        
-                            ⠄⠄⣼⡟⣿⠏⢀⣿⣇⣿⣏⣿⣿⣿⣿⣿⣿⣿⢸⡇⣿⣿⣿⣟⣿⣿⣿⣿⣏⠋                        
-                            ⡆⣸⡟⣼⣯⠏⣾⣿⢸⣿⢸⣿⣿⣿⣿⣿⣿⡟⠸⠁⢹⡿⣿⣿⢻⣿⣿⣿⣿⠄                        
-                            ⡇⡟⣸⢟⣫⡅⣶⢆⡶⡆⣿⣿⣿⣿⣿⢿⣛⠃⠰⠆⠈⠁⠈⠙⠈⠻⣿⢹⡏⠄                        
-                            ⣧⣱⡷⣱⠿⠟⠛⠼⣇⠇⣿⣿⣿⣿⣿⣿⠃⣰⣿⣿⡆⠄⠄⠄⠄⠄⠉⠈⠄⠄                        
- ▄▄▄     ▄▄▄▄▄▄▄ ▄▄▄▄▄▄▄    ⡏⡟⢑⠃⡠⠂⠄⠄⠈⣾⢻⣿⣿⡿⡹⡳⠋⠉⠁⠉⠙⠄⢀⠄⠄⠄⠄⠄⠂⠄    ▄▄   ▄▄ ▄▄▄ ▄▄   ▄▄ 
-█   █   █       █       █   ⡇⠁⢈⢰⡇⠄⠄⡙⠂⣿⣿⣿⣿⣱⣿⡗⠄⠄⠄⢀⡀⠄⠈⢰⠄⠄⠄⠐⠄⠄   █  █ █  █   █  █▄█  █
-█   █   █    ▄▄▄█   ▄   █   ⠄⠄⠘⣿⣧⠴⣄⣡⢄⣿⣿⣿⣷⣿⣿⡇⢀⠄⠤⠈⠁⣠⣠⣸⢠⠄⠄⠄⠄⠄   █  █▄█  █   █       █
-█   █   █   █▄▄▄█  █ █  █   ⢀⠄⠄⣿⣿⣷⣬⣵⣿⣿⣿⣿⣿⣿⣿⣷⣟⢷⡶⢗⡰⣿⣿⠇⠘⠄⠄⠄⠄⠄   █       █   █       █
-█   █▄▄▄█    ▄▄▄█  █▄█  █   ⣿⠄⠄⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣾⣿⣿⡟⢀⠃⠄⢸⡄⠁⣸   █       █   █       █
-█       █   █▄▄▄█       █   ⣿⠄⠄⠘⢿⣿⣿⣿⣿⣿⣿⢛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣟⢄⡆⠄⢀⣪⡆⠄⣿    █     ██   █ ██▄██ █
-█▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█▄▄▄▄▄▄▄█   ⡟⠄⠄⠄⠄⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⢿⣟⣻⣩⣾⣃⣴⣿⣿⡇⠸⢾     █▄▄▄█ █▄▄▄█▄█   █▄█]],
-				keys = {
-					{ icon = " ", key = "f", desc = "Find file", action = ":lua Snacks.picker.files()" },
-					{ icon = " ", key = "e", desc = "New file", action = ":ene | startinsert" },
-					{ icon = " ", key = "p", desc = "Find project", action = ":lua Snacks.picker.projects()" },
-					{ icon = " ", key = "r", desc = "Recently used files", action = ":lua Snacks.picker.recent()" },
-					{ icon = "󱎸 ", key = "t", desc = "Find text", action = ":lua Snacks.picker.grep()" },
-					-- 这里把 Config 改为直接搜索配置目录，比打开 init.lua 更实用
-					{
-						icon = " ",
-						key = "c",
-						desc = "Configuration",
-						action = ":lua Snacks.picker.files({cwd = vim.fn.stdpath('config')})",
-					},
-					{ icon = " ", key = "q", desc = "Quit Neovim", action = ":qa" },
-				},
-			},
-			sections = {
-				{ section = "header" },
-				{ section = "keys", gap = 1, padding = 1 },
-				{ section = "startup" },
-			},
-		},
+		dashboard = { enabled = false },
 		explorer = { enabled = false },
 		indent = {
 			enabled = true,
