@@ -277,8 +277,6 @@
         "format-icons": [" ", " ", " ", " ", " "],
 
         "on-update": "~/dotfiles/scripts/check_batt.sh",
-        // "on-click": "~/dotfiles/scripts/check_batt.sh {capacity} {status}"
-        "on-click": "~/dotfiles/scripts/check_batt.sh"
     },
 
     // backlight
