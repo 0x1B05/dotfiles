@@ -6,18 +6,6 @@ local line_begin = require("luasnip.extras.expand_conditions").line_begin
 return {
 	s({ trig = "ii", snippetType = "autosnippet" }, fmta("$<>$", i(1))),
 	s(
-		{ trig = ";a", dscr = "attention block", snippetType = "autosnippet" },
-		fmta(
-			[[
-    #attention("Attention")[
-        <>
-    ]
-]],
-			i(1)
-		),
-		{ condition = line_begin }
-	),
-	s(
 		{ trig = ";c", dscr = "code block", snippetType = "autosnippet" },
 		fmta(
 			[[
@@ -36,11 +24,11 @@ return {
 		{ trig = ";t", dscr = "tip block", snippetType = "autosnippet" },
 		fmta(
 			[[
-    #tip("Tip")[
+    #tip-box(title: "<>")[
         <>
     ]
 ]],
-			i(1)
+			{ i(1), i(2) }
 		),
 		{ condition = line_begin }
 	),
@@ -48,38 +36,32 @@ return {
 		{ trig = ";d", dscr = "definition block", snippetType = "autosnippet" },
 		fmta(
 			[[
-    #definition("Definition")[
+    #definition(title: "<>")[
         <>
     ]
 ]],
-			i(1)
+			{ i(1), i(2) }
 		),
 		{ condition = line_begin }
 	),
 	s(
-		{ trig = ";e", dscr = "definition block", snippetType = "autosnippet" },
+		{ trig = ";e", dscr = "example block", snippetType = "autosnippet" },
 		fmta(
 			[[
-    #example("Example")[
+    #example(title: "<>")[
         <>
     ]
 ]],
-			i(1)
+			{ i(1), i(2) }
 		),
 		{ condition = line_begin }
 	),
+
 	s(
 		{ trig = "#ud", regTrig = true, wordTrig = false, snippetType = "autosnippet" },
-		fmta("#underline[<>]", {
-			i(1),
-		})
+		fmta("#underline[<>]", { i(1) })
 	),
-	s(
-		{ trig = "#strk", regTrig = true, wordTrig = false, snippetType = "autosnippet" },
-		fmta("#strike[<>]", {
-			i(1),
-		})
-	),
+	s({ trig = "#strk", regTrig = true, wordTrig = false, snippetType = "autosnippet" }, fmta("#strike[<>]", { i(1) })),
 
 	s({ trig = ";i", snippetType = "autosnippet" }, fmta("_<>_", i(1))),
 	s({ trig = ";b", snippetType = "autosnippet" }, fmta("*<>*", i(1))),

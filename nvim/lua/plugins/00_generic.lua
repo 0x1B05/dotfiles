@@ -209,11 +209,10 @@ return {
 
 				typst = {
 					template = [[
-#align(center)[
     #figure(
-        image("$FILE_PATH", width: 80%), caption: [$CURSOR],
+      image("$FILE_PATH", width: 80%),
+      caption: [$CURSOR],
     ) <fig-$LABEL>
-]
     ]], ---@type string | fun(context: table): string
 				},
 
