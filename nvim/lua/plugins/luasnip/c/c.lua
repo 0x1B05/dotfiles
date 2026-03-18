@@ -80,9 +80,9 @@ return {
 		{ condition = line_begin }
 	),
 	-- -> DEREFERENCE STRUCTURE PROPERTY
-	s({ trig = ">>", snippetType = "autosnippet", wordTrig = false }, {
-		t("->"),
-	}),
+	-- s({ trig = ">>", snippetType = "autosnippet", wordTrig = false }, {
+	-- 	t("->"),
+	-- }),
 	-- NULL POINTER SYMBOLIC CONSTANT
 	-- s({ trig = "00", snippetType = "autosnippet", wordTrig = false }, {
 	-- 	t("NULL"),
