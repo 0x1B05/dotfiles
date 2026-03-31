@@ -1,41 +1,67 @@
-# stow in common user, not root
-mkdir $HOME/.config/hypr && stow --target=$HOME/.config/hypr hypr
-mkdir $HOME/.config/fcitx5 && stow --target=$HOME/.config/fcitx5 fcitx5
-mkdir $HOME/.config/waybar && stow --target=$HOME/.config/waybar waybar
-mkdir $HOME/.config/wal && stow --target=$HOME/.config/wal wal
-mkdir $HOME/.config/lazygit && stow --target=$HOME/.config/lazygit lazygit
-mkdir $HOME/.config/rofi && stow --target=$HOME/.config/rofi rofi
-mkdir $HOME/.config/yazi && stow --target=$HOME/.config/yazi yazi
-mkdir $HOME/.config/mpv && stow --target=$HOME/.config/mpv mpv
-mkdir $HOME/.config/mpd && stow --target=$HOME/.config/mpd mpd
-mkdir $HOME/.config/zathura && stow --target=$HOME/.config/zathura zathura
-mkdir $HOME/.config/surfer && stow --target=$HOME/.config/surfer surfer
-mkdir $HOME/.config/swaync && stow --target=$HOME/.config/swaync swaync
-mkdir $HOME/.config/cliphist && stow --target=$HOME/.config/cliphist cliphist
-mkdir $HOME/.config/swayimg && stow --target=$HOME/.config/swayimg swayimg
-mkdir $HOME/.config/tmux && stow --target=$HOME/.config/tmux tmux
-mkdir $HOME/.config/foot && stow --target=$HOME/.config/foot foot
-mkdir $HOME/.config/fontconfig && stow --target=$HOME/.config/fontconfig fontconfig
+#!/bin/bash
 
-mkdir $HOME/.config/gtk-3.0 && stow --target=$HOME/.config/gtk-3.0 gtk-3.0
-mkdir $HOME/.config/gtk-4.0 && stow --target=$HOME/.config/gtk-4.0 gtk-4.0
-mkdir $HOME/.config/xsettingsd && stow --target=$HOME/.config/xsettingsd xsettingsd
+set -euo pipefail
 
-stow --target=$HOME/.config starship
-stow --target=$HOME/.config mimeapps
-stow --target=$HOME/.ssh ssh
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-stow git
+stow_package() {
+	local target="$1"
+	local package="$2"
+	local base_dir="${3:-$repo_root}"
 
-ln -s $HOME/dotfiles/.gtkrc-2.0 $HOME/.gtkrc-2.0
-ln -s $HOME/dotfiles/.Xresources $HOME/.Xresources
-ln -s $HOME/dotfiles/zsh/.zshrc $HOME/.zshrc
-ln -s $HOME/dotfiles/zsh/.zprofile $HOME/.zprofile
-ln -s $HOME/dotfiles/gtkwave/.gtkwaverc $HOME/.gtkwaverc
+	mkdir -p "$target"
+	stow --restow --target="$target" --dir="$base_dir" "$package"
+}
 
-sudo ln -s $HOME/dotfiles/keyd/default.conf /etc/keyd/default.conf
+link_file() {
+	local src="$1"
+	local dest="$2"
 
-cd local
-stow --target=$HOME/.local/bin bin
-cd share
-stow --target=$HOME/.local/share/applications applications
+	mkdir -p "$(dirname "$dest")"
+	ln -sfn "$src" "$dest"
+}
+
+sudo_link_file() {
+	local src="$1"
+	local dest="$2"
+
+	sudo mkdir -p "$(dirname "$dest")"
+	sudo ln -sfn "$src" "$dest"
+}
+
+stow_package "$HOME/.config/hypr" hypr
+stow_package "$HOME/.config/fcitx5" fcitx5
+stow_package "$HOME/.config/waybar" waybar
+stow_package "$HOME/.config/wal" wal
+stow_package "$HOME/.config/lazygit" lazygit
+stow_package "$HOME/.config/rofi" rofi
+stow_package "$HOME/.config/yazi" yazi
+stow_package "$HOME/.config/mpv" mpv
+stow_package "$HOME/.config/mpd" mpd
+stow_package "$HOME/.config/zathura" zathura
+stow_package "$HOME/.config/surfer" surfer
+stow_package "$HOME/.config/swaync" swaync
+stow_package "$HOME/.config/cliphist" cliphist
+stow_package "$HOME/.config/swayimg" swayimg
+stow_package "$HOME/.config/tmux" tmux
+stow_package "$HOME/.config/foot" foot
+stow_package "$HOME/.config/fontconfig" fontconfig
+stow_package "$HOME/.config/gtk-3.0" gtk-3.0
+stow_package "$HOME/.config/gtk-4.0" gtk-4.0
+stow_package "$HOME/.config/xsettingsd" xsettingsd
+
+stow_package "$HOME/.config" starship
+stow_package "$HOME/.config" mimeapps
+stow_package "$HOME/.ssh" ssh
+stow_package "$HOME" git
+
+link_file "$repo_root/.gtkrc-2.0" "$HOME/.gtkrc-2.0"
+link_file "$repo_root/.Xresources" "$HOME/.Xresources"
+link_file "$repo_root/zsh/.zshrc" "$HOME/.zshrc"
+link_file "$repo_root/zsh/.zprofile" "$HOME/.zprofile"
+link_file "$repo_root/gtkwave/.gtkwaverc" "$HOME/.gtkwaverc"
+
+sudo_link_file "$repo_root/keyd/default.conf" /etc/keyd/default.conf
+
+stow_package "$HOME/.local/bin" bin "$repo_root/local"
+stow_package "$HOME/.local/share/applications" applications "$repo_root/local/share"
