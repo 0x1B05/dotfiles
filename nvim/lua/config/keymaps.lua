@@ -163,7 +163,6 @@ M.leap = {
 M.lsp = {
 	{ "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", desc = "hover the variable definition" },
 	{ "gl", "<cmd>lua vim.diagnostic.open_float()<CR>", desc = "diagnostic float" },
-	{ "<leader>lI", "<cmd>LspInstallInfo<cr>", desc = "LspInstallInfo" },
 	{ "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "code action" },
 	{ "<leader>lf", util.format, desc = "Format" },
 	{ "<leader>li", "<cmd>LspInfo<cr>", desc = "LspInfo" },

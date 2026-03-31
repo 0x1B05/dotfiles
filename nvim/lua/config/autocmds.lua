@@ -68,17 +68,6 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 		vim.opt.formatoptions = vim.opt.formatoptions - { "c", "r", "o" }
 	end,
 })
--- reload config on save
-vim.api.nvim_create_autocmd("BufWritePost", {
-	pattern = "**/lua/config/*.lua",
-	callback = function()
-		local filepath = vim.fn.expand("%")
-		dofile(filepath)
-		vim.notify("Configuration reloaded \n" .. filepath, nil)
-	end,
-	group = augroup("reload_on_save"),
-	desc = "Reload config on save",
-})
 -- check xelatex
 vim.api.nvim_create_autocmd("BufRead", {
 	pattern = { "*.tex" },
