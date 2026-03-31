@@ -233,7 +233,7 @@ return {
 	{
 		"amitds1997/remote-nvim.nvim",
 		version = "*", -- Pin to GitHub releases
-		cmd = { "RimoteStart", "RemoteInfo", "RemoteStop", "RemoteLog" },
+		cmd = { "RemoteStart", "RemoteInfo", "RemoteStop", "RemoteLog" },
 		keys = keymaps.remote,
 		dependencies = {
 			"nvim-lua/plenary.nvim", -- For standard functions

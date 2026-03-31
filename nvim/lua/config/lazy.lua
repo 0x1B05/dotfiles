@@ -77,7 +77,7 @@ function M.load_lazy()
 				enabled = true,
 			},
 			rtp = {
-				reseet = true,
+				reset = true,
 				paths = {},
 				-- disable some rtp plugins
 				disabled_plugins = {
