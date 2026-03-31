@@ -1,5 +1,6 @@
 local util = require("config.util")
 local keymaps = require("config.keymaps")
+local lsp = require("config.lsp")
 
 return {
 	-- manage LSP servers, DAP servers, linters, and formatters
@@ -55,42 +56,24 @@ return {
 		},
 		opts = {
 			servers = {
+				basedpyright = {},
 				clangd = {},
-				lua_ls = {},
-				tinymist = {},
 				cmake = {},
+				lua_ls = {},
+				ruff = {},
+				tinymist = {},
+				verible = {},
 			},
 		},
 		config = function(_, opts)
-			local capabilities = require("blink.cmp").get_lsp_capabilities()
-
-			local function on_attach(client, bufnr)
-				-- 加载 config/keymaps.lua 中定义的 M.lsp 键位
-				if keymaps.lsp then
-					for _, key in ipairs(keymaps.lsp) do
-						local mode = key.mode or "n"
-						local lhs = key[1]
-						local rhs = key[2]
-						local key_opts = { desc = key.desc, buffer = bufnr }
-						vim.keymap.set(mode, lhs, rhs, key_opts)
-					end
-				end
+			for server_name, server_opts in pairs(opts.servers) do
+				vim.lsp.config(server_name, lsp.extend(server_opts))
+				vim.lsp.enable(server_name)
 			end
 
 			require("mason-lspconfig").setup({
 				ensure_installed = require("config.options").ensure_installed.lsp_servers,
-				automatic_installation = true,
-				automatic_enable = true,
-				handlers = {
-					function(server_name)
-						local server_opts = opts.servers[server_name] or {}
-						server_opts.capabilities =
-							vim.tbl_deep_extend("force", capabilities, server_opts.capabilities or {})
-						server_opts.on_attach = on_attach
-
-						require("lspconfig")[server_name].setup(server_opts)
-					end,
-				},
+				automatic_enable = false,
 			})
 		end,
 	},
@@ -277,10 +260,8 @@ return {
 		opts = function()
 			local metals_config = require("metals").bare_config()
 			metals_config.init_options.statusBarProvider = "on"
-			metals_config.capabilities = require("blink.cmp").get_lsp_capabilities()
-			metals_config.on_attach = function(client, bufnr)
-				-- your on_attach function
-			end
+			metals_config.capabilities = lsp.capabilities()
+			metals_config.on_attach = lsp.on_attach
 
 			return metals_config
 		end,
