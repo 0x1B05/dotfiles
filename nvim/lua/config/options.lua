@@ -122,7 +122,6 @@ M.ensure_installed = {
 		"basedpyright",
 		"clangd",
 		"cmake",
-		"jdtls",
 		"lua_ls",
 		"ruff",
 		"tinymist",

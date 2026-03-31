@@ -126,37 +126,5 @@ return {
 			},
 		},
 		opts_extend = { "sources.default" },
-		-- config = function(_, opts)
-		-- 	local blink = require("blink.cmp")
-		-- 	local ls = require("luasnip")
-		--
-		-- 	blink.setup(opts)
-		--
-		-- 	-- 定义 jk：覆盖 Insert 和 Select 模式
-		-- 	vim.keymap.set({ "i", "s" }, "jk", function()
-		-- 		-- 优先：Snippet 跳转
-		-- 		if ls.jumpable(1) then
-		-- 			ls.jump(1)
-		-- 		-- 其次：补全菜单选择下一项
-		-- 		elseif blink.is_visible() then
-		-- 			blink.select_next()
-		-- 		-- 最后：原样输入 jk
-		-- 		else
-		-- 			-- 使用 feedkeys 模拟按键，确保能触发其他可能存在的映射或直接上屏
-		-- 			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("jk", true, false, true), "n", false)
-		-- 		end
-		-- 	end, { silent = true })
-		--
-		-- 	-- 定义 kj：覆盖 Insert 和 Select 模式
-		-- 	vim.keymap.set({ "i", "s" }, "kj", function()
-		-- 		if ls.jumpable(-1) then
-		-- 			ls.jump(-1)
-		-- 		elseif blink.is_visible() then
-		-- 			blink.select_prev()
-		-- 		else
-		-- 			vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("kj", true, false, true), "n", false)
-		-- 		end
-		-- 	end, { silent = true })
-		-- end,
 	},
 }
