@@ -2,6 +2,21 @@ local util = require("config.util")
 local keymaps = require("config.keymaps")
 local lsp = require("config.lsp")
 
+local function find_verilator_file()
+	local filename = vim.api.nvim_buf_get_name(0)
+	if filename == "" then
+		return nil
+	end
+
+	return vim.fs.find("verilator.f", {
+		path = vim.fs.dirname(filename),
+		upward = true,
+		stop = vim.fs.dirname(vim.uv.os_homedir()),
+		type = "file",
+		limit = 1,
+	})[1]
+end
+
 return {
 	-- manage LSP servers, DAP servers, linters, and formatters
 	{
@@ -138,15 +153,14 @@ return {
 			---@type table<string,table>
 			linters = {
 				verilator = {
-					args = {
-						"--lint-only",
-						"-F",
-						vim.fs.find("verilator.f", {
-							upward = true,
-							stop = "/home",
-							type = "file",
-						})[1],
-					},
+					args = function()
+						local args = { "--lint-only" }
+						local filelist = find_verilator_file()
+						if filelist then
+							vim.list_extend(args, { "-F", filelist })
+						end
+						return args
+					end,
 				},
 			},
 		},

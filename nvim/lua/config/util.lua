@@ -28,6 +28,12 @@ function M.opts(name)
 	return Plugin.values(plugin, "opts", false)
 end
 
+---@param path string?
+function M.config_path(path)
+	path = path and "/" .. path or ""
+	return vim.fn.stdpath("config") .. path
+end
+
 ---@param opts? lsp.Client.format
 function M.format(opts)
 	opts = vim.tbl_deep_extend(

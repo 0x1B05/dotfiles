@@ -1,4 +1,8 @@
 local keymaps = require("config.keymaps")
+local util = require("config.util")
+
+local snippet_path = util.config_path("lua/plugins/luasnip")
+
 return {
 	-- leap
 	{
@@ -45,7 +49,7 @@ return {
 				},
 			})
 			require("luasnip.loaders.from_lua").lazy_load({
-				paths = { "~/.config/nvim/lua/plugins/luasnip" },
+				paths = { snippet_path },
 				fs_event_providers = { libuv = true },
 			})
 			local auto_expand = require("luasnip").expand_auto

@@ -138,11 +138,9 @@ return {
 	{
 		"aserowy/tmux.nvim",
 		event = "VeryLazy",
+		keys = keymaps.tmux,
 		config = function()
 			require("tmux").setup({
-				sync_clipboard = false,
-				sync_unnamed = false,
-				keys = keymaps.tmux,
 				resize = { -- enables default keybindings (A-hjkl) for normal mode
 					enable_default_keybindings = false,
 					-- sets resize steps for x axis

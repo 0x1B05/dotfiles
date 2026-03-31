@@ -1,3 +1,5 @@
+local util = require("config.util")
+
 local function map(mode, lhs, rhs, opts)
 	local options = { noremap = true, silent = true }
 	if opts then
@@ -5,6 +7,8 @@ local function map(mode, lhs, rhs, opts)
 	end
 	vim.keymap.set(mode, lhs, rhs, options)
 end
+
+local snippet_path = util.config_path("lua/plugins/luasnip")
 
 -- move Lines
 map("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
@@ -56,12 +60,14 @@ map("n", "<leader>pj", "<cmd>make PACKAGE=%:p:h:t %:t:r<cr>", { desc = "Java sin
 map(
 	"n",
 	"<leader>U",
-	"<Cmd>lua require('luasnip.loaders.from_lua').load({paths = '~/dotfiles/nvim/lua/plugins/luasnip'})<CR><Cmd>echo 'Snippets reloaded.'<CR>",
+	function()
+		require("luasnip.loaders.from_lua").load({ paths = snippet_path })
+		vim.notify("Snippets reloaded.", vim.log.levels.INFO)
+	end,
 	{ desc = "Hot reload snippets." }
 )
 
 -- keymaps for plugins
-local util = require("config.util")
 local M = {}
 
 M.yazi1 = {
@@ -267,19 +273,70 @@ M.harpoon = {
 	},
 }
 M.tmux = {
-	map("n", "<S-Up>", "<cmd>lua require('tmux').resize_top()<cr>", { desc = "Increase window height" }),
-	map("n", "<S-Down>", "<cmd>lua require('tmux').resize_bottom()<cr>", { desc = "Decrease window height" }),
-	map("n", "<S-Left>", "<cmd>lua require('tmux').resize_left()<cr>", { desc = "Decrease window width" }),
-	map("n", "<S-Right>", "<cmd>lua require('tmux').resize_right()<cr>", { desc = "Increase window width" }),
-	map("n", "<C-h>", "<cmd>lua require('tmux').move_left()<cr>", { desc = "Move to the left tmux and nvim window" }),
-	map(
-		"n",
+	{
+		"<S-Up>",
+		function()
+			require("tmux").resize_top()
+		end,
+		mode = "n",
+		desc = "Increase window height",
+	},
+	{
+		"<S-Down>",
+		function()
+			require("tmux").resize_bottom()
+		end,
+		mode = "n",
+		desc = "Decrease window height",
+	},
+	{
+		"<S-Left>",
+		function()
+			require("tmux").resize_left()
+		end,
+		mode = "n",
+		desc = "Decrease window width",
+	},
+	{
+		"<S-Right>",
+		function()
+			require("tmux").resize_right()
+		end,
+		mode = "n",
+		desc = "Increase window width",
+	},
+	{
+		"<C-h>",
+		function()
+			require("tmux").move_left()
+		end,
+		mode = "n",
+		desc = "Move to the left tmux and nvim window",
+	},
+	{
 		"<C-j>",
-		"<cmd>lua require('tmux').move_bottom()<cr>",
-		{ desc = "Move to the bottom tmux and nvim window" }
-	),
-	map("n", "<C-k>", "<cmd>lua require('tmux').move_top()<cr>", { desc = "Move to the top tmux and nvim window" }),
-	map("n", "<C-l>", "<cmd>lua require('tmux').move_right()<cr>", { desc = "Move to the right tmux and nvim window" }),
+		function()
+			require("tmux").move_bottom()
+		end,
+		mode = "n",
+		desc = "Move to the bottom tmux and nvim window",
+	},
+	{
+		"<C-k>",
+		function()
+			require("tmux").move_top()
+		end,
+		mode = "n",
+		desc = "Move to the top tmux and nvim window",
+	},
+	{
+		"<C-l>",
+		function()
+			require("tmux").move_right()
+		end,
+		mode = "n",
+		desc = "Move to the right tmux and nvim window",
+	},
 }
 M.snacks = {
 	-- ===========================
