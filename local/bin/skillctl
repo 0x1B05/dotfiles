@@ -1,0 +1,253 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+CODEX_ROOT="${HOME}/.codex"
+AGENTS_ROOT="${HOME}/.agents"
+LOCAL_ROOT="${CODEX_ROOT}/skills"
+DISABLED_ROOT="${CODEX_ROOT}/skills-disabled"
+SUPERPOWERS_SOURCE_ROOT="${CODEX_ROOT}/superpowers/skills"
+SUPERPOWERS_ACTIVE_ROOT="${AGENTS_ROOT}/skills/superpowers"
+
+usage() {
+  printf 'usage: skillctl {list|enable|disable|help} [target]\n'
+}
+
+die() {
+  printf 'error: %s\n' "$1" >&2
+  exit 1
+}
+
+print_section() {
+  local title="$1"
+  shift
+
+  printf '%s\n' "$title"
+  if (($# == 0)); then
+    printf '  - (none)\n'
+    return
+  fi
+
+  local item
+  for item in "$@"; do
+    printf '  - %s\n' "$item"
+  done
+}
+
+read_dir_names() {
+  local root="$1"
+  local mode="$2"
+
+  [[ -d "$root" ]] || return 0
+
+  local path name
+  for path in "$root"/*; do
+    [[ -e "$path" || -L "$path" ]] || continue
+    name="$(basename "$path")"
+    case "$mode" in
+      dirs)
+        [[ -d "$path" ]] || continue
+        ;;
+      links_or_entries)
+        ;;
+      *)
+        printf 'error: unknown read mode %s\n' "$mode" >&2
+        exit 1
+        ;;
+    esac
+    printf '%s\n' "$name"
+  done | LC_ALL=C sort
+}
+
+is_system_skill_name() {
+  local name="$1"
+  [[ "$name" == ".system" || "$name" == .system/* ]]
+}
+
+list_sections() {
+  local -a system_skills=()
+  local -a local_enabled=()
+  local -a local_disabled=()
+  local -a superpowers_enabled=()
+  local -a superpowers_available=()
+
+  if [[ -d "${LOCAL_ROOT}/.system" ]]; then
+    mapfile -t system_skills < <(read_dir_names "${LOCAL_ROOT}/.system" dirs)
+  fi
+  if [[ -d "$LOCAL_ROOT" ]]; then
+    while IFS= read -r name; do
+      [[ "$name" == ".system" ]] && continue
+      local_enabled+=("$name")
+    done < <(read_dir_names "$LOCAL_ROOT" dirs)
+  fi
+  if [[ -d "$DISABLED_ROOT" ]]; then
+    mapfile -t local_disabled < <(read_dir_names "$DISABLED_ROOT" dirs)
+  fi
+  if [[ -d "$SUPERPOWERS_ACTIVE_ROOT" ]]; then
+    mapfile -t superpowers_enabled < <(read_dir_names "$SUPERPOWERS_ACTIVE_ROOT" links_or_entries)
+  fi
+  if [[ -d "$SUPERPOWERS_SOURCE_ROOT" ]]; then
+    mapfile -t superpowers_available < <(read_dir_names "$SUPERPOWERS_SOURCE_ROOT" dirs)
+  fi
+
+  print_section "system" "${system_skills[@]}"
+  print_section "local enabled" "${local_enabled[@]}"
+  print_section "local disabled" "${local_disabled[@]}"
+  print_section "superpowers enabled" "${superpowers_enabled[@]}"
+  print_section "superpowers available" "${superpowers_available[@]}"
+  print_section "suites" "humanize"
+}
+
+move_local_skill() {
+  local action="$1"
+  local name="$2"
+  local source_root target_root
+
+  is_system_skill_name "$name" && die ".system skills are read-only"
+
+  case "$action" in
+    enable)
+      source_root="$DISABLED_ROOT"
+      target_root="$LOCAL_ROOT"
+      ;;
+    disable)
+      source_root="$LOCAL_ROOT"
+      target_root="$DISABLED_ROOT"
+      ;;
+    *)
+      die "unknown local action: $action"
+      ;;
+  esac
+
+  [[ -e "$source_root/$name" ]] || die "missing local skill $name"
+  [[ ! -e "$target_root/$name" ]] || die "local skill already in target state: $name"
+
+  mkdir -p "$target_root"
+  mv "$source_root/$name" "$target_root/$name"
+}
+
+set_superpowers_skill() {
+  local action="$1"
+  local name="$2"
+  local source_path="${SUPERPOWERS_SOURCE_ROOT}/${name}"
+  local link_path="${SUPERPOWERS_ACTIVE_ROOT}/${name}"
+
+  case "$action" in
+    enable)
+      [[ -d "$source_path" ]] || die "missing superpowers source $name"
+      [[ ! -e "$link_path" && ! -L "$link_path" ]] || die "superpowers skill already enabled: $name"
+      mkdir -p "$SUPERPOWERS_ACTIVE_ROOT"
+      ln -s "$source_path" "$link_path"
+      ;;
+    disable)
+      [[ -e "$link_path" || -L "$link_path" ]] || die "superpowers skill already disabled: $name"
+      rm -f "$link_path"
+      ;;
+    *)
+      die "unknown superpowers action: $action"
+      ;;
+  esac
+}
+
+expand_suite() {
+  local suite_name="$1"
+
+  case "$suite_name" in
+    humanize)
+      printf '%s\n' \
+        "humanize" \
+        "humanize-gen-plan" \
+        "humanize-refine-plan" \
+        "humanize-rlcr"
+      ;;
+    *)
+      die "unknown suite: $suite_name"
+      ;;
+  esac
+}
+
+toggle_suite() {
+  local action="$1"
+  local suite_name="$2"
+  local source_root target_root
+  local -a skills=()
+  local name
+
+  mapfile -t skills < <(expand_suite "$suite_name")
+
+  case "$action" in
+    enable)
+      source_root="$DISABLED_ROOT"
+      target_root="$LOCAL_ROOT"
+      ;;
+    disable)
+      source_root="$LOCAL_ROOT"
+      target_root="$DISABLED_ROOT"
+      ;;
+    *)
+      die "unknown suite action: $action"
+      ;;
+  esac
+
+  for name in "${skills[@]}"; do
+    [[ -e "$source_root/$name" ]] || die "missing local skill $name"
+    [[ ! -e "$target_root/$name" ]] || die "local skill already in target state: $name"
+  done
+
+  for name in "${skills[@]}"; do
+    move_local_skill "$action" "$name"
+  done
+}
+
+toggle_skill() {
+  local action="$1"
+  local target="$2"
+  local target_kind name
+
+  [[ "$target" == *:* ]] || die "target must use <kind>:<name> format"
+  target_kind="${target%%:*}"
+  name="${target#*:}"
+
+  case "$target_kind" in
+    local)
+      move_local_skill "$action" "$name"
+      ;;
+    superpowers)
+      set_superpowers_skill "$action" "$name"
+      ;;
+    suite)
+      toggle_suite "$action" "$name"
+      ;;
+    *)
+      die "unknown target kind: $target_kind"
+      ;;
+  esac
+}
+
+main() {
+  case "${1:-help}" in
+    list)
+      shift
+      (($# == 0)) || {
+        usage >&2
+        return 1
+      }
+      list_sections
+      ;;
+    help|-h|--help)
+      usage
+      ;;
+    enable|disable)
+      (($# == 2)) || {
+        usage >&2
+        return 1
+      }
+      toggle_skill "$1" "$2"
+      ;;
+    *)
+      usage >&2
+      return 1
+      ;;
+  esac
+}
+
+main "$@"
