@@ -303,6 +303,8 @@ return {
 			-- during startup.
 			require("lazy.core.loader").add_to_rtp(plugin)
 			require("nvim-treesitter.query_predicates")
+			-- Work around markdown injection parsing crashing on README-style fenced blocks.
+			vim.treesitter.query.set("markdown", "injections", "")
 		end,
 		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
 		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects", "HiPhish/nvim-ts-rainbow2" },
