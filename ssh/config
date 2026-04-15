@@ -1,12 +1,17 @@
+Host *
+    IdentityAgent ~/.ssh/agent/ssh-agent.sock
+
 Host github.com
     HostName ssh.github.com
     User git
     Port 443
+    AddKeysToAgent yes
     IdentityFile ~/.ssh/id_ed25519_github
 
 Host ysyx-vm
     HostName 192.168.122.113
     User ysyx-b-env--123456
+    AddKeysToAgent yes
     ForwardAgent true
     ForwardX11Trusted true
     ForwardX11 true
@@ -15,6 +20,7 @@ Host ysyx-vm
 Host eda01 open*
     User liujunqi
     Port 22
+    AddKeysToAgent yes
     ForwardAgent true
     ForwardX11Trusted true
     ForwardX11 true
