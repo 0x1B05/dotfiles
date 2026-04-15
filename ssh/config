@@ -4,22 +4,97 @@ Host github.com
     Port 443
     IdentityFile ~/.ssh/id_ed25519_github
 
-Host ee219
-    HostName 10.15.28.50
-    User ubuntu
-    IdentityFile ~/.ssh/id_ed25519_ee219
-    IdentitiesOnly yes
-    Port 22112
-    ForwardAgent yes
-    ForwardX11Trusted yes
-    ForwardX11 yes
+Host ysyx-vm
+    HostName 192.168.122.113
+    User ysyx-b-env--123456
+    IdentityFile ~/.ssh/id_ed25519_ysyx
 
-Host ee291f
-    HostName 10.15.27.104
-    User centos
-    IdentityFile ~/.ssh/id_ed25519_ee291f
-    IdentitiesOnly yes
-    Port 22112
-    ForwardAgent yes
-    ForwardX11Trusted yes
-    ForwardX11 yes
+Host eda01 open*
+    User liujunqi
+    Port 22
+    IdentityFile ~/.ssh/id_ed25519_eda01
+    ProxyJump ysyx-vm
+
+Host eda01
+    Hostname 172.28.10.101
+
+Host open01
+    HostName 172.28.9.101
+
+Host open02
+    HostName 172.28.9.102
+
+Host open03
+    HostName 172.28.9.103
+
+Host open04
+    HostName 172.28.9.104
+
+Host open05
+    HostName 172.28.9.105
+
+Host open06
+    HostName 172.28.9.106
+
+Host open07
+    HostName 172.28.9.107
+
+Host open08
+    HostName 172.28.9.108
+
+Host open09
+    HostName 172.28.9.109
+
+Host open10
+    HostName 172.28.9.110
+
+Host open11
+    HostName 172.28.9.111
+
+Host open12
+    HostName 172.28.9.112
+
+Host open13
+    HostName 172.28.9.113
+
+Host open14
+    HostName 172.28.9.114
+
+Host open15
+    HostName 172.28.9.115
+
+Host open16
+    HostName 172.28.11.116
+
+Host open17
+    HostName 172.28.11.117
+
+Host open18
+    HostName 172.28.11.118
+
+Host open19
+    HostName 172.28.11.119
+
+Host open20
+    HostName 172.28.11.120
+
+Host open21
+    HostName 172.28.11.121
+
+Host open22
+    HostName 172.28.11.122
+
+Host open23
+    HostName 172.28.9.123
+
+Host open24
+    HostName 172.28.9.124
+
+Host open25
+    HostName 172.28.9.125
+
+Host open26
+    HostName 172.28.9.126
+
+Host open27
+    HostName 172.28.9.127
