@@ -9,11 +9,17 @@ Host github.com github
 Host ysyx-vm
     HostName 192.168.122.121
     User ysyx-b-env--123456
+    ForwardAgent true
+    ForwardX11Trusted true
+    ForwardX11 true
     IdentityFile ~/.ssh/id_ed25519_ysyx
 
 Host eda01 open*
     User liujunqi
     Port 22
+    ForwardAgent true
+    ForwardX11Trusted true
+    ForwardX11 true
     IdentityFile ~/.ssh/id_ed25519_eda01
     ProxyJump ysyx-vm
 
