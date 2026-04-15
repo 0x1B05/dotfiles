@@ -1,0 +1,94 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+URI="${LIBVIRT_URI:-qemu:///system}"
+VM_NAME="${VM_NAME:-ubuntu22.04}"
+VIRSH_BIN="${VIRSH_BIN:-virsh}"
+SUDO_BIN="${SUDO_BIN:-sudo}"
+VIRT_MANAGER_BIN="${VIRT_MANAGER_BIN:-virt-manager}"
+NOHUP_BIN="${NOHUP_BIN:-nohup}"
+START_WAIT_SECONDS="${START_WAIT_SECONDS:-10}"
+OPEN_GUI=0
+
+if [[ $# -gt 1 ]]; then
+  printf 'usage: %s [gui]\n' "${0##*/}" >&2
+  exit 1
+fi
+
+if [[ $# -eq 1 ]]; then
+  case "$1" in
+    gui|--gui)
+      OPEN_GUI=1
+      ;;
+    *)
+      printf 'unknown argument: %s\nusage: %s [gui]\n' "$1" "${0##*/}" >&2
+      exit 1
+      ;;
+  esac
+fi
+
+run_privileged() {
+  if [[ -n "$SUDO_BIN" ]]; then
+    "$SUDO_BIN" "$@"
+  else
+    "$@"
+  fi
+}
+
+run_virsh() {
+  run_privileged "$VIRSH_BIN" --connect "$URI" "$@"
+}
+
+get_state() {
+  local state
+  state="$(run_virsh domstate "$VM_NAME" 2>/dev/null)"
+  state="${state//$'\r'/}"
+  state="${state//$'\n'/}"
+  printf '%s' "$state"
+}
+
+open_console() {
+  "$NOHUP_BIN" "$VIRT_MANAGER_BIN" --connect "$URI" --show-domain-console "$VM_NAME" \
+    >/dev/null 2>&1 </dev/null &
+  printf '%s console opened\n' "$VM_NAME"
+}
+
+if [[ -n "$SUDO_BIN" ]]; then
+  "$SUDO_BIN" -v
+fi
+
+if ! state="$(get_state)"; then
+  printf 'failed to query libvirt state for %s\n' "$VM_NAME" >&2
+  exit 1
+fi
+
+case "$state" in
+  running)
+    printf '%s already running\n' "$VM_NAME"
+    if [[ "$OPEN_GUI" == "1" ]]; then
+      open_console
+    fi
+    exit 0
+    ;;
+  "shut off")
+    run_virsh start "$VM_NAME" >/dev/null
+    ;;
+  *)
+    printf 'unsupported state for %s: %s\n' "$VM_NAME" "$state" >&2
+    exit 1
+    ;;
+esac
+
+for ((attempt = 0; attempt < START_WAIT_SECONDS; attempt++)); do
+  if [[ "$(get_state)" == "running" ]]; then
+    printf '%s started\n' "$VM_NAME"
+    if [[ "$OPEN_GUI" == "1" ]]; then
+      open_console
+    fi
+    exit 0
+  fi
+  sleep 1
+done
+
+printf 'timed out waiting for %s to reach running state\n' "$VM_NAME" >&2
+exit 1

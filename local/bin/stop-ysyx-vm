@@ -1,0 +1,67 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+URI="${LIBVIRT_URI:-qemu:///system}"
+VM_NAME="${VM_NAME:-ubuntu22.04}"
+VIRSH_BIN="${VIRSH_BIN:-virsh}"
+SUDO_BIN="${SUDO_BIN:-sudo}"
+FORCE="${FORCE:-0}"
+STOP_WAIT_SECONDS="${STOP_WAIT_SECONDS:-30}"
+
+run_privileged() {
+  if [[ -n "$SUDO_BIN" ]]; then
+    "$SUDO_BIN" "$@"
+  else
+    "$@"
+  fi
+}
+
+run_virsh() {
+  run_privileged "$VIRSH_BIN" --connect "$URI" "$@"
+}
+
+get_state() {
+  local state
+  state="$(run_virsh domstate "$VM_NAME" 2>/dev/null)"
+  state="${state//$'\r'/}"
+  state="${state//$'\n'/}"
+  printf '%s' "$state"
+}
+
+if [[ -n "$SUDO_BIN" ]]; then
+  "$SUDO_BIN" -v
+fi
+
+if ! state="$(get_state)"; then
+  printf 'failed to query libvirt state for %s\n' "$VM_NAME" >&2
+  exit 1
+fi
+
+case "$state" in
+  "shut off")
+    printf '%s already stopped\n' "$VM_NAME"
+    exit 0
+    ;;
+  running)
+    if [[ "$FORCE" == "1" ]]; then
+      run_virsh destroy "$VM_NAME" >/dev/null
+    else
+      run_virsh shutdown "$VM_NAME" >/dev/null
+    fi
+    ;;
+  *)
+    printf 'unsupported state for %s: %s\n' "$VM_NAME" "$state" >&2
+    exit 1
+    ;;
+esac
+
+for ((attempt = 0; attempt < STOP_WAIT_SECONDS; attempt++)); do
+  if [[ "$(get_state)" == "shut off" ]]; then
+    printf '%s stopped\n' "$VM_NAME"
+    exit 0
+  fi
+  sleep 1
+done
+
+printf 'timed out waiting for %s to stop\n' "$VM_NAME" >&2
+exit 1
