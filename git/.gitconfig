@@ -3,7 +3,6 @@
 	name = 0x1B05
 [core]
 	editor = nvim
-	excludesfile = .DS_Store
 [color]
 	ui = true
 [url "ssh://git@github/"]
