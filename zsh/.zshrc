@@ -1,21 +1,36 @@
 # Disable XON/XOFF flow control
 stty -ixon
-# env-variables
+
+# Core tools
 export EDITOR=nvim
-export NPC_HOME=$HOME/ysyx-workbench/npc
-export NEMU_HOME=$HOME/ysyx-workbench/nemu
-export AM_HOME=$HOME/ysyx-workbench/abstract-machine
-export NVBOARD_HOME=$HOME/ysyx-workbench/nvboard
-export NAVY_HOME=$HOME/ysyx-workbench/navy-apps
-export SOC_HOME=$HOME/ysyx-workbench/ysyxSoC
 
-export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
-export JRE_HOME=/usr/lib/jvm/java-17-openjdk/jre
+# Legacy ysyx-workbench paths (disabled while using XiangShan xs-env)
+# export NPC_HOME=$HOME/ysyx-workbench/npc
+# export NEMU_HOME=$HOME/ysyx-workbench/nemu
+# export AM_HOME=$HOME/ysyx-workbench/abstract-machine
+# export NVBOARD_HOME=$HOME/ysyx-workbench/nvboard
+# export NAVY_HOME=$HOME/ysyx-workbench/navy-apps
+# export SOC_HOME=$HOME/ysyx-workbench/ysyxSoC
 
-# zoxide history directory
+# XiangShan xs-env (mirrors xs-env/env.sh so you do not need to source it each time)
+export XS_PROJECT_ROOT=$HOME/XS/xs-env
+if [[ -d "$XS_PROJECT_ROOT" ]]; then
+    export NEMU_HOME=$XS_PROJECT_ROOT/NEMU
+    export AM_HOME=$XS_PROJECT_ROOT/nexus-am
+    export NOOP_HOME=$XS_PROJECT_ROOT/XiangShan
+    export DRAMSIM3_HOME=$XS_PROJECT_ROOT/DRAMsim3
+fi
+export RVTOOL_PATH=/nfs/home/share/riscv-tools/bin
+
+# XDG directories
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
+
+# Node
+# Load nvm before normalizing PATH so its Node bin can be de-duplicated cleanly.
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
 export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git"'
 
@@ -25,7 +40,8 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git"'
 [[ -f ~/dotfiles/zsh/icons.zsh ]] && source ~/dotfiles/zsh/icons.zsh
 [[ -f ~/dotfiles/zsh/history.zsh ]] && source ~/dotfiles/zsh/history.zsh
 
-paths=(
+# PATH
+path=(
     $HOME/.local/bin
     $HOME/.cargo/bin
     $HOME/.local/share/coursier/bin
@@ -33,10 +49,16 @@ paths=(
     /usr/lib/ccache/bin
     /usr/bin
     /usr/sbin
-    ${(@s/:/)PATH}
+    ${path}
+    $RVTOOL_PATH
+    /nfs/home/share/riscv/bin
 )
-typeset -U paths
-export PATH="${(j/:/)paths}"
+typeset -U path PATH
+export PATH
+
+dasm() {
+    echo "DASM($1)" | spike-dasm
+}
 
 # Start ssh-agent
 [[ -f ~/dotfiles/zsh/ssh-agent.zsh ]] && source ~/dotfiles/zsh/ssh-agent.zsh
@@ -110,6 +132,3 @@ compinit
 
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
