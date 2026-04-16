@@ -6,7 +6,7 @@
 	excludesfile = .DS_Store
 [color]
 	ui = true
-[url "git@github.com:"]
+[url "ssh://git@github/"]
 	insteadOf = https://github.com/
 	insteadOf = http://github.com/
 [merge]

@@ -1,4 +1,3 @@
-alias vim="nvim"
 alias py="python3"
 alias la="ls -a"
 alias glog="git log --all --oneline --pretty=format:'%C(auto)%h%C(blue) %<|(19)%as%C(auto)%d %s' --graph"

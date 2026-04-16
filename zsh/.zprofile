@@ -1,3 +1,1 @@
-if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
-    dbus-run-session start-hyprland
-fi
+# Server profile: do not auto-start a desktop session on login.

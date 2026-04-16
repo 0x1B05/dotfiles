@@ -17,9 +17,10 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 
-export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git" '
+export FZF_DEFAULT_COMMAND='rg --files --hidden -g "!.git"'
 
 [[ -f ~/dotfiles/zsh/aliases.zsh ]] && source ~/dotfiles/zsh/aliases.zsh
+[[ -f ~/dotfiles/zsh/proxy.zsh ]] && source ~/dotfiles/zsh/proxy.zsh
 [[ -f ~/dotfiles/zsh/scripts.zsh ]] && source ~/dotfiles/zsh/scripts.zsh
 [[ -f ~/dotfiles/zsh/icons.zsh ]] && source ~/dotfiles/zsh/icons.zsh
 [[ -f ~/dotfiles/zsh/history.zsh ]] && source ~/dotfiles/zsh/history.zsh
@@ -32,9 +33,10 @@ paths=(
     /usr/lib/ccache/bin
     /usr/bin
     /usr/sbin
+    ${(@s/:/)PATH}
 )
-path=$(join_by ":" "${paths[@]}")
-export PATH="$path"
+typeset -U paths
+export PATH="${(j/:/)paths}"
 
 # Start ssh-agent
 [[ -f ~/dotfiles/zsh/ssh-agent.zsh ]] && source ~/dotfiles/zsh/ssh-agent.zsh
@@ -93,16 +95,11 @@ plug "zap-zsh/supercharge"
 plug "zsh-users/zsh-autosuggestions"
 plug "zsh-users/zsh-syntax-highlighting"
 plug "zsh-users/zsh-completions"
-# Fish-like syntax highlighting for Zsh.
-# zsh-users/zsh-syntax-highlighting must be sourced after completion
-plug "zsh-users/zsh-syntax-highlighting"
 # Fish-like history search (up arrow) for Zsh.
 # zsh-users/zsh-history-substring-search must be sourced after zsh-users/zsh-syntax-highlighting
 plug "zsh-users/zsh-history-substring-search"
 plug "wookayin/fzf-fasd"
 plug "Aloxaf/fzf-tab"
-# Fish-like autosuggestions for Zsh.
-plug "zsh-users/zsh-autosuggestions"
 plug "hlissner/zsh-autopair"
 # plug "jeffreytse/zsh-vi-mode" --source zsh-vi-mode.plugin.zsh
 plug "jeffreytse/zsh-vi-mode"
@@ -113,3 +110,6 @@ compinit
 
 eval "$(zoxide init zsh)"
 eval "$(starship init zsh)"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
