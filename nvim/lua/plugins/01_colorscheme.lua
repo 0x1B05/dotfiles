@@ -1,13 +1,5 @@
 return {
 	{
-		"theniceboy/nvim-deus",
-		lazy = true,
-		priority = 1000,
-		config = function()
-			vim.cmd([[colorscheme deus]])
-		end,
-	},
-	{
 		"catppuccin/nvim",
 		name = "catppuccin",
 		lazy = false,

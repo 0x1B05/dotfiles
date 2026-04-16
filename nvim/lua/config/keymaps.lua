@@ -50,12 +50,6 @@ map("n", "<leader><tab>d", "<cmd>tabclose<cr>", { desc = "Close Tab" })
 -- save file
 map({ "i", "v", "n", "s" }, "<C-s>", "<cmd>wa<cr><esc>", { desc = "Save file" })
 
--- preview typst
-map("n", "<leader>pt", "<cmd>TypstWatch<cr>", { desc = "Typst preview" })
-
--- compile java
-map("n", "<leader>pj", "<cmd>make PACKAGE=%:p:h:t %:t:r<cr>", { desc = "Java single-file compile." })
-
 -- refresh snippets
 map(
 	"n",
@@ -100,9 +94,6 @@ M.yazi2 = {
 	change_working_directory = "<c-\\>",
 }
 
-M.img_clip = {
-	{ "<C-A-v>", "<cmd>PasteImage<cr>", desc = "Paste image from system clipboard" },
-}
 M.grug_far = {
 	{
 		"<leader>sr",
@@ -192,40 +183,6 @@ M.persistence = {
 		end,
 		desc = "Load Session",
 	},
-}
-M.knap = {
-	{
-		"<leader>pk",
-		function()
-			require("knap").toggle_autopreviewing()
-		end,
-		desc = "Knap toggle auto previewing",
-	},
-	{
-		"<leader>ps",
-		function()
-			require("knap").forward_jump()
-		end,
-		desc = "Knap forward jump",
-	},
-	{
-		"<leader>pr",
-		function()
-			require("knap").process_once()
-		end,
-		desc = "Knap processes the document and refreshes the view",
-	},
-	{
-		"<leader>pc",
-		function()
-			require("knap").close_viewer()
-		end,
-		desc = "Knap closes the viewer application",
-	},
-}
-M.remote = {
-	{ "<leader>rs", "<cmd>RemoteStart<cr>", desc = "Remote Start" },
-	{ "<leader>ri", "<cmd>RemoteInfo<cr>", desc = "Remote Info" },
 }
 M.harpoon = {
 	{
@@ -406,7 +363,7 @@ M.snacks = {
 	},
 
 	-- ===========================
-	-- Telescope 功能 (Picker)
+	-- Picker 功能
 	-- ===========================
 	{
 		"<leader>ff",

@@ -1,4 +1,18 @@
 local keymaps = require("config.keymaps")
+
+local function patch_tree_sitter_generate_args()
+	local ok, install = pcall(require, "nvim-treesitter.install")
+	if not ok then
+		return
+	end
+
+	if vim.treesitter.language_version then
+		install.ts_generate_args = { "generate", "--abi", vim.treesitter.language_version }
+	else
+		install.ts_generate_args = { "generate" }
+	end
+end
+
 return {
 	{ "nvim-tree/nvim-web-devicons", lazy = true },
 	{
@@ -292,7 +306,10 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		version = false, -- last release is way too old and doesn't work on Windows
-		build = ":TSUpdate",
+		build = function()
+			patch_tree_sitter_generate_args()
+			require("nvim-treesitter.install").update({ with_sync = true })()
+		end,
 		event = { "BufReadPost", "BufNewFile" },
 		lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
 		init = function(plugin)
@@ -302,6 +319,7 @@ return {
 			-- Luckily, the only things that those plugins need are the custom queries, which we make available
 			-- during startup.
 			require("lazy.core.loader").add_to_rtp(plugin)
+			patch_tree_sitter_generate_args()
 			require("nvim-treesitter.query_predicates")
 			-- Work around markdown injection parsing crashing on README-style fenced blocks.
 			vim.treesitter.query.set("markdown", "injections", "")
@@ -331,7 +349,6 @@ return {
 				"javascript",
 				"jq",
 				"json",
-				"latex",
 				"lua",
 				"luap",
 				"make",
@@ -360,6 +377,7 @@ return {
 			},
 		},
 		config = function(_, opts)
+			patch_tree_sitter_generate_args()
 			require("nvim-treesitter.configs").setup(opts)
 		end,
 	},

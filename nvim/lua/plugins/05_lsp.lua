@@ -17,6 +17,36 @@ local function find_verilator_file()
 	})[1]
 end
 
+local server_commands = {
+	basedpyright = { "basedpyright-langserver", "--stdio" },
+	clangd = { "clangd" },
+	cmake = { "cmake-language-server" },
+	lua_ls = { "lua-language-server" },
+	ruff = { "ruff" },
+	verible = { "verible-verilog-ls" },
+}
+
+local mason_lsp_servers = {
+	"ruff",
+	"verible",
+}
+
+local function resolve_server_cmd(server_name)
+	local cmd = server_commands[server_name]
+	if not cmd then
+		return nil
+	end
+
+	local executable = vim.fn.exepath(cmd[1])
+	if executable == "" then
+		return nil
+	end
+
+	local resolved = vim.deepcopy(cmd)
+	resolved[1] = executable
+	return resolved
+end
+
 return {
 	-- manage LSP servers, DAP servers, linters, and formatters
 	{
@@ -27,7 +57,10 @@ return {
 		build = ":MasonUpdate",
 		opts = {
 			ensure_installed = require("config.options").ensure_installed.mason_tools,
+			PATH = "append",
+			max_concurrent_installers = 1,
 			ui = {
+				check_outdated_packages_on_open = false,
 				icons = {
 					package_installed = "✓",
 					package_pending = "➜",
@@ -76,18 +109,21 @@ return {
 				cmake = {},
 				lua_ls = {},
 				ruff = {},
-				tinymist = {},
 				verible = {},
 			},
 		},
 		config = function(_, opts)
 			for server_name, server_opts in pairs(opts.servers) do
-				vim.lsp.config(server_name, lsp.extend(server_opts))
-				vim.lsp.enable(server_name)
+				local resolved_cmd = resolve_server_cmd(server_name)
+				if resolved_cmd then
+					server_opts = vim.tbl_deep_extend("force", { cmd = resolved_cmd }, server_opts)
+					vim.lsp.config(server_name, lsp.extend(server_opts))
+					vim.lsp.enable(server_name)
+				end
 			end
 
 			require("mason-lspconfig").setup({
-				ensure_installed = require("config.options").ensure_installed.lsp_servers,
+				ensure_installed = mason_lsp_servers,
 				automatic_enable = false,
 			})
 		end,
@@ -120,7 +156,6 @@ return {
 				bash = { "shfmt" },
 				sh = { "shfmt" },
 				lua = { "stylua" },
-				typst = { "typstyle" },
 				html = { "prettier" },
 				markdown = { "prettier" },
 				javascript = { "prettier" },
@@ -289,14 +324,5 @@ return {
 				group = nvim_metals_group,
 			})
 		end,
-	},
-	-- typst
-	{ "kaarmu/typst.vim", lazy = true, ft = "typst" },
-	-- latex
-	{
-		"frabjous/knap",
-		enabled = true,
-		keys = keymaps.knap,
-		ft = { "tex", "markdown" },
 	},
 }
