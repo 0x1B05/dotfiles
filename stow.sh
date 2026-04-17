@@ -31,5 +31,6 @@ stow_package "$HOME" git
 
 link_file "$repo_root/zsh/.zshrc" "$HOME/.zshrc"
 link_file "$repo_root/zsh/.zprofile" "$HOME/.zprofile"
+link_file "$repo_root/gtkwave/.gtkwaverc" "$HOME/.gtkwaverc"
 
 stow_package "$HOME/.local/bin" bin "$repo_root/local"

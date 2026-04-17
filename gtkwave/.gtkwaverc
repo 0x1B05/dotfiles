@@ -1,0 +1,23 @@
+# Font selection
+fontname_signals Mono 10
+fontname_waves Monaco Medium 10
+
+# Shortcuts
+accel "/Markers/Drop Named Marker" x
+accel "/Markers/Collect Named Marker" z
+accel "/Markers/Collect All Named Markers" c
+accel "/Search/Open Scope" v
+accel "/Edit/Insert Blank" b
+accel "/Search/Pattern Search 1" <Control>F
+accel "/Edit/Delete" BackSpace
+
+# Visual cleanup
+highlight_wavewindow 1
+color_grid 636363
+enable_horiz_grid 0
+splash_disable 1
+fill_waveform 1
+use_fat_lines 1
+use_big_fonts 1
+sst_dbl_action_type i
+disable_mouseover 0
