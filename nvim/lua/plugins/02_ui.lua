@@ -1,6 +1,8 @@
 local keymaps = require("config.keymaps")
 
 local function patch_tree_sitter_generate_args()
+	require("config.proxy").setup_treesitter()
+
 	local ok, install = pcall(require, "nvim-treesitter.install")
 	if not ok then
 		return
@@ -324,7 +326,7 @@ return {
 			-- Work around markdown injection parsing crashing on README-style fenced blocks.
 			vim.treesitter.query.set("markdown", "injections", "")
 		end,
-		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
+		cmd = { "TSInstall", "TSInstallSync", "TSUpdate", "TSUpdateSync" },
 		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects", "HiPhish/nvim-ts-rainbow2" },
 		opts_extend = { "ensure_installed" },
 		---@type TSConfig
