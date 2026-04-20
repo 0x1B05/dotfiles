@@ -51,12 +51,12 @@ stow_package "$HOME/.config/gtk-4.0" gtk-4.0
 stow_package "$HOME/.config/xsettingsd" xsettingsd
 
 stow_package "$HOME/.config" starship
-stow_package "$HOME/.config" mimeapps
 stow_package "$HOME/.ssh" ssh
 stow_package "$HOME" git
 
 link_file "$repo_root/.gtkrc-2.0" "$HOME/.gtkrc-2.0"
 link_file "$repo_root/.Xresources" "$HOME/.Xresources"
+link_file "$repo_root/mimeapps/mimeapps.list" "$HOME/.config/mimeapps.list"
 link_file "$repo_root/zsh/.zshrc" "$HOME/.zshrc"
 link_file "$repo_root/zsh/.zprofile" "$HOME/.zprofile"
 link_file "$repo_root/gtkwave/.gtkwaverc" "$HOME/.gtkwaverc"
