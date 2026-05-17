@@ -41,8 +41,8 @@ bind(mainMod .. " + CTRL + E", hl.dsp.layout("fit toend"))
 bind(mainMod .. " + CTRL + F", hl.dsp.layout("fit active"))
 bind(mainMod .. " + CTRL + V", hl.dsp.layout("fit visible"))
 
-bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { drag = true })
-bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { drag = true })
+bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
+bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
 
 bind(mainMod .. " + S", hl.dsp.window.move({ workspace = "special:magic" }))
 bind(mainMod .. " + SHIFT + S", hl.dsp.workspace.toggle_special("magic"))
