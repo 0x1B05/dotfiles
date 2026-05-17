@@ -6,7 +6,10 @@ hl.env("XDG_SESSION_DESKTOP", "Hyprland")
 hl.env("XDG_SESSION_TYPE", "wayland")
 
 hl.env("QT_SCALE_FACTOR", "1")
-hl.env("XCURSOR_SIZE", "30")
+hl.env("XCURSOR_THEME", "Bibata-Modern-Ice")
+hl.env("XCURSOR_SIZE", "32")
+hl.env("HYPRCURSOR_THEME", "Bibata-Modern-Ice")
+hl.env("HYPRCURSOR_SIZE", "32")
 hl.env("GDK_SCALE", "2")
 
 hl.env("ANKI_WAYLAND", "1")
@@ -26,4 +29,9 @@ hl.env("INPUT_METHOD", "fcitx")
 -- hl.env("__GLX_VENDOR_LIBRARY_NAME", "nvidia")
 -- hl.env("__GL_VRR_ALLOWED", "1")
 -- hl.env("WLR_DRM_NO_ATOMIC", "1")
-hl.config({ cursor = { no_hardware_cursors = true } })
+hl.config({
+    cursor = {
+        no_hardware_cursors = true,
+        sync_gsettings_theme = false,
+    },
+})
