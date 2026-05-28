@@ -24,8 +24,6 @@ Host eda01 open*
     Port 22
     AddKeysToAgent yes
     ForwardAgent true
-    ForwardX11Trusted true
-    ForwardX11 true
     IdentityFile ~/.ssh/id_ed25519_eda01
     ProxyJump ysyx-vm
 

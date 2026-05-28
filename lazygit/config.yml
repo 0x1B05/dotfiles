@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/jesseduffield/lazygit/master/schema/config.json
 # Config relating to the Lazygit UI
 gui:
   # See https://github.com/jesseduffield/lazygit/blob/master/docs/Config.md#custom-author-color
@@ -244,7 +245,7 @@ git:
   # Commands used to display git log of all branches in the main window, they will be cycled in order of appearance (array of strings)
   allBranchesLogCmds:
     - git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium
-  # If true, git diffs are rendered with the `--ignore-all-space` flag, which ignores whitespace changes. Can be toggled from within Lazygit with `<c-w>`.
+  # If true, git diffs are rendered with the `--ignore-all-space` flag, which ignores whitespace changes. Can be toggled from within Lazygit with `<ctrl+w>`.
   ignoreWhitespaceInDiffView: false
   # The number of lines of context to show around each diff hunk. Can be changed from within Lazygit with the `{` and `}` keys.
   diffContextSize: 3
@@ -269,12 +270,12 @@ git:
     # 'topo-order' makes it easier to read the git log graph, but commits may not
     # appear chronologically. See https://git-scm.com/docs/
     #
-    # Can be changed from within Lazygit with `Log menu -> Commit sort order` (`<c-l>` in the commits window by default).
+    # Can be changed from within Lazygit with `Log menu -> Commit sort order` (`<ctrl+l>` in the commits window by default).
     order: topo-order
     # This determines whether the git graph is rendered in the commits panel
     # One of 'always' | 'never' | 'when-maximised'
     #
-    # Can be toggled from within lazygit with `Log menu -> Show git graph` (`<c-l>` in the commits window by default).
+    # Can be toggled from within lazygit with `Log menu -> Show git graph` (`<ctrl+l>` in the commits window by default).
     showGraph: always
     # displays the whole git graph by default in the commits view (equivalent to passing the `--all` argument to `git log`)
     showWholeGraph: false
@@ -357,7 +358,7 @@ promptToReturnFromSubprocess: true
 keybinding:
   universal:
     quit: q
-    quit-alt1: <c-c>
+    quit-alt1: <ctrl+c>
     return: <esc>
     quitWithoutChangingDirectory: Q
     togglePanel: <tab>
@@ -374,8 +375,8 @@ keybinding:
     gotoTop-alt: <home>
     gotoBottom-alt: <end>
     toggleRangeSelect: v
-    rangeSelectDown: <s-down>
-    rangeSelectUp: <s-up>
+    rangeSelectDown: <shift+down>
+    rangeSelectUp: <shift+up>
     prevBlock: <left>
     nextBlock: <right>
     prevBlock-alt: h
@@ -392,13 +393,12 @@ keybinding:
     nextMatch: "n"
     prevMatch: "N"
     startSearch: /
-    optionMenu: <disabled>
-    optionMenu-alt1: '?'
+    optionMenu: '?'
     select: <space>
     goInto: <enter>
     confirm: <enter>
-    confirmInEditor: <a-enter>
-    confirmInEditor-alt: <c-s>
+    confirmInEditor: <alt+enter>
+    confirmInEditor-alt: <ctrl+s>
     remove: d
     new: "n"
     edit: e
@@ -407,8 +407,8 @@ keybinding:
     scrollDownMain: <pgdown>
     scrollUpMain-alt1: K
     scrollDownMain-alt1: J
-    # scrollUpMain-alt2: <c-u>
-    # scrollDownMain-alt2: <c-d>
+    # scrollUpMain-alt2: <ctrl+u>
+    # scrollDownMain-alt2: <ctrl+d>
     executeShellCommand: ':'
     createRebaseOptionsMenu: m
     # 'Files' appended for legacy reasons
@@ -416,26 +416,26 @@ keybinding:
     # 'Files' appended for legacy reasons
     pullFiles: p
     refresh: R
-    createPatchOptionsMenu: <c-p>
+    createPatchOptionsMenu: <ctrl+p>
     nextTab: ']'
     prevTab: '['
     nextScreenMode: +
     prevScreenMode: _
     undo: z
-    redo: <c-z>
-    filteringMenu: <c-s>
+    redo: Z
+    filteringMenu: <ctrl+s>
     diffingMenu: W
-    diffingMenu-alt: <c-e>
-    copyToClipboard: <c-o>
-    openRecentRepos: <c-r>
+    diffingMenu-alt: <ctrl+e>
+    copyToClipboard: <ctrl+o>
+    openRecentRepos: <ctrl+r>
     submitEditorText: <enter>
     extrasMenu: '@'
-    toggleWhitespaceInDiffView: <c-w>
+    toggleWhitespaceInDiffView: <ctrl+w>
     increaseContextInDiffView: '}'
     decreaseContextInDiffView: '{'
     increaseRenameSimilarityThreshold: )
     decreaseRenameSimilarityThreshold: (
-    openDiffTool: <c-t>
+    openDiffTool: <ctrl+t>
   status:
     checkForUpdate: u
     recentRepos: <enter>
@@ -445,7 +445,7 @@ keybinding:
     commitChangesWithoutHook: w
     amendLastCommit: A
     commitChangesWithEditor: C
-    findBaseCommitForFixup: <c-f>
+    findBaseCommitForFixup: <ctrl+f>
     confirmDiscard: x
     ignoreFile: i
     refreshFiles: r
@@ -456,14 +456,14 @@ keybinding:
     fetch: f
     toggleTreeView: '`'
     openMergeOptions: M
-    openStatusFilter: <c-b>
+    openStatusFilter: <ctrl+b>
     copyFileInfoToClipboard: "y"
     collapseAll: '-'
     expandAll: =
   branches:
     createPullRequest: o
     viewPullRequestOptions: O
-    copyPullRequestURL: <c-y>
+    copyPullRequestURL: <ctrl+y>
     checkoutBranchByName: c
     forceCheckoutBranch: F
     checkoutPreviousBranch: '-'
@@ -488,8 +488,8 @@ keybinding:
     markCommitAsFixup: f
     createFixupCommit: F
     squashAboveCommits: S
-    moveDownCommit: '<c-d>'
-    moveUpCommit: '<c-u>'
+    moveDownCommit: '<ctrl+d>'
+    moveUpCommit: '<ctrl+u>'
     amendToCommit: A
     resetCommitAuthor: a
     pickCommit: p
@@ -499,9 +499,9 @@ keybinding:
     markCommitAsBaseForRebase: B
     tagCommit: T
     checkoutCommit: <space>
-    resetCherryPick: <c-R>
+    resetCherryPick: <ctrl+r>
     copyCommitAttributeToClipboard: "y"
-    openLogMenu: <c-l>
+    openLogMenu: <ctrl+l>
     openInBrowser: o
     viewBisectOptions: b
     startInteractiveRebase: i
@@ -524,4 +524,4 @@ keybinding:
     update: u
     bulkMenu: b
   commitMessage:
-    commitMenu: <c-o>
+    commitMenu: <ctrl+o>
