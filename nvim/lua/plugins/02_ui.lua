@@ -305,6 +305,8 @@ return {
 			require("nvim-treesitter.query_predicates")
 			-- Work around markdown injection parsing crashing on README-style fenced blocks.
 			vim.treesitter.query.set("markdown", "injections", "")
+			-- Bash heredoc injections can produce invalid child parser ranges in large hook scripts.
+			vim.treesitter.query.set("bash", "injections", "")
 		end,
 		cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
 		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects", "HiPhish/nvim-ts-rainbow2" },
@@ -360,6 +362,17 @@ return {
 			},
 		},
 		config = function(_, opts)
+			local parser_install_dir = vim.fn.stdpath("data") .. "/treesitter"
+			vim.fn.mkdir(parser_install_dir, "p")
+			vim.opt.runtimepath:prepend(parser_install_dir)
+			opts.parser_install_dir = parser_install_dir
+
+			require("nvim-treesitter.install").ts_generate_args = {
+				"generate",
+				"--abi",
+				tostring(vim.treesitter.language_version),
+			}
+
 			require("nvim-treesitter.configs").setup(opts)
 		end,
 	},
