@@ -56,6 +56,20 @@ southwest = "GoToStart"
 keep_during_reload = true
 arrow_key_bindings = "Edge"
 
+[shortcuts]
+# Keys use egui names: "I" means the i key, while "Shift+I" means uppercase I.
+# Unified high-frequency navigation with zathura/swayimg where Surfer supports it.
+zoom_in = ["I", "Plus"]
+zoom_out = ["O", "Minus"]
+zoom_to_fit = ["Z", "Equals", "Shift+F"]
+scroll_up = ["U", "PageUp"]
+scroll_down = ["D", "PageDown"]
+goto_start = ["G"]
+goto_end = ["Shift+G"]
+toggle_side_panel = ["Tab", "B"]
+reload_waveform = ["Command+R"]
+show_command_prompt = ["Space"]
+
 [wcp]
 autostart = false
 address = "127.0.0.1:54321"
