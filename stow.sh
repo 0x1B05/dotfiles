@@ -44,6 +44,7 @@ stow_package "$HOME/.config/swaync" swaync
 stow_package "$HOME/.config/cliphist" cliphist
 stow_package "$HOME/.config/swayimg" swayimg
 stow_package "$HOME/.config/tmux" tmux
+stow_package "$HOME/.config/uv" uv
 stow_package "$HOME/.config/foot" foot
 stow_package "$HOME/.config/fontconfig" fontconfig
 stow_package "$HOME/.config/gtk-3.0" gtk-3.0
