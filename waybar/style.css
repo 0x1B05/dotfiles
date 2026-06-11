@@ -43,7 +43,7 @@
 /* @define-color iconcolor #000000; */
 
 * {
-    font-family: "Fira Sans Semibold", FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-family: "Fira Sans SemiBold", "Symbols Nerd Font", Roboto, Helvetica, Arial, sans-serif;
     border: none;
     border-radius: 0px;
     min-height: 0;
