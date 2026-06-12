@@ -43,12 +43,34 @@ hl.window_rule({
     name = "feishu-meeting-class-float",
     match = { class = "^(Meeting)$" },
     float = true,
+    center = true,
 })
 
 hl.window_rule({
     name = "feishu-meeting-title-float",
     match = { title = "^(Feishu Meetings)$" },
     float = true,
+})
+
+hl.window_rule({
+    name = "feishu-share-picker-float",
+    match = { class = "^(hyprland-share-picker)$" },
+    float = true,
+    center = true,
+})
+
+hl.window_rule({
+    name = "xwayland-empty-popup-float",
+    match = {
+        class = "^$",
+        title = "^$",
+        xwayland = true,
+        float = false,
+        fullscreen = false,
+        pin = false,
+    },
+    float = true,
+    no_initial_focus = true,
 })
 
 hl.window_rule({
