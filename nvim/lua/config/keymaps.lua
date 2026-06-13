@@ -172,8 +172,8 @@ M.lsp = {
 	{ "<leader>la", "<cmd>lua vim.lsp.buf.code_action()<cr>", desc = "code action" },
 	{ "<leader>lf", util.format, desc = "Format" },
 	{ "<leader>li", "<cmd>LspInfo<cr>", desc = "LspInfo" },
-	{ "<leader>lj", "<cmd>lua vim.diagnostic.goto_next({buffer=0})<cr>", desc = "go to next diagnostic" },
-	{ "<leader>lk", "<cmd>lua vim.diagnostic.goto_prev({buffer=0})<cr>", desc = "go to prev diagnostic" },
+	{ "<leader>lj", "<cmd>lua vim.diagnostic.jump({ count = 1, float = true })<cr>", desc = "go to next diagnostic" },
+	{ "<leader>lk", "<cmd>lua vim.diagnostic.jump({ count = -1, float = true })<cr>", desc = "go to prev diagnostic" },
 	{ "<leader>lr", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "rename buffer" },
 	{ "<leader>ls", "<cmd>lua vim.lsp.buf.signature_help()<CR>", desc = "signature help" },
 }
