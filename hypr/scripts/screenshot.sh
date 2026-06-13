@@ -18,6 +18,11 @@ reset_opacity() {
     hyprctl keyword decoration:active_opacity 0.9
 }
 
+geom_size() {
+    local size="${1#* }"
+    printf '%s\n' "${size/x/,}"
+}
+
 choice=$(echo -e "$options" | rofi -dmenu -replace -config ~/dotfiles/rofi/config-screenshot.rasi -i -no-show-icons -l 3 -width 30 -p "Take Screenshot")
 
 case $choice in
@@ -41,7 +46,7 @@ $option2)
         reset_opacity
         if [ -f "$DIR$NAME" ]; then
             notify-send "Screenshot pinned" "Image is pinned to screen"
-            swayimg --config=info.show=no --config=viewer.scale=fit --class "swayimg_pin" --size=image "$DIR$NAME" &
+            swayimg --class "swayimg_pin" --size="$(geom_size "$GEOM")" "$DIR$NAME" &
         fi
     fi
     ;;
