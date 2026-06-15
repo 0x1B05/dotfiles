@@ -24,7 +24,7 @@ return {
 		{ trig = ";t", dscr = "tip block", snippetType = "autosnippet" },
 		fmta(
 			[[
-    #tip-box(title: "<>")[
+    #tip-block(title: "<>")[
         <>
     ]
 ]],
