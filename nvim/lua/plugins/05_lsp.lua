@@ -76,7 +76,7 @@ return {
 				cmake = {},
 				lua_ls = {},
 				ruff = {},
-				tinymist = {},
+				tinymist = { root_markers = { "main.typ", ".git" } },
 				verible = {},
 			},
 		},
