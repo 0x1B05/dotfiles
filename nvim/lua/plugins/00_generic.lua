@@ -192,7 +192,10 @@ return {
 
 				-- drag and drop options
 				drag_and_drop = {
-					enabled = true, ---@type boolean | fun(): boolean
+					-- img-clip implements drag and drop by replacing vim.paste.  With
+					-- insert_mode enabled it synchronously probes pasted URLs with curl,
+					-- which makes ordinary text pastes block on the network.
+					enabled = false, ---@type boolean | fun(): boolean
 					insert_mode = true, ---@type boolean | fun(): boolean
 				},
 			},
