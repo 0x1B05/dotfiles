@@ -362,11 +362,6 @@ return {
 			},
 		},
 		config = function(_, opts)
-			local parser_install_dir = vim.fn.stdpath("data") .. "/treesitter"
-			vim.fn.mkdir(parser_install_dir, "p")
-			vim.opt.runtimepath:prepend(parser_install_dir)
-			opts.parser_install_dir = parser_install_dir
-
 			require("nvim-treesitter.install").ts_generate_args = {
 				"generate",
 				"--abi",

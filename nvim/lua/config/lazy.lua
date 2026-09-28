@@ -114,7 +114,6 @@ function M.load_lazy()
 					"optwin",
 					"compiler",
 					"bugreport",
-					"ftplugin",
 				},
 			},
 		},
