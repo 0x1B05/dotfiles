@@ -37,7 +37,6 @@ M.opt_g = {
 		textopdfshorterror = 'A=%outputfile% ; LOGFILE="${A%.pdf}.log" ; rubber-info "$LOGFILE" 2>&1 | head -n 1',
 		delay = 250,
 	},
-	skip_ts_context_commentstring_module = true,
 }
 M.opt_o = {
 	-----------------------------------------------------------
@@ -79,7 +78,7 @@ M.opt_o = {
 	-- Code Fold
 	-----------------------------------------------------------
 	foldmethod = "expr",
-	foldexpr = "nvim_treesitter#foldexpr()",
+	foldexpr = "v:lua.vim.treesitter.foldexpr()",
 	foldlevel = 99,
 
 	-----------------------------------------------------------

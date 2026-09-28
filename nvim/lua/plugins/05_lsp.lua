@@ -150,18 +150,19 @@ return {
 				markdown = { "markdownlint" },
 				cpp = { "verilator" },
 			},
-			---@type table<string,table>
+			---@type table<string,table|function>
 			linters = {
-				verilator = {
-					args = function()
-						local args = { "--lint-only" }
-						local filelist = find_verilator_file()
-						if filelist then
-							vim.list_extend(args, { "-F", filelist })
-						end
-						return args
-					end,
-				},
+				verilator = function()
+					local linter = vim.deepcopy(require("lint.linters.verilator"))
+					linter.args = { "--lint-only" }
+
+					local filelist = find_verilator_file()
+					if filelist then
+						vim.list_extend(linter.args, { "-F", filelist })
+					end
+
+					return linter
+				end,
 			},
 		},
 		config = function(_, opts)
