@@ -17,6 +17,20 @@ local function find_verilator_file()
 	})[1]
 end
 
+local function clang_format_style(ctx)
+	local found = vim.fs.find(".clang-format", {
+		path = vim.fs.dirname(ctx.filename),
+		upward = true,
+		stop = vim.fs.dirname(vim.uv.os_homedir()),
+		type = "file",
+		limit = 1,
+	})[1]
+	if found then
+		return "--style=file"
+	end
+	return "--style={BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 88, AlignAfterOpenBracket: Align, AlignTrailingComments: true, DerivePointerAlignment: true, PointerAlignment: Right, SortIncludes: false}"
+end
+
 return {
 	-- manage LSP servers, DAP servers, linters, and formatters
 	{
@@ -131,10 +145,22 @@ return {
 			formatters = {
 				clang_format = {
 					command = "clang-format",
-					-- "--style={BasedOnStyle: Google, IndentWidth: 4, DerivePointerAlignment: true, PointerAlignment: Right, SortIncludes: false}",
-					args = {
-						"--style={BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 88, AlignAfterOpenBracket: Align, AlignTrailingComments: true, DerivePointerAlignment: true, PointerAlignment: Right, SortIncludes: false}",
-					},
+					args = function(_, ctx)
+						return { "-assume-filename", "$FILENAME", clang_format_style(ctx) }
+					end,
+					range_args = function(_, ctx)
+						local start_offset, end_offset =
+							require("conform.util").get_offsets_from_range(ctx.buf, ctx.range)
+						return {
+							"-assume-filename",
+							"$FILENAME",
+							clang_format_style(ctx),
+							"--offset",
+							tostring(start_offset),
+							"--length",
+							tostring(end_offset - start_offset),
+						}
+					end,
 					stdin = true,
 				},
 			},
