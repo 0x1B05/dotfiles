@@ -174,7 +174,8 @@ return {
 			events = { "BufWritePost", "BufReadPost", "InsertLeave" },
 			linters_by_ft = {
 				markdown = { "markdownlint" },
-				cpp = { "verilator" },
+				verilog = { "verilator" },
+				systemverilog = { "verilator" },
 			},
 			---@type table<string,table|function>
 			linters = {
