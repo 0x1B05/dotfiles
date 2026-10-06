@@ -1,14 +1,15 @@
-ncmpcpp_directory = ~/.ncmpcpp
-lyrics_directory = ~/.ncmpcpp/lyrics
+ncmpcpp_directory = ~/.config/ncmpcpp
+lyrics_directory = ~/.local/share/ncmpcpp/lyrics
 mpd_music_dir = ~/Music
 
 visualizer_in_stereo = "no"
-visualizer_fifo_path = "/tmp/mpd.fifo"
-visualizer_output_name = "my_fifo"
-visualizer_sync_interval = "10"
+visualizer_data_source = "/tmp/mpd.fifo"
+visualizer_output_name = "Visualizer feed"
 visualizer_type = "spectrum" #spectrum/wave/wave_filled/ellipse
 
-autocenter_mode = yes
+startup_screen = browser
+autocenter_mode = no
+ask_before_clearing_playlists = yes
 message_delay_time = "1"
 song_list_format = "{{%a %t}|{%f}}{$R%l}"
 current_item_prefix = $b$7
@@ -16,13 +17,12 @@ current_item_inactive_column_prefix = $b$(white)$r
 now_playing_prefix = "$b$3"
 now_playing_suffix = "$b$9"
 main_window_color = white
-execute_on_song_change = notify-send "♫ Now Playing" "$(mpc current)"
 
 playlist_display_mode = "classic"
 user_interface = classic
-header_visibility = "no"
-statusbar_visibility = "no"
-titles_visibility = "no"
+header_visibility = "yes"
+statusbar_visibility = "yes"
+titles_visibility = "yes"
 
 mouse_support = "yes"
 
