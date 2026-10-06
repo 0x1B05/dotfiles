@@ -22,6 +22,7 @@ stow_packages=(
 	yazi
 	mpv
 	mpd
+	ncmpcpp
 	zathura
 	surfer
 	swaync
@@ -63,6 +64,7 @@ default_user_packages=(
 	yazi
 	mpv
 	mpd
+	ncmpcpp
 	zathura
 	surfer
 	swaync
@@ -261,6 +263,7 @@ stow_user_package() {
 		yazi) run_stow "$HOME/.config/yazi" yazi ;;
 		mpv) run_stow "$HOME/.config/mpv" mpv ;;
 		mpd) run_stow "$HOME/.config/mpd" mpd ;;
+		ncmpcpp) run_stow "$HOME/.config/ncmpcpp" ncmpcpp ;;
 		zathura) run_stow "$HOME/.config/zathura" zathura ;;
 		surfer) run_stow "$HOME/.config/surfer" surfer ;;
 		swaync) run_stow "$HOME/.config/swaync" swaync ;;
