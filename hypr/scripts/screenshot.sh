@@ -23,7 +23,8 @@ geom_size() {
     printf '%s\n' "${size/x/,}"
 }
 
-choice=$(echo -e "$options" | rofi -dmenu -replace -config ~/dotfiles/rofi/config-screenshot.rasi -i -no-show-icons -l 3 -width 30 -p "Take Screenshot")
+choice=$(printf '%s\n' "$option1" "$option2" "$option3" | \
+    "$HOME/dotfiles/scripts/fuzzel.sh" --dmenu --lines 3 --width 30 --no-icons --prompt "Take Screenshot")
 
 case $choice in
 $option1)

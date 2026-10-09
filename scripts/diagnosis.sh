@@ -24,7 +24,7 @@ _folderExists() {
     fi
 }
 
-_commandExists "rofi"
+_commandExists "fuzzel"
 _commandExists "dunst"
 _commandExists "waybar"
 _commandExists "swww"
