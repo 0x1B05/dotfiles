@@ -97,20 +97,20 @@
         "tooltip": false
     },
 
-    // Rofi Application Launcher
+    // Fuzzel Application Launcher
     "custom/appmenu": {
         // START APPS LABEL
         "format": "Apps",
         // END APPS LABEL
-        "on-click": "sleep 0.2;rofi -show drun -replace",
+        "on-click": "sleep 0.2;~/dotfiles/scripts/fuzzel.sh",
         "on-click-right": "~/dotfiles/hypr/scripts/keybindings.sh",
         "tooltip": false
     },
 
-    // Rofi Application Launcher
+    // Fuzzel Application Launcher
     "custom/appmenuicon": {
         "format": "",
-        "on-click": "rofi -show drun -replace",
+        "on-click": "~/dotfiles/scripts/fuzzel.sh",
         "on-click-right": "~/dotfiles/hypr/scripts/keybindings.sh",
         "tooltip": false
     },
@@ -295,9 +295,13 @@
 
     // Bluetooth
     "bluetooth": {
-        "format": " {status}",
+        "format": "",
+        "format-connected": "",
         "format-disabled": "",
         "format-off": "",
+        "tooltip-format": "Bluetooth: {status}",
+        "tooltip-format-connected": "{num_connections} device(s) connected\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}",
         "interval": 30,
         "on-click": "blueman-manager",
         "format-no-controller": ""

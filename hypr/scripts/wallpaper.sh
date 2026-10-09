@@ -5,6 +5,8 @@ cache_file="$HOME/.cache/current_wallpaper"
 blurred="$HOME/.cache/blurred_wallpaper.png"
 rasi_file="$HOME/.cache/current_wallpaper.rasi"
 blur_file="$HOME/dotfiles/.settings/blur.sh"
+wallpaper_dir="$HOME/Beauti/wallpaper"
+thumbnail_dir="$HOME/.cache/wallpaper-thumbnails"
 
 blur="50x30"
 [ -f "$blur_file" ] && blur=$(cat "$blur_file")
@@ -34,14 +36,42 @@ case $1 in
         ;;
     "select")
         sleep 0.2
-        selected=$(find "$HOME/Beauti/wallpaper" -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -exec basename {} \; | sort -R | while read rfile; do
-            echo -en "$rfile\x00icon\x1f$HOME/Beauti/wallpaper/${rfile}\n"
-        done | rofi -dmenu -i -replace -config ~/dotfiles/rofi/config-wallpaper.rasi)
+        mkdir -p "$thumbnail_dir"
+        selected=$(find "$wallpaper_dir" -maxdepth 1 -type f \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) -print0 | sort -z -R | while IFS= read -r -d '' wallpaper_path; do
+            rfile=${wallpaper_path##*/}
+            thumbnail="$thumbnail_dir/$(printf '%s' "$wallpaper_path" | sha256sum | cut -d ' ' -f1).png"
+
+            # Fuzzel's dmenu icon protocol accepts PNG/SVG, so cache JPEGs as PNG thumbnails.
+            if [ ! -s "$thumbnail" ] || [ "$wallpaper_path" -nt "$thumbnail" ]; then
+                if ! magick "$wallpaper_path" -thumbnail '360x220^' -gravity center -extent 360x220 "$thumbnail" 2>/dev/null; then
+                    continue
+                fi
+            fi
+
+            printf '%s\t%s\0icon\x1f%s\n' \
+                "$rfile" \
+                "$wallpaper_path" \
+                "$thumbnail"
+        done | "$HOME/dotfiles/scripts/fuzzel.sh" \
+            --dmenu \
+            --with-nth 1 \
+            --accept-nth 2 \
+            --minimal-lines \
+            --lines 5 \
+            --width 60 \
+            --anchor top \
+            --y-margin 65 \
+            --override main.image-size-ratio=0 \
+            --override main.line-height=72 \
+            --override main.horizontal-pad=16 \
+            --override main.vertical-pad=4 \
+            --override main.inner-pad=4 \
+            --placeholder "Search wallpapers")
         if [ -z "$selected" ]; then
             echo "No wallpaper selected"
             exit
         fi
-        wal -q -i "$HOME/Beauti/wallpaper/$selected"
+        wal -q -i "$selected"
         ;;
     *)
         wal -q -i ~/Beauti/wallpaper/

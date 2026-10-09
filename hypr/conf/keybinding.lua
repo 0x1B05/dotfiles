@@ -59,7 +59,7 @@ bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd("~/dotfiles/waybar/launch.sh"))
 bind(mainMod .. " + SHIFT + W", hl.dsp.exec_cmd("~/dotfiles/hypr/scripts/wallpaper.sh"))
 bind(mainMod .. " + CTRL + W", hl.dsp.exec_cmd("~/dotfiles/hypr/scripts/wallpaper.sh select"))
 bind(mainMod .. " + CTRL + Q", hl.dsp.exec_cmd("wlogout"))
-bind(mainMod .. " + CTRL + RETURN", hl.dsp.exec_cmd("rofi -show drun -replace -i"))
+bind(mainMod .. " + CTRL + RETURN", hl.dsp.exec_cmd("~/dotfiles/scripts/fuzzel.sh"))
 
 -- Workspaces
 for i = 1, 10 do

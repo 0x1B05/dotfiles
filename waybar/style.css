@@ -316,7 +316,7 @@ window#waybar.empty #window {
     padding: 1px 10px 0px 10px;
     margin: 6px 15px 6px 0px;
     opacity:0.8;
-    border:3px solid @bordercolor;
+    border: 0;
 }
 
 /* -----------------------------------------------------
@@ -434,6 +434,19 @@ window#waybar.empty #window {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+}
+
+/* Compact status modules so short indicators do not dominate the bar. */
+#custom-updates,
+#backlight,
+#wireplumber,
+#bluetooth,
+#battery,
+#network,
+#clock {
+    border-radius: 12px;
+    padding: 1px 7px 0px 7px;
+    margin: 4px 8px 4px 0px;
 }
 
 /* -----------------------------------------------------
