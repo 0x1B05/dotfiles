@@ -31,6 +31,7 @@ stow_packages=(
 	swayimg
 	tmux
 	uv
+	xmake
 	foot
 	fontconfig
 	gtk-3.0
@@ -74,6 +75,7 @@ default_user_packages=(
 	swayimg
 	tmux
 	uv
+	xmake
 	foot
 	fontconfig
 	gtk-3.0
@@ -274,6 +276,7 @@ stow_user_package() {
 		swayimg) run_stow "$HOME/.config/swayimg" swayimg ;;
 		tmux) run_stow "$HOME/.config/tmux" tmux ;;
 		uv) run_stow "$HOME/.config/uv" uv ;;
+		xmake) run_stow "$HOME/.xmake" xmake ;;
 		foot) run_stow "$HOME/.config/foot" foot ;;
 		fontconfig) run_stow "$HOME/.config/fontconfig" fontconfig ;;
 		gtk-3.0) run_stow "$HOME/.config/gtk-3.0" gtk-3.0 ;;
