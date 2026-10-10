@@ -84,6 +84,7 @@ M.opt_o = {
 	-----------------------------------------------------------
 	-- Neovim UI
 	-----------------------------------------------------------
+	fillchars = "vert:│,horiz:─",
 	cursorline = true, -- highlight cursorline
 	laststatus = 3,
 	list = true, -- Show some invisible characters (tabs...

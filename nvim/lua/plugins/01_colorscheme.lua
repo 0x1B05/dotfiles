@@ -45,9 +45,14 @@ return {
 					operators = {},
 				},
 				color_overrides = {},
-				custom_highlights = {},
+				custom_highlights = function(colors)
+					return {
+						WinSeparator = { fg = colors.surface2 },
+						VertSplit = { fg = colors.surface2 },
+					}
+				end,
 				integrations = {
-					cmp = true,
+					blink_cmp = true,
 					gitsigns = true,
 					nvimtree = true,
 					treesitter = true,

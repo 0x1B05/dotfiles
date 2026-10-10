@@ -31,11 +31,14 @@ return {
 		"L3MON4D3/LuaSnip",
 		version = "v2.*",
 		build = "make install_jsregexp",
-		config = function()
-			require("luasnip").config.set_config({
-				enable_autosnippets = true,
-				store_selection_keys = "<A-s>",
-				history = false,
+			config = function()
+				require("luasnip").config.set_config({
+					enable_autosnippets = true,
+					cut_selection_keys = "<A-s>",
+					keep_roots = false,
+					link_roots = false,
+					link_children = false,
+					exit_roots = true,
 				-- Event on which to check for exiting a snippet's region
 				region_check_events = "InsertEnter,CursorMoved",
 				delete_check_events = "InsertLeave",

@@ -136,19 +136,18 @@ return {
 		end,
 	},
 	{
-		"aserowy/tmux.nvim",
-		event = "VeryLazy",
-		keys = keymaps.tmux,
+		"christoomey/vim-tmux-navigator",
+		lazy = false,
+		init = function()
+			vim.g.tmux_navigator_no_mappings = 1
+		end,
 		config = function()
-			require("tmux").setup({
-				resize = { -- enables default keybindings (A-hjkl) for normal mode
-					enable_default_keybindings = false,
-					-- sets resize steps for x axis
-					resize_step_x = 5,
-					-- sets resize steps for y axis
-					resize_step_y = 5,
-				},
-			})
+			for key, direction in pairs({ h = "Left", j = "Down", k = "Up", l = "Right" }) do
+				vim.keymap.set("n", "<C-" .. key .. ">", "<cmd>TmuxNavigate" .. direction .. "<cr>", {
+					silent = true,
+					desc = "Navigate " .. direction:lower() .. " split or tmux pane",
+				})
+			end
 		end,
 	},
 	{
