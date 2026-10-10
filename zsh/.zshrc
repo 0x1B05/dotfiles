@@ -26,6 +26,7 @@ paths=(
     $HOME/.local/bin
     $HOME/.cargo/bin
     $HOME/.local/share/coursier/bin
+    $HOME/.kimi-code/bin
     /usr/local/bin
     /usr/lib/ccache/bin
     /usr/bin
