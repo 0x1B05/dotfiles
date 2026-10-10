@@ -27,7 +27,6 @@ return {
 			},
 
 			appearance = {
-				use_nvim_cmp_as_default = true,
 				nerd_font_variant = "mono",
 
 				kind_icons = {
@@ -56,6 +55,14 @@ return {
 					Event = "",
 					Operator = "󰆕",
 					TypeParameter = "",
+				},
+			},
+
+			fuzzy = {
+				prebuilt_binaries = {
+					proxy = {
+						url = "http://127.0.0.1:7897",
+					},
 				},
 			},
 

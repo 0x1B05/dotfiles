@@ -28,11 +28,34 @@ map("n", "<leader>wl", "<C-W>v", { desc = "Split window right" })
 map("n", "<leader>wq", "<C-W>q", { desc = "Quit the current window" })
 map("n", "<leader>wx", "<C-W>x", { desc = "Swap the current window with the next window" })
 
--- Resize window in neovim using <ctrl> arrow keys
-map("n", "<C-Up>", "<cmd>resize +5<cr>", { desc = "Increase window height" })
-map("n", "<C-Down>", "<cmd>resize -5<cr>", { desc = "Decrease window height" })
-map("n", "<C-Left>", "<cmd>vertical resize -5<cr>", { desc = "Decrease window width" })
-map("n", "<C-Right>", "<cmd>vertical resize +5<cr>", { desc = "Increase window width" })
+local function move_split_border(direction)
+	local current = vim.api.nvim_get_current_win()
+	local directions = {
+		left = { "h", "l", -5, "width" },
+		right = { "l", "h", 5, "width" },
+		up = { "k", "j", -5, "height" },
+		down = { "j", "k", 5, "height" },
+	}
+	local primary, secondary, delta, dimension = unpack(directions[direction])
+	local adjacent = vim.fn.win_getid(vim.fn.winnr(primary))
+	local opposite = vim.fn.win_getid(vim.fn.winnr(secondary))
+	if adjacent == current and opposite == current then
+		return
+	end
+
+	local target = delta > 0 and (adjacent ~= current and current or opposite)
+		or (adjacent ~= current and adjacent or current)
+	if dimension == "width" then
+		vim.api.nvim_win_set_width(target, vim.api.nvim_win_get_width(target) + delta)
+	else
+		vim.api.nvim_win_set_height(target, vim.api.nvim_win_get_height(target) + delta)
+	end
+end
+
+map("n", "<C-Up>", function() move_split_border("up") end, { desc = "Move split border up" })
+map("n", "<C-Down>", function() move_split_border("down") end, { desc = "Move split border down" })
+map("n", "<C-Left>", function() move_split_border("left") end, { desc = "Move split border left" })
+map("n", "<C-Right>", function() move_split_border("right") end, { desc = "Move split border right" })
 
 -- buffers
 map("n", "<leader>j", "<cmd>bprevious<cr>", { desc = "Prev buffer" })
@@ -272,72 +295,6 @@ M.harpoon = {
 		desc = "Harpoon to 4",
 	},
 }
-M.tmux = {
-	{
-		"<S-Up>",
-		function()
-			require("tmux").resize_top()
-		end,
-		mode = "n",
-		desc = "Increase window height",
-	},
-	{
-		"<S-Down>",
-		function()
-			require("tmux").resize_bottom()
-		end,
-		mode = "n",
-		desc = "Decrease window height",
-	},
-	{
-		"<S-Left>",
-		function()
-			require("tmux").resize_left()
-		end,
-		mode = "n",
-		desc = "Decrease window width",
-	},
-	{
-		"<S-Right>",
-		function()
-			require("tmux").resize_right()
-		end,
-		mode = "n",
-		desc = "Increase window width",
-	},
-	{
-		"<C-h>",
-		function()
-			require("tmux").move_left()
-		end,
-		mode = "n",
-		desc = "Move to the left tmux and nvim window",
-	},
-	{
-		"<C-j>",
-		function()
-			require("tmux").move_bottom()
-		end,
-		mode = "n",
-		desc = "Move to the bottom tmux and nvim window",
-	},
-	{
-		"<C-k>",
-		function()
-			require("tmux").move_top()
-		end,
-		mode = "n",
-		desc = "Move to the top tmux and nvim window",
-	},
-	{
-		"<C-l>",
-		function()
-			require("tmux").move_right()
-		end,
-		mode = "n",
-		desc = "Move to the right tmux and nvim window",
-	},
-}
 M.snacks = {
 	-- ===========================
 	-- ToggleTerm 功能
@@ -370,39 +327,6 @@ M.snacks = {
 		end,
 		desc = "Toggle Terminal",
 		mode = { "n", "t" },
-	},
-
-	{
-		"<c-h>",
-		function()
-			require("tmux").move_left()
-		end,
-		mode = "t",
-		desc = "Go to Left Window",
-	},
-	{
-		"<c-j>",
-		function()
-			require("tmux").move_bottom()
-		end,
-		mode = "t",
-		desc = "Go to Lower Window",
-	},
-	{
-		"<c-k>",
-		function()
-			require("tmux").move_top()
-		end,
-		mode = "t",
-		desc = "Go to Upper Window",
-	},
-	{
-		"<c-l>",
-		function()
-			require("tmux").move_right()
-		end,
-		mode = "t",
-		desc = "Go to Right Window",
 	},
 
 	-- ===========================
