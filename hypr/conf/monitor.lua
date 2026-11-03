@@ -9,7 +9,7 @@ hl.monitor({
     output = "DP-1",
     mode = "preferred",
     position = "2560x0",
-    scale = "1",
+    scale = "0.83",
 })
 
 -- hl.monitor({
