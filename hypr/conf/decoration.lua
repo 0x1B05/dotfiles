@@ -23,7 +23,7 @@ hl.config({
     group = {
         groupbar = {
             enabled = true,
-            height = 0,
+            height = 1,
             text_color = "0xffffffff",
             col = {
                 active = "0x66ffff00",
