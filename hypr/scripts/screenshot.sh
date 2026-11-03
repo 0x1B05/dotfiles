@@ -47,7 +47,8 @@ $option2)
         reset_opacity
         if [ -f "$DIR$NAME" ]; then
             notify-send "Screenshot pinned" "Image is pinned to screen"
-            swayimg --appid "swayimg_pin" --size="$(geom_size "$GEOM")" "$DIR$NAME" &
+            swayimg --appid "swayimg_pin" --size="$(geom_size "$GEOM")" \
+                --execute='swayimg.text.visible = false' "$DIR$NAME" &
         fi
     fi
     ;;
