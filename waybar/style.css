@@ -350,10 +350,10 @@ window#waybar.empty #window {
 }
 
 /* -----------------------------------------------------
- * wireplumber
+ * pulseaudio
  * ----------------------------------------------------- */
 
-#wireplumber {
+#pulseaudio {
     background-color: @backgroundlight;
     font-size:22px;
     color: @textcolor2;
@@ -363,7 +363,7 @@ window#waybar.empty #window {
     opacity:0.8;
 }
 
-#wireplumber.muted {
+#pulseaudio.muted {
     background-color: @backgrounddark;
     color: @textcolor1;
 }
@@ -455,7 +455,7 @@ window#waybar.empty #window {
 /* Compact status modules so short indicators do not dominate the bar. */
 #custom-updates,
 #backlight,
-#wireplumber,
+#pulseaudio,
 #bluetooth,
 #battery,
 #network,

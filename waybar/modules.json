@@ -204,7 +204,7 @@
     "disk": {
         "interval": 30,
         "format": "D {percentage_used}% ",
-        "path": "/",
+        "paths": ["/"],
         "on-click": "foot htop"
     },
 
@@ -279,23 +279,21 @@
         "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
 
-    // wireplumber
-    "wireplumber": {
+    // pulseaudio (works through pipewire-pulse; keeps port-specific icons)
+    "pulseaudio": {
         "scroll-step": 5, // %, can be a float
         "format": "{icon}  {volume}%",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon}",
+        "format-bluetooth-muted": " {icon}",
         "format-muted": " X",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
         "format-icons": {
             "headphone": " ",
-            "hands-free": " ",
-            "headset": " ",
+            "hands-free": " ",
+            "headset": " ",
             "phone": " ",
             "portable": " ",
             "car": " ",
-            "default": [" "]
+            "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
     },
